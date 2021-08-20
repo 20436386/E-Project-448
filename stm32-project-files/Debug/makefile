@@ -65,8 +65,8 @@ all: main-build
 main-build: adafruit-stm32F405-E-Project.elf secondary-outputs
 
 # Tool invocations
-adafruit-stm32F405-E-Project.elf: $(OBJS) $(USER_OBJS) /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/stm32-project-files/STM32F405RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "adafruit-stm32F405-E-Project.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/stm32-project-files/STM32F405RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="adafruit-stm32F405-E-Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+adafruit-stm32F405-E-Project.elf: $(OBJS) $(USER_OBJS) C:\Users\Brandon\Documents\skripsie\E-Project-448\stm32-project-files\STM32F405RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "adafruit-stm32F405-E-Project.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Brandon\Documents\skripsie\E-Project-448\stm32-project-files\STM32F405RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="adafruit-stm32F405-E-Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
