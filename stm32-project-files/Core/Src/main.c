@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "fatfs.h"
 #include "usb_device.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -26,6 +27,7 @@
 #include "stdio.h"
 #include "string.h"
 #include "usbd_cdc_if.h"
+#include "stdbool.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,6 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -43,6 +46,9 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+SD_HandleTypeDef hsd;
+DMA_HandleTypeDef hdma_sdio_rx;
+DMA_HandleTypeDef hdma_sdio_tx;
 
 /* USER CODE BEGIN PV */
 
@@ -51,7 +57,12 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
+static void MX_SDIO_SD_Init(void);
 /* USER CODE BEGIN PFP */
+void PrintVCP(char* buf);
+FRESULT AppendToFile(char* path, size_t path_len, char* msg, size_t msg_len);
+void BlinkLED(uint32_t blink_delay, uint8_t num_blinks);
 
 /* USER CODE END PFP */
 
@@ -67,6 +78,10 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	FRESULT fres;
+	char* msg = "Successfully written to sd card:D\n";
+	char log_path[] = "/LOG.TXT";
+	uint32_t currentTick = HAL_GetTick();
 
   /* USER CODE END 1 */
 
@@ -88,8 +103,11 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USB_DEVICE_Init();
-  /* USER CODE BEGIN 2 */
+  MX_SDIO_SD_Init();
+  MX_FATFS_Init();
+   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
@@ -97,12 +115,26 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  char buf[] = "hello";
-	  CDC_Transmit_FS((uint8_t*)buf, strlen(buf));
-	  HAL_Delay(1000);
-
-	  HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_1);
     /* USER CODE END WHILE */
+
+	  if((HAL_GetTick() - currentTick) >= 1000)
+	{
+		//Turn LED on while writing to file
+		HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
+		fres = AppendToFile(log_path, strlen(log_path), msg, strlen(msg));
+		HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+
+		currentTick = HAL_GetTick();
+		PrintVCP((char*)"fileappend called\n\r");
+
+		//If error writing to card, blink 3 times
+		if(fres != FR_OK)
+		{
+			BlinkLED(200, 3);
+			PrintVCP((char*)"error no SD card present\n\r");
+		}
+	}
+
 
     /* USER CODE BEGIN 3 */
   }
@@ -153,6 +185,53 @@ void SystemClock_Config(void)
 }
 
 /**
+  * @brief SDIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SDIO_SD_Init(void)
+{
+
+  /* USER CODE BEGIN SDIO_Init 0 */
+
+  /* USER CODE END SDIO_Init 0 */
+
+  /* USER CODE BEGIN SDIO_Init 1 */
+
+  /* USER CODE END SDIO_Init 1 */
+  hsd.Instance = SDIO;
+  hsd.Init.ClockEdge = SDIO_CLOCK_EDGE_RISING;
+  hsd.Init.ClockBypass = SDIO_CLOCK_BYPASS_DISABLE;
+  hsd.Init.ClockPowerSave = SDIO_CLOCK_POWER_SAVE_DISABLE;
+  hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
+  hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
+  hsd.Init.ClockDiv = 0;
+  /* USER CODE BEGIN SDIO_Init 2 */
+
+  /* USER CODE END SDIO_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA2_Stream3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream3_IRQn);
+  /* DMA2_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -164,21 +243,109 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : PC1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
+  /*Configure GPIO pin : RED_LED_Pin */
+  GPIO_InitStruct.Pin = RED_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  HAL_GPIO_Init(RED_LED_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB12 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
 /* USER CODE BEGIN 4 */
+void PrintVCP(char* buf)
+{
+	char* eol = "\r\n";
+	strcat(buf, eol);
+	CDC_Transmit_FS((uint8_t*)buf, strlen(buf)); //use sizeof() as it returns size of array of anytype, strlen() expects char pointer in its argument
+}
+
+//Append string to file given a path
+FRESULT AppendToFile(char* path, size_t path_len, char* msg, size_t msg_len)
+{
+	FATFS fs;
+	FIL myfile;
+	UINT testByte;
+	FRESULT stat;
+
+	//Bounds check on strings(i.e. check if strings are null terminated
+	if((path[path_len] != 0) || (msg[msg_len] != 0))
+	{
+		return FR_INVALID_NAME;
+	}
+
+	//Re-initialize SD (allows SD card to be hot pluggable)
+	if ( BSP_SD_Init() != MSD_OK)
+	{
+		return FR_NOT_READY;
+	}
+
+	//Re-initialize FATFS
+	if(FATFS_UnLinkDriver(SDPath) != 0)
+	{
+		return FR_NOT_READY;
+	}
+
+	if(FATFS_LinkDriver(&SD_Driver, SDPath) != 0)
+	{
+		return FR_NOT_READY;
+	}
+
+	//Re-initialize and re-mount the FAT filesystem
+	stat = f_mount(&fs, SDPath, 0);
+	if(stat != FR_OK)
+	{
+		//unmount file system
+		f_mount(0, SDPath, 0);
+		//return error back to caller
+		return stat;
+	}
+
+	//Open file for appending
+	stat = f_open(&myfile, path, FA_WRITE | FA_OPEN_APPEND);
+	if(stat != FR_OK)
+	{
+		f_mount(0, SDPath, 0);
+		return stat;
+	}
+
+	//Write message to end of file
+	stat = f_write(&myfile, msg, msg_len, &testByte);
+	if(stat != FR_OK)
+	{
+		f_mount(0,SDPath, 0);
+		return stat;
+	}
+
+	//Sync, close file, unmount
+	stat = f_close(&myfile);
+	f_mount(0, SDPath, 0);
+
+	return stat;
+}
+
+//Blink onboard LED
+void BlinkLED(uint32_t blink_delay, uint8_t num_blinks)
+{
+	for(int i = 0; i < num_blinks; i++)
+	{
+		HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
+		HAL_Delay(blink_delay);
+	}
+}
 
 /* USER CODE END 4 */
 
