@@ -46,11 +46,16 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c2;
+
 SD_HandleTypeDef hsd;
 DMA_HandleTypeDef hdma_sdio_rx;
 DMA_HandleTypeDef hdma_sdio_tx;
 
 /* USER CODE BEGIN PV */
+static const uint32_t I2C_DELAY = 1000;
+static const uint8_t I2C_ADDR = 0b1101000 << 1;
+static const uint8_t I2C_REG_ADDR = 0x41;
 
 /* USER CODE END PV */
 
@@ -59,8 +64,9 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_SDIO_SD_Init(void);
+static void MX_I2C2_Init(void);
 /* USER CODE BEGIN PFP */
-void PrintVCP(char* buf);
+void printVCP(char* buf);
 FRESULT AppendToFile(char* path, size_t path_len, char* msg, size_t msg_len);
 void BlinkLED(uint32_t blink_delay, uint8_t num_blinks);
 
@@ -78,10 +84,13 @@ void BlinkLED(uint32_t blink_delay, uint8_t num_blinks);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	FRESULT fres;
-	char* msg = "Successfully written to sd card:D\n";
-	char log_path[] = "/LOG.TXT";
-	uint32_t currentTick = HAL_GetTick();
+//	FRESULT fres;
+//	char* msg = "Successfully written to sd card:D\n";
+//	char log_path[] = "/LOG.TXT";
+//	uint32_t currentTick = HAL_GetTick();
+	uint8_t* magData;
+	HAL_StatusTypeDef ret;
+	char msg[20] = "empty";
 
   /* USER CODE END 1 */
 
@@ -107,7 +116,8 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
-   /* USER CODE BEGIN 2 */
+  MX_I2C2_Init();
+  /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
@@ -115,26 +125,40 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+//	  if((HAL_GetTick() - currentTick) >= 1000)
+//		{
+//			//Turn LED on while writing to file
+//			HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
+//			fres = AppendToFile(log_path, strlen(log_path), msg, strlen(msg));
+//			HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
+//
+//			currentTick = HAL_GetTick();
+//			printVCP((char*)"fileappend called\n\r");
+//
+//			//If error writing to card, blink 3 times
+//			if(fres != FR_OK)
+//			{
+//				BlinkLED(200, 3);
+//				printVCP((char*)"error no SD card present\n\r");
+//			}
+//		}
+
+	  HAL_Delay(1000);
+
+	  ret =  HAL_I2C_Master_Transmit(&hi2c2, (uint16_t)I2C_ADDR, (uint8_t*)&I2C_REG_ADDR, 1, I2C_DELAY);
+	  if(ret != HAL_OK){
+		  printVCP((char*)"transmit error\n\r");
+	  }
+
+	  ret = HAL_I2C_Master_Receive(&hi2c2, (uint16_t)I2C_ADDR, (uint8_t*)magData, 2, I2C_DELAY);
+	  if(ret != HAL_OK){
+	  		  printVCP((char*)"read error\n\r");
+	  	  }
+	  uint32_t hold = ((magData[0] << 4) | (magData[1]));
+	  sprintf((char*)msg, "%d\n\r", (int)hold);
+	  printVCP((char*)msg);
+
     /* USER CODE END WHILE */
-
-	  if((HAL_GetTick() - currentTick) >= 1000)
-	{
-		//Turn LED on while writing to file
-		HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_SET);
-		fres = AppendToFile(log_path, strlen(log_path), msg, strlen(msg));
-		HAL_GPIO_WritePin(RED_LED_GPIO_Port, RED_LED_Pin, GPIO_PIN_RESET);
-
-		currentTick = HAL_GetTick();
-		PrintVCP((char*)"fileappend called\n\r");
-
-		//If error writing to card, blink 3 times
-		if(fres != FR_OK)
-		{
-			BlinkLED(200, 3);
-			PrintVCP((char*)"error no SD card present\n\r");
-		}
-	}
-
 
     /* USER CODE BEGIN 3 */
   }
@@ -182,6 +206,40 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief I2C2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C2_Init(void)
+{
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.ClockSpeed = 100000;
+  hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
+
 }
 
 /**
@@ -266,7 +324,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void PrintVCP(char* buf)
+void printVCP(char* buf)
 {
 	char* eol = "\r\n";
 	strcat(buf, eol);
