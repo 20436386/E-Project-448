@@ -46,16 +46,18 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-I2C_HandleTypeDef hi2c2;
-
 SD_HandleTypeDef hsd;
 DMA_HandleTypeDef hdma_sdio_rx;
 DMA_HandleTypeDef hdma_sdio_tx;
 
+UART_HandleTypeDef huart3;
+
 /* USER CODE BEGIN PV */
-static const uint32_t I2C_DELAY = 1000;
-static const uint8_t I2C_ADDR = 0b1101000 << 1;
-static const uint8_t I2C_REG_ADDR = 0x41;
+//static const uint32_t I2C_DELAY = 1000;
+//static const uint8_t I2C_ADDR = 0b1101000 << 1;
+//static const uint8_t I2C_REG_ADDR = 0x41;
+
+uint8_t GPSdata[256];
 
 /* USER CODE END PV */
 
@@ -64,16 +66,24 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_SDIO_SD_Init(void);
-static void MX_I2C2_Init(void);
+static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
 void printVCP(char* buf);
 FRESULT AppendToFile(char* path, size_t path_len, char* msg, size_t msg_len);
 void BlinkLED(uint32_t blink_delay, uint8_t num_blinks);
 
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	CDC_Transmit_FS((uint8_t*)GPSdata, 256);
+	HAL_UART_Receive_IT(&huart3, (uint8_t*)GPSdata, 256);
+}
 
 /* USER CODE END 0 */
 
@@ -88,9 +98,11 @@ int main(void)
 //	char* msg = "Successfully written to sd card:D\n";
 //	char log_path[] = "/LOG.TXT";
 //	uint32_t currentTick = HAL_GetTick();
-	uint8_t* magData;
-	HAL_StatusTypeDef ret;
-	char msg[20] = "empty";
+//	uint8_t* magData;
+//	HAL_StatusTypeDef ret;
+//	char msg[20] = "empty";
+
+	uint32_t currentTick = HAL_GetTick();
 
   /* USER CODE END 1 */
 
@@ -116,8 +128,10 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
-  MX_I2C2_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+
+  HAL_UART_Receive_IT(&huart3, (uint8_t*)GPSdata, 256);
 
   /* USER CODE END 2 */
 
@@ -125,6 +139,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  //NB: to transfer data to serial, do the following:
+	  //uint8_t GPSdata[3] = {0x45, 0x34, 0x24};
+	  //CDC_Transmit_FS((uint8_t*)GPSdata, 3);
+	  //And to append to file use
+	  //AppendToFile(log_path, strlen(log_path), (char*)GPSdata, 3);
+
 //	  if((HAL_GetTick() - currentTick) >= 1000)
 //		{
 //			//Turn LED on while writing to file
@@ -143,20 +163,26 @@ int main(void)
 //			}
 //		}
 
-	  HAL_Delay(1000);
+//	  HAL_Delay(1000);
+//
+//	  ret =  HAL_I2C_Master_Transmit(&hi2c2, (uint16_t)I2C_ADDR, (uint8_t*)&I2C_REG_ADDR, 1, I2C_DELAY);
+//	  if(ret != HAL_OK){
+//		  printVCP((char*)"transmit error\n\r");
+//	  }
+//
+//	  ret = HAL_I2C_Master_Receive(&hi2c2, (uint16_t)I2C_ADDR, (uint8_t*)magData, 2, I2C_DELAY);
+//	  if(ret != HAL_OK){
+//	  		  printVCP((char*)"read error\n\r");
+//	  	  }
+//	  uint32_t hold = ((magData[0] << 4) | (magData[1]));
+//	  sprintf((char*)msg, "%d\n\r", (int)hold);
+//	  printVCP((char*)msg);
 
-	  ret =  HAL_I2C_Master_Transmit(&hi2c2, (uint16_t)I2C_ADDR, (uint8_t*)&I2C_REG_ADDR, 1, I2C_DELAY);
-	  if(ret != HAL_OK){
-		  printVCP((char*)"transmit error\n\r");
+	  if((HAL_GetTick() - currentTick) >= 1000)
+	  {
+		  printVCP((char*)"ok\n\r");
+		  currentTick = HAL_GetTick();
 	  }
-
-	  ret = HAL_I2C_Master_Receive(&hi2c2, (uint16_t)I2C_ADDR, (uint8_t*)magData, 2, I2C_DELAY);
-	  if(ret != HAL_OK){
-	  		  printVCP((char*)"read error\n\r");
-	  	  }
-	  uint32_t hold = ((magData[0] << 4) | (magData[1]));
-	  sprintf((char*)msg, "%d\n\r", (int)hold);
-	  printVCP((char*)msg);
 
     /* USER CODE END WHILE */
 
@@ -209,40 +235,6 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief I2C2 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_I2C2_Init(void)
-{
-
-  /* USER CODE BEGIN I2C2_Init 0 */
-
-  /* USER CODE END I2C2_Init 0 */
-
-  /* USER CODE BEGIN I2C2_Init 1 */
-
-  /* USER CODE END I2C2_Init 1 */
-  hi2c2.Instance = I2C2;
-  hi2c2.Init.ClockSpeed = 100000;
-  hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
-  hi2c2.Init.OwnAddress1 = 0;
-  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c2.Init.OwnAddress2 = 0;
-  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN I2C2_Init 2 */
-
-  /* USER CODE END I2C2_Init 2 */
-
-}
-
-/**
   * @brief SDIO Initialization Function
   * @param None
   * @retval None
@@ -267,6 +259,39 @@ static void MX_SDIO_SD_Init(void)
   /* USER CODE BEGIN SDIO_Init 2 */
 
   /* USER CODE END SDIO_Init 2 */
+
+}
+
+/**
+  * @brief USART3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART3_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART3_Init 0 */
+
+  /* USER CODE END USART3_Init 0 */
+
+  /* USER CODE BEGIN USART3_Init 1 */
+
+  /* USER CODE END USART3_Init 1 */
+  huart3.Instance = USART3;
+  huart3.Init.BaudRate = 9600;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
+  huart3.Init.StopBits = UART_STOPBITS_1;
+  huart3.Init.Parity = UART_PARITY_NONE;
+  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART3_Init 2 */
+
+  /* USER CODE END USART3_Init 2 */
 
 }
 
