@@ -51,14 +51,17 @@ DMA_HandleTypeDef hdma_sdio_rx;
 DMA_HandleTypeDef hdma_sdio_tx;
 
 UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_usart3_rx;
 
 /* USER CODE BEGIN PV */
 //static const uint32_t I2C_DELAY = 1000;
 //static const uint8_t I2C_ADDR = 0b1101000 << 1;
 //static const uint8_t I2C_REG_ADDR = 0x41;
 
-uint8_t GPSbuff[256];
-int32_t GPS_idx = 0;
+volatile uint8_t GPSbuff[512];
+//const uint32_t GPSbuffSize = sizeof(GPSbuff);
+//volatile uint8_t GPSbuffCplt = 0;
+//volatile int32_t GPS_idx = 0;
 
 /* USER CODE END PV */
 
@@ -83,18 +86,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 //	Note: trying to write to file inside this function doesnt work for some reason.
-	CDC_Transmit_FS((uint8_t*)&GPSbuff[GPS_idx], 1);
-
-	//Reset pointer to start of GPSdata array
-	if(GPS_idx == 255)
-	{
-		GPS_idx = 0;
-	}
-	else
-	{
-		GPS_idx++;
-	}
-	HAL_UART_Receive_IT(&huart3, (uint8_t*)&GPSbuff[GPS_idx], 1);
+	CDC_Transmit_FS((uint8_t*)GPSbuff, 512);
+//	GPSbuffCplt = 1;
 }
 
 /* USER CODE END 0 */
@@ -105,12 +98,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   */
 int main(void)
 {
-	//NB: to transfer data to serial, do the following:
-	//uint8_t GPSdata[3] = {0x45, 0x34, 0x24};
-	//CDC_Transmit_FS((uint8_t*)GPSdata, 3);
-	//And to append to file use
-	//AppendToFile(log_path, strlen(log_path), (char*)GPSdata, 3);
-
   /* USER CODE BEGIN 1 */
 //	FRESULT fres;
 //	char* msg = "Successfully written to sd card:D\n";
@@ -149,7 +136,7 @@ int main(void)
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_UART_Receive_IT(&huart3, (uint8_t*)GPSbuff, 1);
+  HAL_UART_Receive_DMA(&huart3, (uint8_t*)GPSbuff, 512);
 
   /* USER CODE END 2 */
 
@@ -318,8 +305,12 @@ static void MX_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA2_CLK_ENABLE();
+  __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+  /* DMA1_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
   /* DMA2_Stream3_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream3_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream3_IRQn);
