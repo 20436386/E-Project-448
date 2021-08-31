@@ -1,0 +1,1 @@
+Adafruit CircuitPython 6.3.0 on 2021-06-01; Adafruit Feather STM32F405 Express with STM32F405RG
