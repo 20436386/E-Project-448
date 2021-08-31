@@ -9,8 +9,8 @@ import time
 import busio
 import adafruit_gps
 
-#Initialise and mount SD card filesystem
 """
+#Initialise and mount SD card filesystem using sdio. Note: using sdio gives OSError: [Errno 5] Input/output error for some reason
 sdcard = sdioio.SDCard(
     clock=board.SDIO_CLOCK,
     command=board.SDIO_COMMAND,
@@ -23,6 +23,7 @@ vfs = storage.VfsFat(sdcard)
 #Mount filesystem into circuitPython
 storage.mount(vfs, "/sd")
 """
+
 #Mounting sd card with spi
 SD_CS_PIN = board.D6
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
@@ -30,11 +31,10 @@ sd_cs = digitalio.DigitalInOut(SD_CS_PIN)
 sdcard = adafruit_sdcard.SDCard(spi, sd_cs)
 vfs = storage.VfsFat(sdcard)
 storage.mount(vfs, '/sd')    # Mount SD card under '/sd' path in filesystem.
-LOG_FILE = '/sd/gps.txt'
 
 
-#LOG_FILE = "/sd/gps.txt"    # Example for writing to SD card path /sd/gps.txt
-#LOG_MODE = 'w'
+LOG_FILE = "/sd/gps.txt"    # Example for writing to SD card path /sd/gps.txt
+LOG_MODE = 'ab'
 
 #Initialise UART connection to gps module
 TX = board.TX
@@ -45,11 +45,13 @@ gps = adafruit_gps.GPS(uart)#, debug = False)
 #Not sure if this does anything
 gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
+gps_ident = bytes("$GNRMC", 'utf-16')
+
 current_time = time.monotonic()
 #print(current_time)
 while True:
 
-    #gps.update()
+    gps.update()
     '''
     if (time.monotonic() - current_time) >= 1.0:
         if not gps.has_fix:
@@ -70,11 +72,15 @@ while True:
     sentence = gps.readline()
     if not sentence:
         continue
-    print(sentence)#str(sentence, "utf-8").strip())
+    #print(sentence)#str(sentence, "utf-16").strip()) #this was from documentation, doesnt work
 
-    with open("/sd/gps.txt", "ab", encoding='utf-16') as file:
-        file.write(sentence)
-        #file.flush()
+    if sentence[0 : 6] == gps_ident:#(0x24, 0x47, 0x4E, 0x52, 0x4D, 0x43):
+        #Delay between acquiring RMC data is on avg 1 second
+        print(sentence)
+
+        with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
+            file.write(sentence)
+            #file.flush()
 
 
 
