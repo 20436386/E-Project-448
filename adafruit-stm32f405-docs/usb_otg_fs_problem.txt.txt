@@ -1,3 +1,0 @@
-https://community.nxp.com/t5/MQX-Software-Solutions/Using-CDC-Class-device-with-Linux/m-p/201691#M4586
-Linux USB enumerator
-"device descriptor request failed" - this was error in device manager before ant github code added.

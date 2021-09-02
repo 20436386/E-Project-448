@@ -1,3 +1,0 @@
-#Run the following command to program binary files to adafruit-stm32f405
-
-dfu-util -a 0 -s 0x08000000:leave -D /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/stm32-project-files/Debug/adafruit-stm32F405-E-Project.bin
