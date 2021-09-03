@@ -9,6 +9,9 @@ import time
 import busio
 import adafruit_gps
 import pwmio
+from roboticsmasters_mpu9250 import MPU9250
+from roboticsmasters_mpu6500 import MPU6500
+from roboticsmasters_ak8963 import AK8963
 
 """
 #Initialise and mount SD card filesystem using sdio. Note: using sdio gives OSError: [Errno 5] Input/output error for some reason
@@ -56,13 +59,37 @@ gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 gps_ident = bytes("$GNRMC", 'utf-16')
 
 '''
-#set up pwm for led
+
+"""
+#set up pwm for servos
 led = pwmio.PWMOut(board.A2, frequency = 50, duty_cycle = (int)((120/1000)*(2**16)))
 
+"""
+
+#Code to test MPU9250 magnetometer
+i2c = busio.I2C(board.SCL, board.SDA)
+
+mpu = MPU6500(i2c, address=0x69)
+#ak = AK8963(i2c)
+
+sensor = MPU9250(i2c)
+
+print("Reading in data from IMU.")
+#print("MPU9250 id: " + hex(sensor.read_whoami()))
+
+while True:
+    print('Acceleration (m/s^2): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.acceleration))
+    print('Magnetometer (gauss): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.magnetic))
+    print('Gyroscope (degrees/sec): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.gyro))
+    print('Temperature: {0:0.3f}C'.format(sensor.temperature))
+    time.sleep(2)
+"""
 current_time = time.monotonic()
 #print(current_time)
 while True:
     continue
+
+"""
 '''
     #Reads and prints gps data to serial
     gps.update()
