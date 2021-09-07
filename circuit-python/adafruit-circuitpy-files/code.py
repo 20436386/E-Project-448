@@ -12,6 +12,7 @@ import pwmio
 from roboticsmasters_mpu9250 import MPU9250
 from roboticsmasters_mpu6500 import MPU6500
 from roboticsmasters_ak8963 import AK8963
+import math
 
 """
 #Initialise and mount SD card filesystem using sdio. Note: using sdio gives OSError: [Errno 5] Input/output error for some reason
@@ -62,9 +63,9 @@ gps_ident = bytes("$GNRMC", 'utf-16')
 
 """
 #set up pwm for servos
-led = pwmio.PWMOut(board.A2, frequency = 50, duty_cycle = (int)((120/1000)*(2**16)))
-
+led = pwmio.PWMOut(board.A2, frequency = 50, duty_cycle = (int)((75/1000)*(2**16)))
 """
+
 
 #Code to test MPU9250 magnetometer
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -74,15 +75,38 @@ mpu = MPU6500(i2c, address=0x69)
 
 sensor = MPU9250(i2c)
 
-print("Reading in data from IMU.")
-#print("MPU9250 id: " + hex(sensor.read_whoami()))
+#Calibrate magnetometer. Will take 51,2 seconds to complete
+print("calibrating in 5")
+time.sleep(5)
+sensor.cal_mag()
 
+
+#print("Reading in data from IMU.")
+print("reading calibrated magnetic in 5")
+time.sleep(5)
 while True:
-    print('Acceleration (m/s^2): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.acceleration))
-    print('Magnetometer (gauss): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.magnetic))
-    print('Gyroscope (degrees/sec): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.gyro))
-    print('Temperature: {0:0.3f}C'.format(sensor.temperature))
-    time.sleep(2)
+#for i in range(0, 256):
+#    raw = sensor.magnetic
+#    print(raw[0], ",", raw[1], ",", raw[2],"\n")
+#    time.sleep(0.4)
+
+    raw = sensor.magnetic
+    print("\ncalibrated:")
+    print(raw[0], ",", raw[1], ",", raw[2])
+    phi = math.atan2(raw[0],raw[1]) * (180/math.pi)
+    print("phi = ", phi)
+    if(phi < 0):
+        theta = 360+phi
+    else:
+        theta = phi
+    print("theta = ", theta)
+    #print('Acceleration (m/s^2): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.acceleration))
+    #print('Magnetometer (gauss): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.magnetic))
+    #print('Gyroscope (degrees/sec): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.gyro))
+    #print('Temperature: {0:0.3f}C'.format(sensor.temperature))
+    time.sleep(0.2)
+
+
 """
 current_time = time.monotonic()
 #print(current_time)

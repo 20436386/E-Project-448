@@ -148,8 +148,8 @@ class AK8963:
 
         print(asax, asay, asaz)
 
-        self._offset = (143.725, 6.00244, -21.6755)
-        self._scale = (1.07464, 0.97619, 0.956875)
+        self._offset = (-12.0, 352.0, 43.5)
+        self._scale = (0.986715, 1.05555, 0.962308)
         self._adjustment = (
             ((asax - 128.0) / 256.0) + 1.0,
             ((asay - 128.0) / 256.0) + 1.0,
@@ -200,8 +200,9 @@ class AK8963:
         raw_x = raw_data[0][0]
         raw_y = raw_data[1][0]
         raw_z = raw_data[2][0]
-
-        print(raw_x, raw_y, raw_z)
+	
+	#print("uncalibrated:")
+        #print(raw_x, raw_y, raw_z)
 
         self._status # Enable updating readings again
 
@@ -224,9 +225,9 @@ class AK8963:
         #mag_x = ((raw_x / mag_scale) - self._offset[0]) * self._scale[0]
         #mag_y = ((raw_y / mag_scale) - self._offset[1]) * self._scale[1]
         #mag_z = ((raw_z / mag_scale) - self._offset[2]) * self._scale[2]
-        mag_x = (raw_x * mag_scale * self._scale[0]) - self._offset[0]
-        mag_y = (raw_y * mag_scale * self._scale[1]) - self._offset[1]
-        mag_z = (raw_z * mag_scale * self._scale[2]) - self._offset[1]
+        mag_x = (raw_x - self._offset[0]) * self._scale[0]
+        mag_y = (raw_y - self._offset[1]) * self._scale[1]
+        mag_z = (raw_z - self._offset[2]) * self._scale[2]
 
         return (mag_x, mag_y, mag_z)
 
