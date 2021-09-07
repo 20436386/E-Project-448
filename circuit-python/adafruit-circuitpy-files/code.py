@@ -16,17 +16,22 @@ import math
 
 def mag_bearing():
     pass
-def mag_bearing_tilt_comp():
-    pass
-
-def tilt(sensor):
-    #This works
+def bearing_tilt_comp(sensor):
     acc = sensor.acceleration
-    roll = math.atan(acc[1]/acc[2])
-    pitch = math.atan( (-acc[0])/(acc[1]*math.sin(roll) + acc[2]*math.cos(roll)))
-    return (roll, pitch)
+    mag = sensor.magnetic
+    print("Bs = ", mag)
 
+    #calculate roll and pitch angles
+    phi = math.atan2(acc[1],acc[2])
+    theta = math.atan( (-acc[0])/(acc[1]*math.sin(phi) + acc[2]*math.cos(phi)))
+    print("phi = ", phi * (180/math.pi), "theta = ", theta * (180/math.pi))
 
+    #Calculate tilt compensated bearing
+    Bfy = (mag[1]*math.cos(phi) + mag[2]*math.sin(phi))
+    Bfx =  (mag[0]*math.cos(theta) + mag[1]*math.sin(theta)*math.sin(phi) - mag[2]*math.sin(theta)*math.cos(phi) )
+    print("Bfy = ", Bfy, "Bfx = ", Bfx)
+    gamma = math.atan2( -Bfy, Bfx)
+    return gamma
 
 """
 #Initialise and mount SD card filesystem using sdio. Note: using sdio gives OSError: [Errno 5] Input/output error for some reason
@@ -90,7 +95,7 @@ mpu = MPU6500(i2c, address=0x69)
 sensor = MPU9250(i2c)
 
 #Calibrate magnetometer. Will take 51,2 seconds to complete
-#print("calibrating in 5")
+print("calibrating in 5")
 #time.sleep(5)
 #sensor.cal_mag()
 
@@ -101,9 +106,14 @@ sensor = MPU9250(i2c)
 
 while True:    
     
-    roll, pitch = tilt(sensor)
-    print("roll = ", roll * (180/math.pi), "pitch = ", pitch * (180/math.pi))
-    time.sleep(0.4)
+    gamma = bearing_tilt_comp(sensor) * (180/math.pi)
+    print("gamma = ", gamma)
+    if(gamma < 0):
+        bearing = 360 + gamma
+    else:
+        bearing = gamma
+    print("bearing = ", bearing, "\n")
+    time.sleep(0.5)
     
     
     # raw = sensor.magnetic

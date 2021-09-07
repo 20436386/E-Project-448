@@ -235,11 +235,11 @@ class MPU6500:
         #accel_z = (raw_z / accel_scale * STANDARD_GRAVITY
 	
 	#My calibration and change of axis
-	accel_x = -((raw_y / accel_scale) + 0.64825441796875) * STANDARD_GRAVITY
+	accel_x = -((raw_y / accel_scale) + 0.64825441796875) #* STANDARD_GRAVITY
 			
-        accel_y = -((raw_x / accel_scale) - 0.56932927734375) * STANDARD_GRAVITY
+        accel_y = -((raw_x / accel_scale) - 0.56932927734375) #* STANDARD_GRAVITY
 
-        accel_z = ((raw_z / accel_scale) + 0.5317201953125)* STANDARD_GRAVITY
+        accel_z = ((raw_z / accel_scale) + 0.5317201953125) #* STANDARD_GRAVITY
 
         return (accel_x, accel_y, accel_z)
 

@@ -148,8 +148,8 @@ class AK8963:
 
         print(asax, asay, asaz)
 
-        self._offset = (-10.0, 356.0, 50.0)
-        self._scale = (0.972603, 1.08397, 0.95302)
+        self._offset = (-11.0, 359.5, 47.0)
+        self._scale = (0.956876, 1.1262, 0.937214)
         self._adjustment = (
             ((asax - 128.0) / 256.0) + 1.0,
             ((asay - 128.0) / 256.0) + 1.0,
