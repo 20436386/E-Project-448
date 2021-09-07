@@ -14,6 +14,20 @@ from roboticsmasters_mpu6500 import MPU6500
 from roboticsmasters_ak8963 import AK8963
 import math
 
+def mag_bearing():
+    pass
+def mag_bearing_tilt_comp():
+    pass
+
+def tilt(sensor):
+    #This works
+    acc = sensor.acceleration
+    roll = math.atan(acc[1]/acc[2])
+    pitch = math.atan( (-acc[0])/(acc[1]*math.sin(roll) + acc[2]*math.cos(roll)))
+    return (roll, pitch)
+
+
+
 """
 #Initialise and mount SD card filesystem using sdio. Note: using sdio gives OSError: [Errno 5] Input/output error for some reason
 sdcard = sdioio.SDCard(
@@ -81,26 +95,32 @@ sensor = MPU9250(i2c)
 #sensor.cal_mag()
 
 
-print("Reading in data from IMU.")
-print("reading calibrated magnetic in 5")
+# print("Reading in data from IMU.")
+# print("reading calibrated magnetic in 5")
 #time.sleep(5)
 
 while True:    
-    raw = sensor.magnetic
-    print("\ncalibrated:")
-    print(raw[0], ",", raw[1], ",", raw[2])
-    phi = math.atan2(raw[1],raw[0]) * (180/math.pi)
-    print("phi = ", phi)
-    if(phi < 0):
-        theta = -phi
-    else:
-        theta = 360 - phi
-    print("theta = ", theta)
-    #print('Acceleration (m/s^2): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.acceleration))
-    #print('Magnetometer (gauss): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.magnetic))
-    #print('Gyroscope (degrees/sec): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.gyro))
-    #print('Temperature: {0:0.3f}C'.format(sensor.temperature))
+    
+    roll, pitch = tilt(sensor)
+    print("roll = ", roll * (180/math.pi), "pitch = ", pitch * (180/math.pi))
     time.sleep(0.4)
+    
+    
+    # raw = sensor.magnetic
+    # print("\ncalibrated:")
+    # print(raw[0], ",", raw[1], ",", raw[2])
+    # phi = math.atan2(raw[1],raw[0]) * (180/math.pi)
+    # print("phi = ", phi)
+    # if(phi < 0):
+    #     theta = -phi
+    # else:
+    #     theta = 360 - phi
+    # print("theta = ", theta)
+    # #print('Acceleration (m/s^2): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.acceleration))
+    # #print('Magnetometer (gauss): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.magnetic))
+    # #print('Gyroscope (degrees/sec): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.gyro))
+    # #print('Temperature: {0:0.3f}C'.format(sensor.temperature))
+    # time.sleep(0.4)
     
 
 
