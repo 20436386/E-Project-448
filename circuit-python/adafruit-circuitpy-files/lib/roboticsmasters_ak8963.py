@@ -148,8 +148,8 @@ class AK8963:
 
         print(asax, asay, asaz)
 
-        self._offset = (-12.0, 352.0, 43.5)
-        self._scale = (0.986715, 1.05555, 0.962308)
+        self._offset = (-10.0, 356.0, 50.0)
+        self._scale = (0.972603, 1.08397, 0.95302)
         self._adjustment = (
             ((asax - 128.0) / 256.0) + 1.0,
             ((asay - 128.0) / 256.0) + 1.0,
@@ -225,9 +225,13 @@ class AK8963:
         #mag_x = ((raw_x / mag_scale) - self._offset[0]) * self._scale[0]
         #mag_y = ((raw_y / mag_scale) - self._offset[1]) * self._scale[1]
         #mag_z = ((raw_z / mag_scale) - self._offset[2]) * self._scale[2]
+
+	#my calibration and change of axis
         mag_x = (raw_x - self._offset[0]) * self._scale[0]
+
         mag_y = (raw_y - self._offset[1]) * self._scale[1]
-        mag_z = (raw_z - self._offset[2]) * self._scale[2]
+
+        mag_z = -((raw_z - self._offset[2]) * self._scale[2])
 
         return (mag_x, mag_y, mag_z)
 
