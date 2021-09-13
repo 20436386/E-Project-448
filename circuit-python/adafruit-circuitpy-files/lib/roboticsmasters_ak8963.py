@@ -148,13 +148,16 @@ class AK8963:
 
         print(asax, asay, asaz)
 
-        self._offset = (-11.0, 359.5, 47.0)
-        self._scale = (0.956876, 1.1262, 0.937214)
+        self._offset = (19.0, 158.5, 16.0)
+        self._scale = (1.00119, 1.06591, 0.940716)
         self._adjustment = (
             ((asax - 128.0) / 256.0) + 1.0,
             ((asay - 128.0) / 256.0) + 1.0,
             ((asaz - 128.0) / 256.0) + 1.0
         )
+
+        print("offset = ", self._offset)
+        print("scale = ", self._scale)
 
         print(self._adjustment)
 
@@ -201,15 +204,14 @@ class AK8963:
         raw_y = raw_data[1][0]
         raw_z = raw_data[2][0]
 	
-	#print("uncalibrated:")
-        #print(raw_x, raw_y, raw_z)
+        # print(raw_x, ",", raw_y, "," , raw_z)
 
         self._status # Enable updating readings again
 
         # Apply factory axial sensitivy adjustments
-        #raw_x *= self._adjustment[0]
-        #raw_y *= self._adjustment[1]
-        #raw_z *= self._adjustment[2]
+        # raw_x *= self._adjustment[0]
+        # raw_y *= self._adjustment[1]
+        # raw_z *= self._adjustment[2]
 
         # Apply output scale determined in constructor
         mag_range = self._mag_range
@@ -222,20 +224,22 @@ class AK8963:
             mag_scale = 5.997557998 # for mG (millGauss) calc: 10.*4912./8190.0
 
         # setup range dependant scaling and offsets
-        #mag_x = ((raw_x / mag_scale) - self._offset[0]) * self._scale[0]
-        #mag_y = ((raw_y / mag_scale) - self._offset[1]) * self._scale[1]
-        #mag_z = ((raw_z / mag_scale) - self._offset[2]) * self._scale[2]
+        # mag_x = ((raw_x / mag_scale) - self._offset[0]) * self._scale[0]
+        # mag_y = ((raw_y / mag_scale) - self._offset[1]) * self._scale[1]
+        # mag_z = ((raw_z / mag_scale) - self._offset[2]) * self._scale[2]
 
 	#my calibration and change of axis
         mag_x = (raw_x - self._offset[0]) * self._scale[0]
 
         mag_y = (raw_y - self._offset[1]) * self._scale[1]
 
-        mag_z = -((raw_z - self._offset[2]) * self._scale[2])
+        mag_z = ((raw_z - self._offset[2]) * self._scale[2])
 
-        return (mag_x, mag_y, mag_z)
+        # print(mag_x, ",", mag_y, "," , mag_z)
 
-    def calibrate(self, count=256, delay=0.200):
+        return (mag_x, mag_y, -mag_z)
+
+    def calibrate(self, count=720, delay=0.200):
         """
         Calibrate the magnetometer.
 
