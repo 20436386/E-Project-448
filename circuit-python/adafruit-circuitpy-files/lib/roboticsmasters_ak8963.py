@@ -148,8 +148,8 @@ class AK8963:
 
         print(asax, asay, asaz)
 
-        self._offset = (19.0, 158.5, 16.0)
-        self._scale = (1.00119, 1.06591, 0.940716)
+        self._offset = (18.0, 158.0, 14.5)
+        self._scale = (1.00129, 1.05874, 0.946276)
         self._adjustment = (
             ((asax - 128.0) / 256.0) + 1.0,
             ((asay - 128.0) / 256.0) + 1.0,
@@ -209,9 +209,9 @@ class AK8963:
         self._status # Enable updating readings again
 
         # Apply factory axial sensitivy adjustments
-        # raw_x *= self._adjustment[0]
-        # raw_y *= self._adjustment[1]
-        # raw_z *= self._adjustment[2]
+        raw_x *= self._adjustment[0]
+        raw_y *= self._adjustment[1]
+        raw_z *= self._adjustment[2]
 
         # Apply output scale determined in constructor
         mag_range = self._mag_range
@@ -224,22 +224,22 @@ class AK8963:
             mag_scale = 5.997557998 # for mG (millGauss) calc: 10.*4912./8190.0
 
         # setup range dependant scaling and offsets
-        # mag_x = ((raw_x / mag_scale) - self._offset[0]) * self._scale[0]
-        # mag_y = ((raw_y / mag_scale) - self._offset[1]) * self._scale[1]
-        # mag_z = ((raw_z / mag_scale) - self._offset[2]) * self._scale[2]
+        mag_x = ((raw_x / mag_scale) - self._offset[0]) * self._scale[0]
+        mag_y = ((raw_y / mag_scale) - self._offset[1]) * self._scale[1]
+        mag_z = ((raw_z / mag_scale) - self._offset[2]) * self._scale[2]
 
 	#my calibration and change of axis
-        mag_x = (raw_x - self._offset[0]) * self._scale[0]
+        # mag_x = (raw_x - self._offset[0]) * self._scale[0]
 
-        mag_y = (raw_y - self._offset[1]) * self._scale[1]
+        # mag_y = (raw_y - self._offset[1]) * self._scale[1]
 
-        mag_z = ((raw_z - self._offset[2]) * self._scale[2])
+        # mag_z = ((raw_z - self._offset[2]) * self._scale[2])
 
         # print(mag_x, ",", mag_y, "," , mag_z)
 
         return (mag_x, mag_y, -mag_z)
 
-    def calibrate(self, count=720, delay=0.200):
+    def calibrate(self, count=2048, delay=0.100):
         """
         Calibrate the magnetometer.
 

@@ -42,6 +42,13 @@ def bearing_tilt_comp(sensor):
     
     return (phi, theta, gamma)
 
+def blink(num, delay):
+    for i in range(num):
+        led.value = True
+        time.sleep(delay)
+        led.value = False
+        time.sleep(delay)
+
 
 # #Initialise and mount SD card filesystem using sdio. Note: using sdio gives OSError: [Errno 5] Input/output error for some reason
 # sdcard = sdioio.SDCard(
@@ -56,9 +63,9 @@ def bearing_tilt_comp(sensor):
 # #Mount filesystem into circuitPython
 # storage.mount(vfs, "/sd")
 
-# #Setup led for debug purposes
-# led = digitalio.DigitalInOut(board.LED)
-# led.direction = digitalio.Direction.OUTPUT
+#Setup led for debug purposes
+led = digitalio.DigitalInOut(board.LED)
+led.direction = digitalio.Direction.OUTPUT
 
 
 # #Mounting sd card with spi
@@ -70,7 +77,7 @@ def bearing_tilt_comp(sensor):
 # storage.mount(vfs, '/sd')    # Mount SD card under '/sd' path in filesystem.
 
 
-# LOG_FILE = "/sd/gps.txt"    # Example for writing to SD card path /sd/gps.txt
+# LOG_FILE = "/sd/mag2.txt"    # Example for writing to SD card path /sd/gps.txt
 # LOG_MODE = 'ab'
 
 
@@ -108,9 +115,9 @@ mpu = MPU6500(i2c, address=0x69)
 sensor = MPU9250(i2c)
 
 #Calibrate magnetometer. Will take 51,2 seconds to complete
-print("calibrating in 5")
-time.sleep(5)
-sensor.cal_mag()
+# print("calibrating in 5")
+# time.sleep(5)
+# sensor.cal_mag()
 
 
 # print("Reading in data from IMU.")
@@ -136,14 +143,14 @@ sensor.cal_mag()
 #             count += 1
 
 
-# #Blink LED 3 times
-# for i in range(3):
-#     led.value = True
-#     time.sleep(0.5)
-#     led.value = False
-#     time.sleep(0.5)
+#Blink LED 3 times
+# blink(20, 0.3)
 
 # current_time = time.monotonic()
+
+# with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
+#             file.write(bytes(str(sensor._akm._offset) , 'utf-16'))
+#             file.write(bytes(str(sensor._akm._scale) , 'utf-16'))
 
 
 while True:
@@ -159,10 +166,14 @@ while True:
     # current_time = time.monotonic()
     # time.sleep(1 - 0.027)
 
+
     phi, theta, gamma = bearing_tilt_comp(sensor)
-    print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
-    print("no-comp = ", bearing(sensor))
-    time.sleep(0.4)
+    print(gamma)
+    # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
+    # print("no-comp = ", bearing(sensor))
+    time.sleep(0.3)
+
+    # blink(3, 0.2)
     
     
     
