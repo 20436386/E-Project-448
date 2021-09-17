@@ -148,14 +148,13 @@ class AK8963:
 
         print(asax, asay, asaz)
 
-        self._offset = (18.0, 158.0, 14.5)
-        self._scale = (1.00129, 1.05874, 0.946276)
+        self._offset = (9.0, 191.5, 18.0)
+        self._scale = (0.945221, 1.09447, 0.972422)
         self._adjustment = (
             ((asax - 128.0) / 256.0) + 1.0,
             ((asay - 128.0) / 256.0) + 1.0,
             ((asaz - 128.0) / 256.0) + 1.0
         )
-
         print("offset = ", self._offset)
         print("scale = ", self._scale)
 

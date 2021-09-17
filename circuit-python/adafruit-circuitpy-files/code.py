@@ -9,6 +9,7 @@ import time
 import busio
 import adafruit_gps
 import pwmio
+import analogio
 from roboticsmasters_mpu9250 import MPU9250
 from roboticsmasters_mpu6500 import MPU6500
 from roboticsmasters_ak8963 import AK8963
@@ -41,6 +42,9 @@ def bearing_tilt_comp(sensor):
         gamma =  (360 + gamma)
     
     return (phi, theta, gamma)
+
+def error_comp(mag_sample):
+    return ( -2.20606408e-06*mag_sample**3 + 1.75195525e-03*mag_sample**2 + 6.78000446e-01*mag_sample + 7.88451138 )
 
 def blink(num, delay):
     for i in range(num):
@@ -81,12 +85,6 @@ led.direction = digitalio.Direction.OUTPUT
 # LOG_MODE = 'ab'
 
 
-# #write newlines to file to differentiate between data_logs
-# with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
-#             file.write(bytes("\n\n\r", 'utf-16'))
-#             #file.flush()
-
-
 # #Initialise UART connection to gps module
 # TX = board.TX
 # RX = board.RX
@@ -99,22 +97,21 @@ led.direction = digitalio.Direction.OUTPUT
 # gps_ident = bytes("$GNRMC", 'utf-16')
 
 
-
-
 # #set up pwm for servos
 # servo1 = pwmio.PWMOut(board.A2, frequency = 50, duty_cycle = (int)((75/1000)*(2**16)))
 
+#Init ADC for wind sensor
+adc = analogio.AnalogIn(board.A3)
 
+#Code initialise MPU9250 magnetometer
+# i2c = busio.I2C(board.SCL, board.SDA)
 
-#Code to test MPU9250 magnetometer
-i2c = busio.I2C(board.SCL, board.SDA)
+# mpu = MPU6500(i2c, address=0x69)
+# #ak = AK8963(i2c)
 
-mpu = MPU6500(i2c, address=0x69)
-#ak = AK8963(i2c)
+# sensor = MPU9250(i2c)
 
-sensor = MPU9250(i2c)
-
-#Calibrate magnetometer. Will take 51,2 seconds to complete
+#Calibrate magnetometer
 # print("calibrating in 5")
 # time.sleep(5)
 # sensor.cal_mag()
@@ -155,6 +152,10 @@ sensor = MPU9250(i2c)
 
 while True:
 
+    print((adc.value/2**16) * 3.3)
+    time.sleep(1)
+
+
     # phi, theta, gamma = bearing_tilt_comp(sensor)
     # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
     # sentence = bytes(str(phi), 'utf-16') + "," + bytes(str(theta), 'utf-16') + "," +bytes(str(gamma), 'utf-16') + "\n"
@@ -167,11 +168,11 @@ while True:
     # time.sleep(1 - 0.027)
 
 
-    phi, theta, gamma = bearing_tilt_comp(sensor)
-    print(gamma)
-    # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
-    # print("no-comp = ", bearing(sensor))
-    time.sleep(0.3)
+    # phi, theta, gamma = bearing_tilt_comp(sensor)
+    # print(gamma)
+    # # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
+    # # print("no-comp = ", bearing(sensor))
+    # time.sleep(0.3)
 
     # blink(3, 0.2)
     
@@ -199,9 +200,6 @@ while True:
 # current_time = time.monotonic()
 # #print(current_time)
 # while True:
-#     continue
-
-
 
 #     #Reads and prints gps data to serial
 #     gps.update()
