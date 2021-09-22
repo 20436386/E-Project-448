@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=NetFeather_A3 Pin=FST202_Wind_Sensor-1
+Change Component Footprint: Designator=FST202_Wind_Sensor Old Footprint=CONNECTOR New Footprint=Screw_Terminal
+Change Component Comment : Designator=FST202_Wind_Sensor Old Comment=External_Connection_input New Comment=Screw_Terminal
+Added Pin To Net: NetName=NetFeather_A3 Pin=FST202_Wind_Sensor-A3

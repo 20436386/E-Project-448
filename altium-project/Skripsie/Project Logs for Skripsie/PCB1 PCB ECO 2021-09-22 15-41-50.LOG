@@ -1,0 +1,6 @@
+Added Component: Designator=FST202_Wind_Sensor(Screw_Terminal)
+Added Pin To Net: NetName=GND Pin=FST202_Wind_Sensor-2
+Added Pin To Net: NetName=NetFeather_A3 Pin=FST202_Wind_Sensor-A3
+Added Pin To Net: NetName=VCC_18V Pin=FST202_Wind_Sensor-3
+Added Net: Name=VCC_18V
+Added Member To Class: ClassName=Sheet1 Member=Component FST202_Wind_Sensor Screw_Terminal

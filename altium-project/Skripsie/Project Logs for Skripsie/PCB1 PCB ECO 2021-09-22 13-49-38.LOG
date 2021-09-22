@@ -1,0 +1,3 @@
+Added Pin To Net: NetName=NetFeather_6 Pin=Feather-6
+Added Pin To Net: NetName=NetFeather_6 Pin=SD_Card-CS
+Added Net: Name=NetFeather_6

@@ -1,0 +1,9 @@
+Change Physical Footprint: Designator=3.7V_Bat Old Footprint=Power_Input New Footprint=Power_Input
+Change Physical Footprint: Designator=Feather Old Footprint=ADAFUIT_FEATHER_STM32F405 New Footprint=Adafuit_feather_STM32F405
+Change Physical Footprint: Designator=FST202_Wind_Sensor Old Footprint=SCREW_TERMINAL New Footprint=Screw_Terminal
+Change Physical Footprint: Designator=GPS Old Footprint=GPS New Footprint=GPS
+Change Physical Footprint: Designator=MPU-9250 Old Footprint=MPU-9250/6500 New Footprint=MPU-9250/6500
+Change Physical Footprint: Designator=R1 Old Footprint=AXIAL-0.3 New Footprint=AXIAL-0.3
+Change Physical Footprint: Designator=Rudder_Servo Old Footprint=CONNECTOR New Footprint=connector
+Change Physical Footprint: Designator=Sail_Servo Old Footprint=CONNECTOR New Footprint=connector
+Change Physical Footprint: Designator=SD_Card Old Footprint=SD_CARD_SOCKET New Footprint=SD_Card_Socket

@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=GND Pin=FST202_Wind_Sensor-2
+Removed Pin From Net: NetName=NetFeather_A3 Pin=FST202_Wind_Sensor-A3
+Removed Member From Class: ClassName=Sheet1 Member=FST202_Wind_Sensor

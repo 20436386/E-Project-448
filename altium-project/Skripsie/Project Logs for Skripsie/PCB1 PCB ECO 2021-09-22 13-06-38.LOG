@@ -1,0 +1,6 @@
+Change Component Footprint: Designator=3.7V_Bat Old Footprint=CONNECTOR New Footprint=Power_Input
+Change Component Comment : Designator=3.7V_Bat Old Comment=External_Connection New Comment=Power_Input
+Added Pin To Net: NetName=GND Pin=3.7V_Bat-GND
+Added Pin To Net: NetName=Net3.7V_Bat_BAT Pin=3.7V_Bat-BAT
+Added Pin To Net: NetName=Net3.7V_Bat_BAT Pin=Feather-BAT
+Added Net: Name=Net3.7V_Bat_BAT
