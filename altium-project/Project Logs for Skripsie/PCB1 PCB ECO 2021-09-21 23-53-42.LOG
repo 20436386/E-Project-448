@@ -1,0 +1,16 @@
+Added Pin To Net: NetName=GND Pin=GPS-GND
+Added Pin To Net: NetName=NetFeather_TX Pin=GPS-RX
+Added Pin To Net: NetName=NetFeather_RX Pin=GPS-TX
+Added Pin To Net: NetName=NetFeather_3.3V Pin=GPS-VCC
+Added Pin To Net: NetName=NetFeather_3.3V Pin=MPU-9250-AD0
+Added Pin To Net: NetName=GND Pin=MPU-9250-FSYNC
+Added Pin To Net: NetName=GND Pin=MPU-9250-GND
+Added Pin To Net: NetName=NetFeather_SCL Pin=MPU-9250-SCL
+Added Pin To Net: NetName=NetFeather_SDA Pin=MPU-9250-SDA
+Added Pin To Net: NetName=NetFeather_3.3V Pin=MPU-9250-VCC
+Added Pin To Net: NetName=NetFeather_6 Pin=SD_Card-CS
+Added Pin To Net: NetName=NetFeather_MO Pin=SD_Card-DI
+Added Pin To Net: NetName=NetFeather_MI Pin=SD_Card-DO
+Added Pin To Net: NetName=GND Pin=SD_Card-GND
+Added Pin To Net: NetName=NetFeather_SCK Pin=SD_Card-SCLK
+Added Pin To Net: NetName=NetFeather_3.3V Pin=SD_Card-VDD

@@ -1,0 +1,18 @@
+Removed Pin From Net: NetName=NetFeather_3.3V Pin=Feather-3.3V
+Removed Pin From Net: NetName=NetFeather_6 Pin=Feather-6
+Removed Pin From Net: NetName=NetFeather_9 Pin=Feather-9
+Added Component: Designator=Feather(Adafuit_feather_STM32F405)
+Added Pin To Net: NetName=NetFeather_3.3V Pin=Feather-3.3V
+Added Pin To Net: NetName=NetFeather_6 Pin=Feather-6
+Added Pin To Net: NetName=NetFeather_9 Pin=Feather-9
+Added Pin To Net: NetName=NetFeather_A2 Pin=Feather-A2
+Added Pin To Net: NetName=NetFeather_A3 Pin=Feather-A3
+Added Pin To Net: NetName=Net3.7V_Bat_1 Pin=Feather-BAT
+Added Pin To Net: NetName=GND Pin=Feather-GND
+Added Pin To Net: NetName=NetFeather_MI Pin=Feather-MI
+Added Pin To Net: NetName=NetFeather_MO Pin=Feather-MO
+Added Pin To Net: NetName=NetFeather_RX Pin=Feather-RX
+Added Pin To Net: NetName=NetFeather_SCK Pin=Feather-SCK
+Added Pin To Net: NetName=NetFeather_SCL Pin=Feather-SCL
+Added Pin To Net: NetName=NetFeather_SDA Pin=Feather-SDA
+Added Pin To Net: NetName=NetFeather_TX Pin=Feather-TX

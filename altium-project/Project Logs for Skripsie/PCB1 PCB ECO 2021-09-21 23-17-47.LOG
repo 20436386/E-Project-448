@@ -1,0 +1,2 @@
+Change Component Footprint: Designator=Feather Old Footprint=ADAFRUIT_FEATHER_STM32F405 New Footprint=Adafuit_feather_STM32F405
+Added Pin To Net: NetName=NetFeather_3.3V Pin=Feather-3.3V
