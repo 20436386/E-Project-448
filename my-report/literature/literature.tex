@@ -1,0 +1,57 @@
+\graphicspath{{literature/fig/}}
+
+\chapter{Literature}
+
+\section{Sail Theory}
+
+\section{Related Work}
+\subsection{Unmanned Sailing Vessel by Philip van Schalkwyk}
+Philip is a mechatronics graduate who designed and developed an unmanned sailing vessel for his final year project at Stellenbosch University \cite{Phillip}.
+
+\subsubsection{Objectives}
+To design and develop an USV that is capable of autonomous sailing - uses navigational and control systems to travel along a predetermined path 
+consisting of GPS waypoints. 
+
+\subsubsection{Method Used}
+A RC sailing vessel was retrofitted with micro-controller that would read data from sensors and adjust the rudder and sail position in order to sail along a 
+desired path. The system consisted of a micro-controller, GPS receiver, a micro-SD card, an electronic compass, wind direction sensor and two servo motors - one to control the 
+sail and one to control the rudder angle. The micro-controller that was used was a Espress ESP-WROOM-32 micro-controller which is relatively low cost and has 
+a 240 MHz clock speed. The electronic compass was used to determine the current bearing of the vessel, it was designed and developed using a magnetometer, 
+accelerometer, gyroscope and tilt compensation algorithms. The MPU9250-6500 9-axis sensor module was used for the electronic compass as it consists of a magnetometer, accelerometer and a 
+gyroscope. A mechanical wind vain was designed with CAD software and printed with a 3D printer. The wind vain
+was fitted with a magnetometer - also the MPU9250-6500- which was used to determine the bearing of the wind vane and therefore the wind direction. The GPS receiver that was used for the navigational
+system was a Neo M8N GPS, it would log positional data to the micro-SD card. 
+
+A proportional controller was used to control the rudder position. The desired heading/bearing was calculated using the current GPS coordinates obtained from the 
+GPS receiver and the target GPS coordinates. A sample would then be taken from the electronic compass which would give the current bearing of the vessel, the difference 
+the current bearing and the desired bearing is the error signal. The proportional controller would then determine the rudder angle given this error signal, and the servo 
+motor controlling the rudder would be adjusted accordingly. 
+
+The main sail position was determined by the samples taken from the wind direction sensor and the current bearing. Only three point of sail classifications were used for the sail positions 
+: close-hauled, beam-reach and Run. This was done to give more time to navigational and rudder control systems. If it was determined that angle of attack was less than $45\deg$
+the vessel would tack into the wind. This was achieved by calculating the bearing to either side of the no-sail zone, the vessel would then sail with one of these bearings for 50 meters 
+and then change to the other bearing. The vessel would alternate along these bearings until the target destination was reached.
+
+\subsubsection{Results}
+The e-compass was tested against a magnetic compass and the results showed the average error in bearing to be $5.84\deg$, the e-compass did however produce a consistent spike at $180\deg$ across
+multiple tests. Tests that were done with the GPS receiver showed that the positional accuracy of the GPS receiver was sufficient for the navigational system and data-logging. The Wind sensor that
+ was developed was unable to provide wind direction data consistently, a possible explanation for this is that the length of the $I^{2}C$ was to long and therefore the capacitance in the lines caused 
+ a low pass filter effect on the signal. The final tests that where done to verify the workings of the USV, the point of sail classification was set to run initially and sail adjustments were not taken 
+ throughout the duration of the test - due to the wind sensor not working. The results of the final test showed that the rudder control system was capable of keeping the vessel on a near constant 
+ heading, with a maximum absolute error of $6\deg$. This test was conducted between two GPS coordinates and the vessel therefore sailed on a fixed bearing between them. Fig \ref{phillip_lake_test} shows
+ the results of this final test.
+
+ \subsubsection{Remaining challenges}
+ The rudder control system designed by Phillip was capable of accurately tracking a desired bearing during tests. Proportional integral control could not be implemented due to the consistent error that occurred during 
+ the e-compass testing. The USV that was developed does not however have the ability to dynamically adjust the sail position according to the relative wind direction, and is therefore unable to achieve the desired 
+ performance if wind direction changes from its initial direction. Tests where also not conducted to verify the tacking capabilities of USV.
+
+
+
+
+and the sail position was set accordingly depending on readings from the wind direction sensor.
+
+% #method used
+% #Results
+% #Short comings
+
