@@ -13,7 +13,16 @@ import analogio
 from roboticsmasters_mpu9250 import MPU9250
 from roboticsmasters_mpu6500 import MPU6500
 from roboticsmasters_ak8963 import AK8963
-import math
+import math 
+
+#Earth radius (km)
+R = 6371
+#For Sail control system
+PWM_max = 120
+PWM_min = 72
+ADC_min = 0.22
+ADC_max = 0.96
+angle_no_sail = 45
 
 def bearing(sensor):
     mag = sensor.magnetic
@@ -43,6 +52,22 @@ def bearing_tilt_comp(sensor):
     
     return (phi, theta, gamma)
 
+#This function will implement haversine formulae to calculate distance. Returns distance in metres
+def haversine(current, target):
+    #current = (lat1, long1)
+    #target = (lat2, long2)
+    delta_lat = (target[0] - current[0]) * (math.pi/180)
+    delta_long = (target[1]-current[1]) * (math.pi/180)
+
+
+    a = math.sin( delta_lat/2 )**2 + math.cos(current[0] * (math.pi/180) ) * math.cos(target[0] * (math.pi/180) ) * math.sin( delta_long/2 )**2
+    c = 2 * math.atan2( math.sqrt(a) , math.sqrt(1-a) )
+    d = R*c
+
+    return d * 1000
+
+
+#This will compensate for the error that occurs when using offset = (18.0, 158.0, 14.5), scale = (1.00129, 1.05874, 0.946276) - found in lounge
 def error_comp(mag_sample):
     return ( -2.20606408e-06*mag_sample**3 + 1.75195525e-03*mag_sample**2 + 6.78000446e-01*mag_sample + 7.88451138 )
 
@@ -81,35 +106,33 @@ led.direction = digitalio.Direction.OUTPUT
 # storage.mount(vfs, '/sd')    # Mount SD card under '/sd' path in filesystem.
 
 
-# LOG_FILE = "/sd/mag2.txt"    # Example for writing to SD card path /sd/gps.txt
+# LOG_FILE = "/sd/hello.txt"    # Example for writing to SD card path /sd/gps.txt
 # LOG_MODE = 'ab'
 
 
-# #Initialise UART connection to gps module
-# TX = board.TX
-# RX = board.RX
-# uart = busio.UART(TX, RX, baudrate = 9600, bits = 8, parity = None, stop = 1, timeout = 10)
-# gps = adafruit_gps.GPS(uart)#, debug = False)
+#Initialise UART connection to gps module
+TX = board.TX
+RX = board.RX
+uart = busio.UART(TX, RX, baudrate = 9600, bits = 8, parity = None, stop = 1, timeout = 10)
+gps = adafruit_gps.GPS(uart)#, debug = False)
 
-# #Not sure if this does anything
-# gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+#Not sure if this does anything
+gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
-# gps_ident = bytes("$GNRMC", 'utf-16')
+gps_ident = bytes("$GNRMC", 'utf-16')
 
 
 #set up pwm for servos
 # rudder_servo = pwmio.PWMOut(board.A2, frequency = 50, duty_cycle = (int)((75/1000)*(2**16)))
-sail_servo = pwmio.PWMOut(board.D9, frequency = 50, duty_cycle = (int)((72/1000)*(2**16)))
+# sail_servo = pwmio.PWMOut(board.D9, frequency = 50, duty_cycle = (int)((72/1000)*(2**16)))
 
-#Init ADC for wind sensor
-adc = analogio.AnalogIn(board.A3)
+# #Init ADC for wind sensor
+# adc = analogio.AnalogIn(board.A3)
 
-#Code initialise MPU9250 magnetometer
+# # Code initialise MPU9250 magnetometer
 # i2c = busio.I2C(board.SCL, board.SDA)
-
 # mpu = MPU6500(i2c, address=0x69)
 # #ak = AK8963(i2c)
-
 # sensor = MPU9250(i2c)
 
 #Calibrate magnetometer
@@ -150,33 +173,66 @@ adc = analogio.AnalogIn(board.A3)
 #             file.write(bytes(str(sensor._akm._offset) , 'utf-16'))
 #             file.write(bytes(str(sensor._akm._scale) , 'utf-16'))
 
-PWM_max = 120
-PWM_min = 72
-ADC_min = 0.22
-ADC_max = 0.96
-angle_no_sail = 45
+# lat = []
+# long = []
 
+current_time = time.monotonic()
 while True:
 
-    print("adc_percentage = ",  (adc.value/2**16) * 100)
-    alpha = ( ( (adc.value/2**16) -ADC_min )/(ADC_max-ADC_min) )
-    print("alpha = ", alpha * 100)
-    wind_bearing = ( alpha * 360)
-    if (wind_bearing > 180):
-        wind_bearing -= 360
-    # print("wind bearing = ", wind_bearing, "\n")
-    if abs(wind_bearing) > 45:
-        print("wind bearing = ", wind_bearing)
-        PWM_val = ( (abs(wind_bearing) - angle_no_sail)/(180 - angle_no_sail) ) * (PWM_max - PWM_min) + PWM_min
-        print("PWM_val = ", PWM_val, "\n")
-        sail_servo.duty_cycle = (int)((PWM_val/1000)*(2**16))
-    else:
-        print("no-sail-zone, wind_bearing = ", wind_bearing)
-        print((sail_servo.duty_cycle/2**16)*1000)
+    # #Code to test distance calculation accuracy
+    gps.update()
 
-    # print("adc.value = ", (adc.value/2**16))
-    # print("voltage = ", (adc.value/2**16) * 3.3, "\n")
-    time.sleep(1)
+    if (time.monotonic() - current_time) >= 0.5:
+        if not gps.has_fix:
+            # print("waiting for fix...")\
+            print("has fix = ", gps.has_fix)
+            #Note: continue keyword instructs next iteration of while loop to execute
+        else:
+            # print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
+            # print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
+
+            # lat.append(gps.latitude)
+            # long.append(gps.longitude)
+
+            # if (len(lat) == 10 ):
+            #     average_pos = ( ( sum(lat)/len(lat)) , ( sum(long)/len(long)) )
+            #     print("average_lat = {0:.9f}" .format(average_pos[0]))
+            #     print("average_long = {0:.9f}" .format(average_pos[1]))
+            #     break             
+
+            current_pos = (gps.latitude, gps.longitude )
+            # target_pos = ( -33.929259777, 18.861877441)
+            target_pos = ( -33.929276466 , 18.861862183)
+
+            distance = haversine( current_pos, target_pos)
+            print("distance = ", distance , "m")
+
+            # if gps.speed_knots is not None:
+            #     print("Speed: {} knots" .format(gps.speed_knots))
+            # if gps.track_angle_deg is not None:
+            #     print("Track angle: {} degrees" .format(gps.track_angle_deg))
+        current_time = time.monotonic()
+
+    # #For Sail control system
+    # print("adc_percentage = ",  (adc.value/2**16) * 100)
+    # alpha = ( ( (adc.value/2**16) -ADC_min )/(ADC_max-ADC_min) )
+    # print("alpha = ", alpha * 100)
+    # wind_bearing = ( alpha * 360)
+    # if (wind_bearing > 180):
+    #     wind_bearing -= 360
+    # # print("wind bearing = ", wind_bearing, "\n")
+    # if abs(wind_bearing) > 45:
+    #     print("wind bearing = ", wind_bearing)
+    #     PWM_val = ( (abs(wind_bearing) - angle_no_sail)/(180 - angle_no_sail) ) * (PWM_max - PWM_min) + PWM_min
+    #     print("PWM_val = ", PWM_val, "\n")
+    #     sail_servo.duty_cycle = (int)((PWM_val/1000)*(2**16))
+    # else:
+    #     print("no-sail-zone, wind_bearing = ", wind_bearing)
+    #     print((sail_servo.duty_cycle/2**16)*1000)
+
+    # # print("adc.value = ", (adc.value/2**16))
+    # # print("voltage = ", (adc.value/2**16) * 3.3, "\n")
+    # time.sleep(1)
 
 
     # phi, theta, gamma = bearing_tilt_comp(sensor)
@@ -211,10 +267,10 @@ while True:
     # else:
     #     theta = 360 - phi
     # print("theta = ", theta)
-    # #print('Acceleration (m/s^2): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.acceleration))
-    # #print('Magnetometer (gauss): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.magnetic))
-    # #print('Gyroscope (degrees/sec): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.gyro))
-    # #print('Temperature: {0:0.3f}C'.format(sensor.temperature))
+    # print('Acceleration (m/s^2): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.acceleration))
+    # print('Magnetometer (gauss): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.magnetic))
+    # print('Gyroscope (degrees/sec): ({0:0.3f},{1:0.3f},{2:0.3f})'.format(*sensor.gyro))
+    # print('Temperature: {0:0.3f}C'.format(sensor.temperature))
     # time.sleep(0.4)
     
 
@@ -232,9 +288,9 @@ while True:
 #             print("waiting for fix...")
 #             #Note: continue keyword instructs next iteration of while loop to execute
 #         else:
-#             print("latitude: {0:.6f} degrees" .format(gps.latitude)) #
-#             print("longitude: {0:.6f} degrees" .format(gps.longitude))
-#             print(gps.track_angle_deg)
+#             print("latitude: {0:.8f} degrees" .format(gps.latitude)) #
+#             print("longitude: {0:.8f} degrees" .format(gps.longitude))
+#             # print(gps.track_angle_deg)
 
 #             if gps.speed_knots is not None:
 #                 print("Speed: {} knots" .format(gps.speed_knots))
@@ -257,4 +313,3 @@ while True:
 #         with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
 #             file.write(sentence)
 #             #file.flush()
-
