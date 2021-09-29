@@ -13,12 +13,24 @@
 \contentsline {section}{\numberline {1.5}Scope}{3}{section.1.5}% 
 \contentsline {chapter}{\numberline {2}Literature}{4}{chapter.2}% 
 \contentsline {section}{\numberline {2.1}Sail Theory}{4}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}Related Work}{4}{section.2.2}% 
-\contentsline {subsection}{\numberline {2.2.1}Unmanned Sailing Vessel by Philip van Schalkwyk}{4}{subsection.2.2.1}% 
-\contentsline {subsubsection}{Objectives}{4}{subsubsection*.7}% 
-\contentsline {subsubsection}{Method Used}{4}{subsubsection*.8}% 
-\contentsline {subsubsection}{Results}{5}{subsubsection*.9}% 
-\contentsline {subsubsection}{Remaining challenges}{5}{subsubsection*.10}% 
-\contentsline {chapter}{\numberline {3}Summary and Conclusion}{7}{chapter.3}% 
-\contentsline {chapter}{\numberline {A}Project Planning Schedule}{8}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Outcomes Compliance}{9}{appendix.B}% 
+\contentsline {section}{\numberline {2.2}Related Work}{7}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Unmanned Sailing Vessel by Philip van Schalkwyk}{7}{subsection.2.2.1}% 
+\contentsline {subsubsection}{Objectives}{7}{subsubsection*.10}% 
+\contentsline {subsubsection}{Method Used}{7}{subsubsection*.11}% 
+\contentsline {subsubsection}{Results}{8}{subsubsection*.12}% 
+\contentsline {subsubsection}{Remaining challenges}{8}{subsubsection*.14}% 
+\contentsline {subsection}{\numberline {2.2.2}Design and Implementation of a Control System for a Sailboat Robot}{9}{subsection.2.2.2}% 
+\contentsline {subsubsection}{Objectives}{9}{subsubsection*.15}% 
+\contentsline {subsubsection}{Method Used}{9}{subsubsection*.16}% 
+\contentsline {subsubsection}{Results}{11}{subsubsection*.17}% 
+\contentsline {subsubsection}{Remaining challenges}{11}{subsubsection*.19}% 
+\contentsline {subsection}{\numberline {2.2.3}FASt - An autonomous sailing platform for oceanographic missions}{12}{subsection.2.2.3}% 
+\contentsline {subsubsection}{Objectives}{12}{subsubsection*.20}% 
+\contentsline {subsubsection}{Method Used}{12}{subsubsection*.21}% 
+\contentsline {subsubsection}{Results}{14}{subsubsection*.22}% 
+\contentsline {subsubsection}{Remaining challenges}{14}{subsubsection*.23}% 
+\contentsline {subsection}{\numberline {2.2.4}Establishing frame of reference}{15}{subsection.2.2.4}% 
+\contentsline {subsection}{\numberline {2.2.5}Magnetic declination}{16}{subsection.2.2.5}% 
+\contentsline {chapter}{\numberline {3}Summary and Conclusion}{18}{chapter.3}% 
+\contentsline {chapter}{\numberline {A}Project Planning Schedule}{19}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Outcomes Compliance}{20}{appendix.B}% 

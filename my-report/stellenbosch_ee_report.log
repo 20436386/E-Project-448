@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  24 SEP 2021 00:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  29 SEP 2021 23:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.tex
-(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.tex
+**/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.tex
+(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.tex
 LaTeX2e <2018-12-01>
 (/usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2018/09/03 v1.4i Standard LaTeX document class
@@ -542,7 +542,7 @@ Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footers
 \f@nch@O@orf=\skip74
 )
 
-Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is useless on input line 75.
+Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is useless on input line 76.
 
 (/usr/share/texlive/texmf-dist/tex/latex/algorithms/algorithm.sty
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
@@ -650,7 +650,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 \Hy@SectionHShift=\skip75
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 88.
+Package hyperref Info: Option `colorlinks' set `true' on input line 89.
  (/usr/share/texlive/texmf-dist/tex/latex/tocbibind/tocbibind.sty
 Package: tocbibind 2010/10/13 v1.5k extra ToC listings
 Package tocbibind Info: The document has chapter divisions on input line 50.
@@ -682,27 +682,29 @@ LaTeX Info: Redefining \nocite on input line 332.
 Package: cite 2015/02/27  v 5.5
 )
 \bibdata{IEEEabrv,mybib}
-(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.bbl) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.bbl) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2018/08/19 v2.5f e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count314
-) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.aux)
+)
+   defining Unicode char U+2212 (decimal 8722)
+ (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.aux)
 \openout1 = `stellenbosch_ee_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 109.
-LaTeX Font Info:    ... okay on input line 109.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 109.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
+LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 111.
  (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -740,7 +742,7 @@ File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 109.
+LaTeX Info: Redefining \microtypecontext on input line 111.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -869,7 +871,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-Package hyperref Info: Link coloring ON on input line 109.
+Package hyperref Info: Link coloring ON on input line 111.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -877,44 +879,44 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count321
 )
-LaTeX Info: Redefining \ref on input line 109.
-LaTeX Info: Redefining \pageref on input line 109.
-LaTeX Info: Redefining \nameref on input line 109.
- (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.out) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.out)
+LaTeX Info: Redefining \ref on input line 111.
+LaTeX Info: Redefining \pageref on input line 111.
+LaTeX Info: Redefining \nameref on input line 111.
+ (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.out) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.out)
 \@outlinefile=\write3
 \openout3 = `stellenbosch_ee_report.out'.
 
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 109.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 111.
  (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 109.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 111.
  (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 109.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 111.
  (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 109.
+(Font)              <12> on input line 111.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 109.
+(Font)              <8> on input line 111.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 109.
-LaTeX Font Info:    Try loading font information for U+msa on input line 109.
+(Font)              <6> on input line 111.
+LaTeX Font Info:    Try loading font information for U+msa on input line 111.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 109.
+LaTeX Font Info:    Try loading font information for U+msb on input line 111.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 109.
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 111.
  (/usr/share/texmf/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -922,7 +924,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 109.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 111.
  (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -930,15 +932,15 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/frontmatter/skripsie_title_page.tex
-<frontmatter/fig/USlogo-top.pdf, id=76, 560.0925pt x 183.68625pt>
+ (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/frontmatter/skripsie_title_page.tex
+<frontmatter/fig/USlogo-top.pdf, id=92, 560.0925pt x 183.68625pt>
 File: frontmatter/fig/USlogo-top.pdf Graphic file (type pdf)
 <use frontmatter/fig/USlogo-top.pdf>
 Package pdftex.def Info: frontmatter/fig/USlogo-top.pdf  used on input line 7.
 (pdftex.def)             Requested size: 284.52756pt x 93.31717pt.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/frontmatter/fig/USlogo-top.pdf>]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/frontmatter/acknowledgements.tex) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/frontmatter/declaration.tex [1
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/frontmatter/fig/USlogo-top.pdf>]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/frontmatter/acknowledgements.tex) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/frontmatter/declaration.tex [1
 
 ]
 File: frontmatter/fig/USlogo-top.pdf Graphic file (type pdf)
@@ -947,29 +949,29 @@ Package pdftex.def Info: frontmatter/fig/USlogo-top.pdf  used on input line 7.
 (pdftex.def)             Requested size: 227.62204pt x 74.65036pt.
 LaTeX Font Info:    Font shape `OT1/lmss/bx/it' in size <17.28> not available
 (Font)              Font shape `OT1/lmss/bx/sl' tried instead on input line 10.
-) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/frontmatter/abstract.tex [2]) [3
+) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/frontmatter/abstract.tex [2]) [3
 
-] (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.toc)
+] (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.toc)
 \tf@toc=\write4
 \openout4 = `stellenbosch_ee_report.toc'.
 
  [4
 
-] (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.lof)
+] (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.lof)
 \tf@lof=\write5
 \openout5 = `stellenbosch_ee_report.lof'.
 
  [5
 
-] (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.lot)
+] (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.lot)
 \tf@lot=\write6
 \openout6 = `stellenbosch_ee_report.lot'.
 
- (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/frontmatter/nomenclature.tex [6
+ (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/frontmatter/nomenclature.tex [6
 
 ]) [7
 
-] (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/introduction/introduction.tex
+] (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/introduction/introduction.tex
 Chapter 1.
 
 LaTeX Warning: Citation `Valdes' on page 1 undefined on input line 22.
@@ -979,61 +981,183 @@ LaTeX Warning: Citation `Valdes' on page 1 undefined on input line 23.
 
 [1
 
-]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/literature/literature.tex [2] [3]
+]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/literature.tex [2] [3]
 Chapter 2.
 
-LaTeX Warning: Citation `Phillip' on page 4 undefined on input line 9.
+LaTeX Warning: Citation `ASA' on page 4 undefined on input line 7.
+
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 10.
+(/usr/share/texmf/tex/latex/lm/omslmr.fd
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 10.
+<literature/fig/sailboat_anatomy_1.jpg, id=227, 566.115pt x 638.385pt>
+File: literature/fig/sailboat_anatomy_1.jpg Graphic file (type jpg)
+<use literature/fig/sailboat_anatomy_1.jpg>
+Package pdftex.def Info: literature/fig/sailboat_anatomy_1.jpg  used on input line 25.
+(pdftex.def)             Requested size: 273.14923pt x 308.02856pt.
+
+
+LaTeX Warning: Citation `sail_anatomy' on page 4 undefined on input line 26.
+
+
+LaTeX Warning: Citation `sail_anatomy' on page 4 undefined on input line 26.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `apparent_wind' on page 4 undefined on input line 32.
+
+<literature/fig/apparent_wind.jpeg, id=228, 612.2875pt x 248.93pt>
+File: literature/fig/apparent_wind.jpeg Graphic file (type jpg)
+<use literature/fig/apparent_wind.jpeg>
+Package pdftex.def Info: literature/fig/apparent_wind.jpeg  used on input line 36.
+(pdftex.def)             Requested size: 318.66948pt x 129.55829pt.
+
+LaTeX Warning: Citation `apparent_wind' on page 4 undefined on input line 37.
+
+
+LaTeX Warning: Citation `apparent_wind' on page 4 undefined on input line 37.
+
+
+LaTeX Warning: Reference `points_of_sail' on page 4 undefined on input line 47.
 
 [4
 
-]
+] [5 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/sailboat_anatomy_1.jpg> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/apparent_wind.jpeg>]
+<literature/fig/point_of_sail.png, id=241, 1083.04625pt x 824.07875pt>
+File: literature/fig/point_of_sail.png Graphic file (type png)
+<use literature/fig/point_of_sail.png>
+Package pdftex.def Info: literature/fig/point_of_sail.png  used on input line 53.
+(pdftex.def)             Requested size: 318.66948pt x 242.4724pt.
 
-LaTeX Warning: Reference `phillip_lake_test' on page 5 undefined on input line 41.
 
-[5]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/conclusion/conclusion.tex [6]
+LaTeX Warning: Citation `ASA' on page 6 undefined on input line 54.
+
+
+LaTeX Warning: Citation `ASA' on page 6 undefined on input line 54.
+
+
+LaTeX Warning: Reference `point_of_sail' on page 6 undefined on input line 58.
+
+
+LaTeX Warning: Reference `point_of_sail' on page 6 undefined on input line 60.
+
+[6 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/point_of_sail.png>]
+
+LaTeX Warning: Citation `Phillip' on page 7 undefined on input line 75.
+
+[7]
+<literature/fig/phillip_lake_test.png, id=255, 608.2725pt x 442.65375pt>
+File: literature/fig/phillip_lake_test.png Graphic file (type png)
+<use literature/fig/phillip_lake_test.png>
+Package pdftex.def Info: literature/fig/phillip_lake_test.png  used on input line 118.
+(pdftex.def)             Requested size: 417.91376pt x 304.13457pt.
+
+
+LaTeX Warning: Citation `Phillip' on page 8 undefined on input line 119.
+
+
+LaTeX Warning: Citation `Phillip' on page 8 undefined on input line 119.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8] [9 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/phillip_lake_test.png>] [10]
+<literature/fig/robotics_test_result.png, id=281, 723.70375pt x 825.0825pt>
+File: literature/fig/robotics_test_result.png Graphic file (type png)
+<use literature/fig/robotics_test_result.png>
+Package pdftex.def Info: literature/fig/robotics_test_result.png  used on input line 182.
+(pdftex.def)             Requested size: 273.14923pt x 311.40694pt.
+
+
+LaTeX Warning: Citation `robotics5010005' on page 11 undefined on input line 183.
+
+
+LaTeX Warning: Citation `robotics5010005' on page 11 undefined on input line 183.
+
+
+LaTeX Warning: Reference `Problem Statement' on page 11 undefined on input line 191.
+
+[11 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/robotics_test_result.png>]
+
+LaTeX Warning: Citation `Alves2008FAStA' on page 12 undefined on input line 197.
+
+[12] [13]
+
+LaTeX Warning: Reference `' on page 14 undefined on input line 261.
+
+[14]
+<literature/fig/reference-frame.png, id=307, 746.79pt x 759.83875pt>
+File: literature/fig/reference-frame.png Graphic file (type png)
+<use literature/fig/reference-frame.png>
+Package pdftex.def Info: literature/fig/reference-frame.png  used on input line 279.
+(pdftex.def)             Requested size: 227.62206pt x 231.59395pt.
+
+
+LaTeX Warning: Citation `e_compass' on page 15 undefined on input line 286.
+
+[15 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/reference-frame.png>]
+
+LaTeX Warning: Reference `mag_declination' on page 16 undefined on input line 311.
+
+<literature/fig/mag_declination.jpg, id=319, 822.07124pt x 457.71pt>
+File: literature/fig/mag_declination.jpg Graphic file (type jpg)
+<use literature/fig/mag_declination.jpg>
+Package pdftex.def Info: literature/fig/mag_declination.jpg  used on input line 315.
+(pdftex.def)             Requested size: 409.71692pt x 228.12111pt.
+
+LaTeX Warning: Citation `Mag_declination' on page 16 undefined on input line 316.
+
+
+LaTeX Warning: Citation `Mag_declination' on page 16 undefined on input line 316.
+
+) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [16 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/mag_declination.jpg>] [17]
 Chapter 3.
-) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.bbl) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/appendices/appendices.tex [7
+) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.bbl) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/appendices/appendices.tex [18
 
 ]
 Appendix A.
-[8
+[19
 
 ]
 Appendix B.
 )
 
-Package caption Warning: Unused \captionsetup[algorithm] on input line 94.
+Package caption Warning: Unused \captionsetup[algorithm] on input line 95.
 See the caption package documentation for explanation.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 137.
-[9
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 139.
+[20
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 137.
- (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 137.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 137.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 139.
+ (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 139.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 139.
 Package rerunfilecheck Info: File `stellenbosch_ee_report.out' has not changed.
-(rerunfilecheck)             Checksum: A1204F1F3897309100124A66D28EB1C8;1016.
+(rerunfilecheck)             Checksum: E4E10EAC477EAB01C7BC11F6099C11BA;1413.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 137.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 139.
  ) 
 Here is how much of TeX's memory you used:
- 24476 strings out of 494485
- 445864 string characters out of 6175792
- 539334 words of memory out of 5000000
- 27704 multiletter control sequences out of 15000+600000
- 590113 words of font info for 96 fonts, out of 8000000 for 9000
+ 24632 strings out of 494485
+ 449750 string characters out of 6175792
+ 541983 words of memory out of 5000000
+ 27786 multiletter control sequences out of 15000+600000
+ 599753 words of font info for 111 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 40i,11n,63p,987b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb>
-Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/Report/stellenbosch_ee_report.pdf (17 pages, 207564 bytes).
+ 40i,12n,63p,1008b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb>
+Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (28 pages, 1220318 bytes).
 PDF statistics:
- 254 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
- 46 named destinations out of 1000 (max. 500000)
- 16534 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 409 PDF objects out of 1000 (max. 8388607)
+ 348 compressed objects within 4 object streams
+ 80 named destinations out of 1000 (max. 500000)
+ 19673 words of extra memory for PDF output out of 20736 (max. 10000000)
 
