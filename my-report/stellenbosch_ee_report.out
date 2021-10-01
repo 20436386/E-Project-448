@@ -17,6 +17,12 @@
 \BOOKMARK [2][-]{subsection.2.2.3}{FASt - An autonomous sailing platform for oceanographic missions}{section.2.2}% 17
 \BOOKMARK [2][-]{subsection.2.2.4}{Establishing frame of reference}{section.2.2}% 18
 \BOOKMARK [2][-]{subsection.2.2.5}{Magnetic declination}{section.2.2}% 19
-\BOOKMARK [0][-]{chapter.3}{Summary and Conclusion}{}% 20
-\BOOKMARK [0][-]{appendix.A}{Project Planning Schedule}{}% 21
-\BOOKMARK [0][-]{appendix.B}{Outcomes Compliance}{}% 22
+\BOOKMARK [0][-]{chapter.3}{System Design}{}% 20
+\BOOKMARK [1][-]{section.3.1}{Sail Vessel}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.2}{Wind direction sensor}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.3}{Servo motors}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.4}{Micro-SD card}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.5}{Power system}{chapter.3}% 25
+\BOOKMARK [0][-]{chapter.4}{Summary and Conclusion}{}% 26
+\BOOKMARK [0][-]{appendix.A}{Project Planning Schedule}{}% 27
+\BOOKMARK [0][-]{appendix.B}{Outcomes Compliance}{}% 28

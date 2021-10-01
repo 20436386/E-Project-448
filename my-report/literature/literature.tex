@@ -45,7 +45,7 @@ that acts perpendicular to the centerline of the boat is canceled by the apposin
 the sails is know as 'trimming the sails'. To generate a maximum amount of forward force on the sailboat, the sail must be positioned to capture as much 
 of the winds energy as possible. The direction of apparent wind determines the directions that the sailboat can/cannot sail, these directions are known as 
 points of sail and are measured relative to the direction of apparent wind. Fig. \ref{points_of_sail} illustrates the points of sail of a sailboat. It should 
-be noted that there is a range known as the 'no-sail zone' in which a sailboat cannot sail. This range is measured $45\circ$ to both sides of the apparent wind
+be noted that there is a range known as the 'no-sail zone' in which a sailboat cannot sail. This range is measured $45^{\circ}$ to both sides of the apparent wind
 when sailing directly towards the apparent wind.
 
 \begin{figure}[!h]
@@ -56,18 +56,18 @@ when sailing directly towards the apparent wind.
 \end{figure}
 
 Point of sail is traditionally measured analogous to a clock, as shown in Fig. \ref{point_of_sail}. For the purpose of this report point of sail will be defined 
-as the angle between the direction of travel of the boat and the direction of the apparent wind measured clockwise in degrees. A sail direction of $0\circ$ will 
-then correspond to 12'oclock in Fig.\ref{point_of_sail} and $180\circ$ will corresponding to 6'oclock measured clockwise. The position of the mainsail will be 
+as the angle between apparent wind direction and the direction of travel of the boat, measured clockwise in degrees. A sail direction of $0^{\circ}$ will 
+then correspond to 12'oclock in Fig.\ref{point_of_sail} and $180^{\circ}$ will corresponding to 6'oclock measured clockwise. The position of the mainsail will be 
 defined by the angle between the mainsail and the centerline of the sailboat to either the starboard or port side.
 
 If the desired destination is within the no-sail zone, a manoeuver known as 'tacking' can be performed to reach the desired destination. When sailing with 
 he wind blowing on the starboard, its on the starboard tack, and when the wind is blowing on port side, the boat is on port tack. Tacking is the act of 
-turning the bow of the sailboat through the no-sail zone. Assume the boat is on starboard tack and point of sail is $45\circ$, after some distance has been travelled 
-the bow is turned through the no-sail zone to attain a port tack and a point of sail of $-45\circ$, this 'zig-zag' motion is done continuously until the 
+turning the bow of the sailboat through the no-sail zone. Assume the boat is on starboard tack and point of sail is $45^{\circ}$, after some distance has been travelled 
+the bow is turned through the no-sail zone to attain a port tack and a point of sail of $-45^{\circ}$, this 'zig-zag' motion is done continuously until the 
 desired destination is reached.
 
 Another important manoeuver is the 'jibe', which is defined as the action of changing from a starboard tack to a port tack. An example of this occurring is when 
-point of sail changes from $160\circ$ to $100\circ$, initially apparent wind will be port side but after crossing over $180\circ$ the wind will be starboard side, 
+point of sail changes from $160^{\circ}$ to $100^{\circ}$, initially apparent wind will be port side but after crossing over $180^{\circ}$ the wind will be starboard side, 
 during this crossover the mainsail will often swing from starboard to port.
 \section{Related Work}
 
@@ -105,7 +105,7 @@ the vessel would tack into the wind. This was achieved by calculating the bearin
 and then change to the other bearing. The vessel would alternate along these bearings until the target destination was reached.
 
 \subsubsection{Results}
-The e-compass was tested against a magnetic compass and the results showed the average error in bearing to be $5.84\circ$, the e-compass did however produce a consistent spike at $180\circ$ across
+The e-compass was tested against a magnetic compass and the results showed the average error in bearing to be $5.84^{\circ}$, the e-compass did however produce a consistent spike at $180^{\circ}$ across
 multiple tests. Tests that were done with the GPS receiver showed that the positional accuracy of the GPS receiver was sufficient for the navigational system and data-logging. The wind sensor that
 was developed was unable to provide wind direction data consistently, a possible explanation for this is that the length of the $I^{2}C$ connection is too long and therefore the capacitance in the lines caused 
 a low pass filter effect on the signal. In the final tests that were conducted to verify the successful operation of the control systems, the point of sail classification was set to run initially and sail adjustments were not taken 
@@ -174,7 +174,7 @@ of high-frequency noise caused by the derivative.
 In the simulation the optimal gains for the rudder controller are: Kp = 0.68, Ki = 1.125 and Kd = − 0.130. These controller gains were used as initial values to be fine-tuned through
 multiple tests done with the prototype sailboat. After conducting the tests the resulting adjusted rudder controller gains were: kp = 2.3 and ki = 0.8. The tests that were done 
 compared the use of a proportional controller and a PI controller for the rudder control, Fig.\ref{fig:robotics_test_result} shows the results of one of the tests. Note that the 
-sailboat was initially placed to face $90\circ$ from target location. In all tests that were conducted the prototype sailboat reached the specified target coordinates, the PI 
+sailboat was initially placed to face $90^{\circ}$ from target location. In all tests that were conducted the prototype sailboat reached the specified target coordinates, the PI 
 controller, however, performed better than the P controller with less deviation from the ideal trajectory.
 
 \begin{figure}[!h]
@@ -188,7 +188,7 @@ controller, however, performed better than the P controller with less deviation 
 
 The system that was designed and developed does not incorporate an onboard wind direction sensor but instead receives the wind direction data from a base station via XBee. 
 The sail vessel will therefore not be capable of travelling distances over which the apparent wind direction around the vessel differs from the wind direction around the base 
-station. Aside from this, the system that was developed addresses the problem statement in section \ref{Problem Statement}; the purpose of the following sections is then to duplicate the 
+station. Aside from this, the system that was developed addresses the problem statement in section \ref{problem_statement}; the purpose of the following sections is then to duplicate the 
 above system.
 
 
@@ -320,4 +320,4 @@ south to magnetic north, this is illustrated in Fig. \ref{mag_declination}.
 
 Magnetic declination is an angle of correction used to determine true north from a local magnetic north reading. Magnetic declination takes into account the variance of local magnetic 
 field lines and the angle between magnetic north and true north. Magnetic declination therefore differs across the globe. The National Oceanic and Atmospheric Administration (NOAA) \
-keeps track of magnetic declination across the globe as it changes with time. The magnetic declination in Stellenbosch is $25.77\circ \pm 0.59\circ$.   
+keeps track of magnetic declination across the globe as it changes with time. The magnetic declination in Stellenbosch is $25.77^{\circ} \pm 0.59^{\circ}$.   

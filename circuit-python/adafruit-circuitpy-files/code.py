@@ -18,12 +18,17 @@ import math
 #Earth radius (km)
 R = 6371
 #For Sail control system
-PWM_max = 120
-PWM_min = 72
+PWM_sail_max = 120
+PWM_sail_min = 72
 ADC_min = 0.22
 ADC_max = 0.96
 angle_no_sail = 45
 
+#For rudder control system (neutral is 75)
+PWM_rudder_max = 102
+PWM_rudder_min = 48
+
+#Returns bearing wrt magnetic north, no tilt compensation
 def bearing(sensor):
     mag = sensor.magnetic
     gamma = math.atan2(mag[1],mag[0]) * (180/math.pi)
@@ -32,6 +37,8 @@ def bearing(sensor):
     else:
         return (360 - gamma)
 
+
+#Returns bearing wrt magnetic north, with tilt compensation
 def bearing_tilt_comp(sensor):
     acc = sensor.acceleration
     mag = sensor.magnetic
@@ -52,24 +59,53 @@ def bearing_tilt_comp(sensor):
     
     return (phi, theta, gamma)
 
-#This function will implement haversine formulae to calculate distance. Returns distance in metres
+#This function will implement haversine formulae to calculate distance; returns distance in metres. Takes points in decimal degrees
 def haversine(current, target):
     #current = (lat1, long1)
     #target = (lat2, long2)
-    delta_lat = (target[0] - current[0]) * (math.pi/180)
-    delta_long = (target[1]-current[1]) * (math.pi/180)
+    current_rad = [x * (math.pi/180) for x in current]
+    target_rad = [x * (math.pi/180) for x in target]
+    delta_lat = (target_rad[0] - current_rad[0]) 
+    delta_long = (target_rad[1] - current_rad[1])
 
 
-    a = math.sin( delta_lat/2 )**2 + math.cos(current[0] * (math.pi/180) ) * math.cos(target[0] * (math.pi/180) ) * math.sin( delta_long/2 )**2
+    a = math.sin( delta_lat/2 )**2 + math.cos(current_rad[0]) * math.cos(target_rad[0]) * math.sin( delta_long/2 )**2
     c = 2 * math.atan2( math.sqrt(a) , math.sqrt(1-a) )
     d = R*c
 
+    # delta_lat = (target[0] - current[0]) * (math.pi/180)
+    # delta_long = (target[1] - current[1]) * (math.pi/180)
+
+
+    # a = math.sin( delta_lat/2 )**2 + math.cos(current[0] * (math.pi/180) ) * math.cos(target[0] * (math.pi/180) ) * math.sin( delta_long/2 )**2
+    # c = 2 * math.atan2( math.sqrt(a) , math.sqrt(1-a) )
+    # d = R*c
+
     return d * 1000
 
-
-#This will compensate for the error that occurs when using offset = (18.0, 158.0, 14.5), scale = (1.00129, 1.05874, 0.946276) - found in lounge
+#This will compensate for the error that occurs when using offset = (2.5, 296.0, 52.0), scale = (1.01161, 1.0369, 0.955044) - found at dam.
 def error_comp(mag_sample):
-    return ( -2.20606408e-06*mag_sample**3 + 1.75195525e-03*mag_sample**2 + 6.78000446e-01*mag_sample + 7.88451138 )
+    return ( 2.57600925e-06*mag_sample**3 - 5.29452811e-04*mag_sample**2 + 8.79993961e-01*mag_sample + 1.53253617e+01)
+
+#return desired/reference bearing
+def reference_bearing(current, target):
+    #current = (lat1, long1)
+    #target = (lat2, long2)
+    current_rad = [x * (math.pi/180) for x in current]
+    target_rad = [x * (math.pi/180) for x in target]
+
+    # delta_lat = (target[0] - current[0]) * (math.pi/180)
+    delta_long = (target_rad[1] - current_rad[1])
+
+    numerator = math.sin(delta_long) * math.cos(target_rad[0])
+    denominator = math.cos(current_rad[0]) * math.sin(target_rad[0]) - math.sin(current_rad[0]) * math.cos(target_rad[0]) * math.cos(delta_long)
+    theta = math.atan2(numerator, denominator) * (180 / math.pi)
+
+    #Limit theta to range (0, 360)
+    if theta < 0:
+        theta += 360
+
+    return theta 
 
 def blink(num, delay):
     for i in range(num):
@@ -97,7 +133,7 @@ led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
 
-# #Mounting sd card with spi
+# # Mounting sd card with spi
 # SD_CS_PIN = board.D6
 # spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 # sd_cs = digitalio.DigitalInOut(SD_CS_PIN)
@@ -106,7 +142,7 @@ led.direction = digitalio.Direction.OUTPUT
 # storage.mount(vfs, '/sd')    # Mount SD card under '/sd' path in filesystem.
 
 
-# LOG_FILE = "/sd/hello.txt"    # Example for writing to SD card path /sd/gps.txt
+# LOG_FILE = "/sd/calib.txt"    # Example for writing to SD card path /sd/gps.txt
 # LOG_MODE = 'ab'
 
 
@@ -124,21 +160,21 @@ gps_ident = bytes("$GNRMC", 'utf-16')
 
 #set up pwm for servos
 # rudder_servo = pwmio.PWMOut(board.A2, frequency = 50, duty_cycle = (int)((75/1000)*(2**16)))
-# sail_servo = pwmio.PWMOut(board.D9, frequency = 50, duty_cycle = (int)((72/1000)*(2**16)))
+# sail_servo = pwmio.PWMOut(board.D9, frequency = 50, duty_cycle = (int)((120/1000)*(2**16)))
 
 # #Init ADC for wind sensor
 # adc = analogio.AnalogIn(board.A3)
 
-# # Code initialise MPU9250 magnetometer
+# Code initialise MPU9250 magnetometer
 # i2c = busio.I2C(board.SCL, board.SDA)
 # mpu = MPU6500(i2c, address=0x69)
 # #ak = AK8963(i2c)
 # sensor = MPU9250(i2c)
 
-#Calibrate magnetometer
+# # Calibrate magnetometer 
 # print("calibrating in 5")
 # time.sleep(5)
-# sensor.cal_mag()
+# sensor.cal_mag() 
 
 
 # print("Reading in data from IMU.")
@@ -173,23 +209,43 @@ gps_ident = bytes("$GNRMC", 'utf-16')
 #             file.write(bytes(str(sensor._akm._offset) , 'utf-16'))
 #             file.write(bytes(str(sensor._akm._scale) , 'utf-16'))
 
+# print("offset = ", sensor._akm._offset)
+# print("scale = ", sensor._akm._scale)
+
 # lat = []
 # long = []
 
 current_time = time.monotonic()
 while True:
+    
+    # #Code to test calculating desired bearing
+    # current = (-33.929071, 18.862272)
+    # # target = (-33.928935, 18.863529)
+    # target = (-33.930480,  18.863745)
 
-    # #Code to test distance calculation accuracy
+
+    # # current = (-33.9342191666667, 18.8628255)
+    # # target = (-33.9334761666667, 18.8678281666667)
+
+
+    # distance = haversine(current, target)
+    # ref_bearing = reference_bearing(current, target)
+    # print(ref_bearing)
+    # print(distance, "\n")
+    # time.sleep(1)
+
+    #Code to test distance calculation accuracy
+    # print(gps.readline())
     gps.update()
 
-    if (time.monotonic() - current_time) >= 0.5:
+    if (time.monotonic() - current_time) >= 1:
         if not gps.has_fix:
             # print("waiting for fix...")\
             print("has fix = ", gps.has_fix)
             #Note: continue keyword instructs next iteration of while loop to execute
         else:
-            # print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
-            # print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
+            print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
+            print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
 
             # lat.append(gps.latitude)
             # long.append(gps.longitude)
@@ -201,16 +257,13 @@ while True:
             #     break             
 
             current_pos = (gps.latitude, gps.longitude )
-            # target_pos = ( -33.929259777, 18.861877441)
-            target_pos = ( -33.929276466 , 18.861862183)
+            # target_pos = ( -33.929259777, 18.861877441)#average of 10 samples garden
+            target_pos = ( -33.929276466 , 18.861862183)#one sample, garden
+            # target_pos = ( -33.929245 , 18.861851)#from google earth
 
             distance = haversine( current_pos, target_pos)
-            print("distance = ", distance , "m")
+            print("distance = ", distance , "m", "\n")
 
-            # if gps.speed_knots is not None:
-            #     print("Speed: {} knots" .format(gps.speed_knots))
-            # if gps.track_angle_deg is not None:
-            #     print("Track angle: {} degrees" .format(gps.track_angle_deg))
         current_time = time.monotonic()
 
     # #For Sail control system
@@ -223,7 +276,7 @@ while True:
     # # print("wind bearing = ", wind_bearing, "\n")
     # if abs(wind_bearing) > 45:
     #     print("wind bearing = ", wind_bearing)
-    #     PWM_val = ( (abs(wind_bearing) - angle_no_sail)/(180 - angle_no_sail) ) * (PWM_max - PWM_min) + PWM_min
+    #     PWM_val = ( (abs(wind_bearing) - angle_no_sail)/(180 - angle_no_sail) ) * (PWM_sail_max - PWM_sail_min) + PWM_sail_min
     #     print("PWM_val = ", PWM_val, "\n")
     #     sail_servo.duty_cycle = (int)((PWM_val/1000)*(2**16))
     # else:
@@ -248,10 +301,10 @@ while True:
 
 
     # phi, theta, gamma = bearing_tilt_comp(sensor)
-    # print(gamma)
-    # # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
-    # # print("no-comp = ", bearing(sensor))
-    # time.sleep(0.3)
+    # print("gamma = ", gamma, "with comp = ", error_comp(gamma))
+    # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
+    # print("no-comp = ", bearing(sensor))
+    # time.sleep(1)
 
     # blink(3, 0.2)
     
