@@ -19,10 +19,19 @@
 \BOOKMARK [2][-]{subsection.2.2.5}{Magnetic declination}{section.2.2}% 19
 \BOOKMARK [0][-]{chapter.3}{System Design}{}% 20
 \BOOKMARK [1][-]{section.3.1}{Sail Vessel}{chapter.3}% 21
-\BOOKMARK [1][-]{section.3.2}{Wind direction sensor}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.3}{Servo motors}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.4}{Micro-SD card}{chapter.3}% 24
-\BOOKMARK [1][-]{section.3.5}{Power system}{chapter.3}% 25
-\BOOKMARK [0][-]{chapter.4}{Summary and Conclusion}{}% 26
-\BOOKMARK [0][-]{appendix.A}{Project Planning Schedule}{}% 27
-\BOOKMARK [0][-]{appendix.B}{Outcomes Compliance}{}% 28
+\BOOKMARK [1][-]{section.3.2}{Micro-controller}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.3}{Wind direction sensor}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.4}{Servo motors}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.5}{GPS receiver}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.6}{Digital compass}{chapter.3}% 26
+\BOOKMARK [1][-]{section.3.7}{Micro-SD card}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.8}{Power system}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.9}{Metrics}{chapter.3}% 29
+\BOOKMARK [0][-]{chapter.4}{Detail Designs}{}% 30
+\BOOKMARK [1][-]{section.4.1}{Micro-controller}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.2}{GPS receiver}{chapter.4}% 32
+\BOOKMARK [1][-]{section.4.3}{Digital compass}{chapter.4}% 33
+\BOOKMARK [2][-]{subsection.4.3.1}{calibration}{section.4.3}% 34
+\BOOKMARK [0][-]{chapter.5}{Summary and Conclusion}{}% 35
+\BOOKMARK [0][-]{appendix.A}{Project Planning Schedule}{}% 36
+\BOOKMARK [0][-]{appendix.B}{Outcomes Compliance}{}% 37

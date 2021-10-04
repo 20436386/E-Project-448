@@ -1,0 +1,52 @@
+\graphicspath{{detail_design/fig/}}
+
+\chapter{Detail Designs}
+\label{chap:detail_design}
+
+\section{Micro-controller}
+% discuss how all functional blocks connect and communicate with each other 
+The Adafruit STM32F405 feather has a supply voltage of 3.7V and consumes up to $80mA$ when operational, it is powered by a 5000mAh 3.7V lithium polymer 
+battery connected with a jst connection. The GPS receiver, MPU-9250/6500 IMU, and the micro-SD socket are powered by the 3.3V regulator of the feather. 
+The micro-SD card is connected to the feather via a SPI connection. The STM32F405 micro-controller pull-up resistors are setup for MOSI, MISO and 
+chip select lines, as the development board does not include pull-up resistors. The chip select line is connected to a GPIO pin on the micro-controller.
+%Try find clock speed used for SPI in circuit python
+The micro-SD card is formatted to FAT32 and the micro-controller uses the FAT filesystem protocol when logging data.
+
+
+\section{GPS receiver}
+The GPS receiver has a power supply voltage of 3.3V and is powered by the Feathers 3.3V regulator. It communicates with the micro-controller via a 
+UART connection. The GPS receiver continually receives data at a frequency which is set during the configuration process. Data received by the GPS 
+receiver is in the form of ASCII encoded sentences which follow the NMEA protocol\cite{nmea}. The NMEA protocol defines a number of ASCII identifiers which occur 
+at the beginning of a sentence and are used to identify the type of data present in the sentence. Table \ref{table:NMEA} shows the specific NMEA sentences and 
+their corresponding ASCII identifiers which are relevant to this project.
+\\
+
+\begin{table}[!h]
+    \centering
+    \caption{NMEA sentence information}
+    \label{table:NMEA}
+    \begin{tabular}{ | m{10em} | m{25em} | }
+        
+        \hline
+        \textbf{Sentence identifier} & \textbf{Description} \\
+        \hline
+        \$GPGGA & Global Positioning System Fix Data (Time, Latitude, Longitude) \\
+        \hline
+        \$GPGLL & Geographic Position, Latitude / Longitude and time. \\
+        \hline
+        \$GPGSV & GPS Satellites in view \\
+        \hline
+        \$GPVTG & Track Made Good and Ground Speed. \\
+        \hline
+        \$GPRMC & Recommended minimum specific GPS/Transit data (Latitude, Longitude, Speed over ground in knots, Track angle made true, Magnetic variation) \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+\section{Digital compass}
+
+\subsection{calibration}
+
+

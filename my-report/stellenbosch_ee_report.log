@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  30 SEP 2021 23:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  4 OCT 2021 22:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -981,13 +981,13 @@ LaTeX Warning: Citation `Valdes' on page 1 undefined on input line 23.
 
 [1
 
-]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/literature.tex [2] [3]
+]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/literature.tex [2]
 Chapter 2.
 
-LaTeX Warning: Citation `ASA' on page 4 undefined on input line 7.
+LaTeX Warning: Citation `ASA' on page 3 undefined on input line 7.
 
 
-LaTeX Warning: Reference `fig:sailboat_anatomy' on page 4 undefined on input line 7.
+LaTeX Warning: Reference `fig:sailboat_anatomy' on page 3 undefined on input line 7.
 
 LaTeX Font Info:    Try loading font information for OMS+lmr on input line 10.
 (/usr/share/texmf/tex/latex/lm/omslmr.fd
@@ -995,177 +995,225 @@ File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 10.
-<literature/fig/sailboat_anatomy_1.jpg, id=83, 566.115pt x 638.385pt>
+<literature/fig/sailboat_anatomy_1.jpg, id=86, 566.115pt x 638.385pt>
 File: literature/fig/sailboat_anatomy_1.jpg Graphic file (type jpg)
 <use literature/fig/sailboat_anatomy_1.jpg>
 Package pdftex.def Info: literature/fig/sailboat_anatomy_1.jpg  used on input line 25.
 (pdftex.def)             Requested size: 273.14923pt x 308.02856pt.
 
 
-LaTeX Warning: Citation `sail_anatomy' on page 4 undefined on input line 26.
+LaTeX Warning: Citation `sail_anatomy' on page 3 undefined on input line 26.
 
 
-LaTeX Warning: Citation `sail_anatomy' on page 4 undefined on input line 26.
+LaTeX Warning: Citation `sail_anatomy' on page 3 undefined on input line 26.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-LaTeX Warning: Reference `apparent_wind' on page 4 undefined on input line 32.
+LaTeX Warning: Reference `apparent_wind' on page 3 undefined on input line 32.
 
-<literature/fig/apparent_wind.jpeg, id=84, 612.2875pt x 248.93pt>
+<literature/fig/apparent_wind.jpeg, id=87, 612.2875pt x 248.93pt>
 File: literature/fig/apparent_wind.jpeg Graphic file (type jpg)
 <use literature/fig/apparent_wind.jpeg>
 Package pdftex.def Info: literature/fig/apparent_wind.jpeg  used on input line 36.
 (pdftex.def)             Requested size: 318.66948pt x 129.55829pt.
 
-LaTeX Warning: Citation `apparent_wind' on page 4 undefined on input line 37.
+LaTeX Warning: Citation `apparent_wind' on page 3 undefined on input line 37.
 
 
-LaTeX Warning: Citation `apparent_wind' on page 4 undefined on input line 37.
+LaTeX Warning: Citation `apparent_wind' on page 3 undefined on input line 37.
 
 
-LaTeX Warning: Reference `points_of_sail' on page 4 undefined on input line 47.
+LaTeX Warning: Reference `points_of_sail' on page 3 undefined on input line 47.
 
-[4
+[3
 
-] [5 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/sailboat_anatomy_1.jpg> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/apparent_wind.jpeg>]
-<literature/fig/point_of_sail.png, id=101, 1083.04625pt x 824.07875pt>
+] [4 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/sailboat_anatomy_1.jpg> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/apparent_wind.jpeg>]
+<literature/fig/point_of_sail.png, id=103, 1083.04625pt x 824.07875pt>
 File: literature/fig/point_of_sail.png Graphic file (type png)
 <use literature/fig/point_of_sail.png>
 Package pdftex.def Info: literature/fig/point_of_sail.png  used on input line 53.
 (pdftex.def)             Requested size: 318.66948pt x 242.4724pt.
 
 
-LaTeX Warning: Citation `ASA' on page 6 undefined on input line 54.
+LaTeX Warning: Citation `ASA' on page 5 undefined on input line 54.
 
 
-LaTeX Warning: Citation `ASA' on page 6 undefined on input line 54.
+LaTeX Warning: Citation `ASA' on page 5 undefined on input line 54.
 
 
-LaTeX Warning: Reference `point_of_sail' on page 6 undefined on input line 58.
+LaTeX Warning: Reference `point_of_sail' on page 5 undefined on input line 58.
 
 
-LaTeX Warning: Reference `point_of_sail' on page 6 undefined on input line 60.
+LaTeX Warning: Reference `point_of_sail' on page 5 undefined on input line 60.
 
-[6 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/point_of_sail.png>]
+[5 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/point_of_sail.png>]
 
-LaTeX Warning: Citation `Phillip' on page 7 undefined on input line 75.
+LaTeX Warning: Citation `Phillip' on page 6 undefined on input line 75.
 
-[7]
+[6]
 
-LaTeX Warning: Reference `fig:phillip_lake_test' on page 8 undefined on input line 113.
+LaTeX Warning: Reference `fig:phillip_lake_test' on page 7 undefined on input line 113.
 
-<literature/fig/phillip_lake_test.png, id=118, 608.2725pt x 442.65375pt>
+<literature/fig/phillip_lake_test.png, id=121, 608.2725pt x 442.65375pt>
 File: literature/fig/phillip_lake_test.png Graphic file (type png)
 <use literature/fig/phillip_lake_test.png>
 Package pdftex.def Info: literature/fig/phillip_lake_test.png  used on input line 118.
 (pdftex.def)             Requested size: 417.91376pt x 304.13457pt.
 
-LaTeX Warning: Citation `Phillip' on page 8 undefined on input line 119.
+LaTeX Warning: Citation `Phillip' on page 7 undefined on input line 119.
 
 
-LaTeX Warning: Citation `Phillip' on page 8 undefined on input line 119.
+LaTeX Warning: Citation `Phillip' on page 7 undefined on input line 119.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8] [9 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/phillip_lake_test.png>]
+[7] [8 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/phillip_lake_test.png>]
 
-LaTeX Warning: Reference `eq:sail_dynamics' on page 10 undefined on input line 150.
-
-
-LaTeX Warning: Reference `eq:sail_dynamics' on page 10 undefined on input line 151.
+LaTeX Warning: Reference `eq:sail_dynamics' on page 9 undefined on input line 150.
 
 
-LaTeX Warning: Reference `eq:sail_dynamics' on page 10 undefined on input line 159.
+LaTeX Warning: Reference `eq:sail_dynamics' on page 9 undefined on input line 151.
 
-[10]
 
-LaTeX Warning: Reference `fig:robotics_test_result' on page 11 undefined on input line 176.
+LaTeX Warning: Reference `eq:sail_dynamics' on page 9 undefined on input line 159.
 
-<literature/fig/robotics_test_result.png, id=141, 723.70375pt x 825.0825pt>
+[9]
+
+LaTeX Warning: Reference `fig:robotics_test_result' on page 10 undefined on input line 176.
+
+<literature/fig/robotics_test_result.png, id=144, 723.70375pt x 825.0825pt>
 File: literature/fig/robotics_test_result.png Graphic file (type png)
 <use literature/fig/robotics_test_result.png>
 Package pdftex.def Info: literature/fig/robotics_test_result.png  used on input line 182.
 (pdftex.def)             Requested size: 273.14923pt x 311.40694pt.
 
-LaTeX Warning: Citation `robotics5010005' on page 11 undefined on input line 183.
+LaTeX Warning: Citation `robotics5010005' on page 10 undefined on input line 183.
 
 
-LaTeX Warning: Citation `robotics5010005' on page 11 undefined on input line 183.
+LaTeX Warning: Citation `robotics5010005' on page 10 undefined on input line 183.
 
 
-LaTeX Warning: Reference `problem_statement' on page 11 undefined on input line 191.
+LaTeX Warning: Reference `problem_statement' on page 10 undefined on input line 191.
 
-[11 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/robotics_test_result.png>]
+[10 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/robotics_test_result.png>]
 
-LaTeX Warning: Citation `Alves2008FAStA' on page 12 undefined on input line 197.
+LaTeX Warning: Citation `Alves2008FAStA' on page 11 undefined on input line 197.
 
-[12] [13]
+[11] [12]
 
-LaTeX Warning: Reference `' on page 14 undefined on input line 261.
+LaTeX Warning: Reference `' on page 13 undefined on input line 261.
 
-[14]
+[13]
 
-LaTeX Warning: Reference `fig:reference_frame' on page 15 undefined on input line 275.
+LaTeX Warning: Reference `fig:reference_frame' on page 14 undefined on input line 275.
 
-<literature/fig/reference-frame.png, id=169, 746.79pt x 759.83875pt>
+<literature/fig/reference-frame.png, id=172, 746.79pt x 759.83875pt>
 File: literature/fig/reference-frame.png Graphic file (type png)
 <use literature/fig/reference-frame.png>
 Package pdftex.def Info: literature/fig/reference-frame.png  used on input line 279.
 (pdftex.def)             Requested size: 227.62206pt x 231.59395pt.
 
-LaTeX Warning: Reference `eq:R_x' on page 15 undefined on input line 286.
+LaTeX Warning: Reference `eq:R_x' on page 14 undefined on input line 286.
 
 
-LaTeX Warning: Reference `eq:R_y' on page 15 undefined on input line 286.
+LaTeX Warning: Reference `eq:R_y' on page 14 undefined on input line 286.
 
 
-LaTeX Warning: Reference `eq:R_z' on page 15 undefined on input line 286.
+LaTeX Warning: Reference `eq:R_z' on page 14 undefined on input line 286.
 
 
-LaTeX Warning: Citation `e_compass' on page 15 undefined on input line 286.
+LaTeX Warning: Citation `e_compass' on page 14 undefined on input line 286.
 
-[15 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/reference-frame.png>]
+[14 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/reference-frame.png>]
 
-LaTeX Warning: Reference `mag_declination' on page 16 undefined on input line 311.
+LaTeX Warning: Reference `mag_declination' on page 15 undefined on input line 311.
 
-<literature/fig/mag_declination.jpg, id=177, 822.07124pt x 457.71pt>
+<literature/fig/mag_declination.jpg, id=180, 822.07124pt x 457.71pt>
 File: literature/fig/mag_declination.jpg Graphic file (type jpg)
 <use literature/fig/mag_declination.jpg>
 Package pdftex.def Info: literature/fig/mag_declination.jpg  used on input line 315.
 (pdftex.def)             Requested size: 409.71692pt x 228.12111pt.
 
-LaTeX Warning: Citation `Mag_declination' on page 16 undefined on input line 316.
+LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 316.
 
 
-LaTeX Warning: Citation `Mag_declination' on page 16 undefined on input line 316.
+LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 316.
 
-) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/system_design/system_design.tex [16 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/mag_declination.jpg>] [17]
+) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/system_design/system_design.tex [15 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/mag_declination.jpg>] [16]
 Chapter 3.
-<system_design/fig/system_diagram.png, id=193, 601.24625pt x 420.57124pt>
+<system_design/fig/system_diagram.png, id=195, 601.24625pt x 420.57124pt>
 File: system_design/fig/system_diagram.png Graphic file (type png)
 <use system_design/fig/system_diagram.png>
 Package pdftex.def Info: system_design/fig/system_diagram.png  used on input line 8.
 (pdftex.def)             Requested size: 417.91376pt x 292.33788pt.
 
-LaTeX Warning: Reference `fig:system_diagram' on page 18 undefined on input line 14.
+LaTeX Warning: Reference `fig:system_diagram' on page 17 undefined on input line 14.
 
 
-LaTeX Warning: Reference `fig:system_diagram' on page 18 undefined on input line 17.
+LaTeX Warning: Citation `Dragonflite' on page 17 undefined on input line 16.
 
-[18
 
- </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/system_design/fig/system_diagram.png>] [19]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [20]
+LaTeX Warning: Reference `fig:system_diagram' on page 17 undefined on input line 17.
+
+[17
+
+ </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/system_design/fig/system_diagram.png>]
+
+LaTeX Warning: Citation `black_pill' on page 18 undefined on input line 25.
+
+
+LaTeX Warning: Citation `feather' on page 18 undefined on input line 25.
+
+
+LaTeX Warning: Citation `wind_sensor' on page 18 undefined on input line 39.
+
+[18]
+
+LaTeX Warning: Citation `GPS' on page 19 undefined on input line 53.
+
+
+LaTeX Warning: Citation `altimu-10' on page 19 undefined on input line 60.
+
+
+LaTeX Warning: Citation `mpu-9250' on page 19 undefined on input line 61.
+
+
+LaTeX Warning: Citation `sd' on page 19 undefined on input line 69.
+
+[19]
+
+LaTeX Warning: Reference `' on page 20 undefined on input line 97.
+
+[20] [21]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/detail_design.tex [22]
 Chapter 4.
+
+LaTeX Warning: Citation `nmea' on page 23 undefined on input line 19.
+
+
+LaTeX Warning: Reference `table:NMEA' on page 23 undefined on input line 20.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--23
+
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [23
+
+] [24]
+Chapter 5.
 )
 No file stellenbosch_ee_report.bbl.
-(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/appendices/appendices.tex [21
+(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/appendices/appendices.tex [25
 
 ]
 Appendix A.
-[22
+[26
 
 ]
 Appendix B.
@@ -1174,14 +1222,14 @@ Appendix B.
 Package caption Warning: Unused \captionsetup[algorithm] on input line 95.
 See the caption package documentation for explanation.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 140.
-[23
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
+[27
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 140.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
  (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 140.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 140.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 141.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 141.
 
 
 Package rerunfilecheck Warning: File `stellenbosch_ee_report.out' has changed.
@@ -1190,28 +1238,28 @@ Package rerunfilecheck Warning: File `stellenbosch_ee_report.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `stellenbosch_ee_report.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  37FD3F864D0303B71E17783D42F997FB;1766.
+(rerunfilecheck)             After:  68FBC16181BB8956CFD3FB92623E10D1;2303.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 140.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
  ) 
 Here is how much of TeX's memory you used:
- 24618 strings out of 494485
- 448518 string characters out of 6175792
+ 24660 strings out of 494485
+ 449300 string characters out of 6175792
  540979 words of memory out of 5000000
- 27769 multiletter control sequences out of 15000+600000
- 599753 words of font info for 111 fonts, out of 8000000 for 9000
+ 27781 multiletter control sequences out of 15000+600000
+ 599666 words of font info for 110 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  40i,12n,63p,1008b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (31 pages, 1239003 bytes).
+Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (35 pages, 1255981 bytes).
 PDF statistics:
- 300 PDF objects out of 1000 (max. 8388607)
- 234 compressed objects within 3 object streams
- 90 named destinations out of 1000 (max. 500000)
+ 345 PDF objects out of 1000 (max. 8388607)
+ 275 compressed objects within 3 object streams
+ 117 named destinations out of 1000 (max. 500000)
  19502 words of extra memory for PDF output out of 20736 (max. 10000000)
 
