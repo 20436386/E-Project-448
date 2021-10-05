@@ -50,8 +50,8 @@
 \contentsline {chapter}{\numberline {4}Detail Designs}{23}{chapter.4}% 
 \contentsline {section}{\numberline {4.1}Micro-controller}{23}{section.4.1}% 
 \contentsline {section}{\numberline {4.2}GPS receiver}{23}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Digital compass}{23}{section.4.3}% 
-\contentsline {subsection}{\numberline {4.3.1}calibration}{23}{subsection.4.3.1}% 
+\contentsline {section}{\numberline {4.3}Digital compass}{24}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}calibration}{24}{subsection.4.3.1}% 
 \contentsline {chapter}{\numberline {5}Summary and Conclusion}{25}{chapter.5}% 
 \contentsline {chapter}{\numberline {A}Project Planning Schedule}{26}{appendix.A}% 
 \contentsline {chapter}{\numberline {B}Outcomes Compliance}{27}{appendix.B}% 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  4 OCT 2021 22:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  4 OCT 2021 23:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1203,6 +1203,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 17--23
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+LaTeX Warning: Citation `pmtk' on page 23 undefined on input line 46.
+
 ) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [23
 
 ] [24]
@@ -1248,15 +1251,15 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
  ) 
 Here is how much of TeX's memory you used:
- 24660 strings out of 494485
- 449300 string characters out of 6175792
+ 24661 strings out of 494485
+ 449306 string characters out of 6175792
  540979 words of memory out of 5000000
- 27781 multiletter control sequences out of 15000+600000
+ 27782 multiletter control sequences out of 15000+600000
  599666 words of font info for 110 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  40i,12n,63p,1008b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (35 pages, 1255981 bytes).
+Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (35 pages, 1256289 bytes).
 PDF statistics:
  345 PDF objects out of 1000 (max. 8388607)
  275 compressed objects within 3 object streams

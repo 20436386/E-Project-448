@@ -15,6 +15,8 @@ from roboticsmasters_mpu6500 import MPU6500
 from roboticsmasters_ak8963 import AK8963
 import math 
 
+#Declination
+DECLINATION = 25.77
 #Earth radius (km)
 R = 6371
 #For Sail control system
@@ -73,22 +75,19 @@ def haversine(current, target):
     c = 2 * math.atan2( math.sqrt(a) , math.sqrt(1-a) )
     d = R*c
 
-    # delta_lat = (target[0] - current[0]) * (math.pi/180)
-    # delta_long = (target[1] - current[1]) * (math.pi/180)
-
-
-    # a = math.sin( delta_lat/2 )**2 + math.cos(current[0] * (math.pi/180) ) * math.cos(target[0] * (math.pi/180) ) * math.sin( delta_long/2 )**2
-    # c = 2 * math.atan2( math.sqrt(a) , math.sqrt(1-a) )
-    # d = R*c
-
     return d * 1000
 
 #This will compensate for the error that occurs when using offset = (2.5, 296.0, 52.0), scale = (1.01161, 1.0369, 0.955044) - found at dam.
 def error_comp(mag_sample):
-    return ( 2.57600925e-06*mag_sample**3 - 5.29452811e-04*mag_sample**2 + 8.79993961e-01*mag_sample + 1.53253617e+01)
+    comp =  ( 2.57600925e-06*mag_sample**3 - 5.29452811e-04*mag_sample**2 + 8.79993961e-01*mag_sample + 1.53253617e+01)
+    if comp >=360:
+        comp -= 360
+    if comp < 0:
+        comp += 360
+    return comp
 
 #return desired/reference bearing
-def reference_bearing(current, target):
+def desired_bearing(current, target):
     #current = (lat1, long1)
     #target = (lat2, long2)
     current_rad = [x * (math.pi/180) for x in current]
@@ -133,17 +132,17 @@ led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
 
-# # Mounting sd card with spi
-# SD_CS_PIN = board.D6
-# spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
-# sd_cs = digitalio.DigitalInOut(SD_CS_PIN)
-# sdcard = adafruit_sdcard.SDCard(spi, sd_cs)
-# vfs = storage.VfsFat(sdcard)
-# storage.mount(vfs, '/sd')    # Mount SD card under '/sd' path in filesystem.
+# Mounting sd card with spi
+SD_CS_PIN = board.D6
+spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
+sd_cs = digitalio.DigitalInOut(SD_CS_PIN)
+sdcard = adafruit_sdcard.SDCard(spi, sd_cs)
+vfs = storage.VfsFat(sdcard)
+storage.mount(vfs, '/sd')    # Mount SD card under '/sd' path in filesystem.
 
 
-# LOG_FILE = "/sd/calib.txt"    # Example for writing to SD card path /sd/gps.txt
-# LOG_MODE = 'ab'
+LOG_FILE = "/sd/error_sig_tst.txt"    # Example for writing to SD card path /sd/gps.txt
+LOG_MODE = 'ab'
 
 
 #Initialise UART connection to gps module
@@ -152,24 +151,26 @@ RX = board.RX
 uart = busio.UART(TX, RX, baudrate = 9600, bits = 8, parity = None, stop = 1, timeout = 10)
 gps = adafruit_gps.GPS(uart)#, debug = False)
 
-#Not sure if this does anything
+#Turn on the basic GGA and RMC info
 gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+#This is supposed to set update rate to twice a second 2Hz
+gps.send_command(b'PMTK220,1000')
 
-gps_ident = bytes("$GNRMC", 'utf-16')
+# gps_ident = bytes("$GNRMC", 'utf-16')
 
 
-#set up pwm for servos
+# #set up pwm for servos
 # rudder_servo = pwmio.PWMOut(board.A2, frequency = 50, duty_cycle = (int)((75/1000)*(2**16)))
-# sail_servo = pwmio.PWMOut(board.D9, frequency = 50, duty_cycle = (int)((120/1000)*(2**16)))
+# sail_servo = pwmio.PWMOut(board.D9, frequency = 50, duty_cycle = (int)((100/1000)*(2**16)))
 
 # #Init ADC for wind sensor
 # adc = analogio.AnalogIn(board.A3)
 
 # Code initialise MPU9250 magnetometer
-# i2c = busio.I2C(board.SCL, board.SDA)
-# mpu = MPU6500(i2c, address=0x69)
-# #ak = AK8963(i2c)
-# sensor = MPU9250(i2c)
+i2c = busio.I2C(board.SCL, board.SDA)
+mpu = MPU6500(i2c, address=0x69)
+#ak = AK8963(i2c)
+sensor = MPU9250(i2c)
 
 # # Calibrate magnetometer 
 # print("calibrating in 5")
@@ -215,8 +216,52 @@ gps_ident = bytes("$GNRMC", 'utf-16')
 # lat = []
 # long = []
 
+#This variable is for error signal test
+target_pos = (-33.957047462 , 18.809661865) #bottom side dam
+# target_pos = (-33.956742287 , 18.807343483) #right side dam
+
 current_time = time.monotonic()
 while True:
+
+    # #This code obtains target gps coordinates
+    # # print(gps.readline())
+    # gps.update()
+
+    # if (time.monotonic() - current_time) >= 1:
+    #     if not gps.has_fix:
+    #         print("waiting for fix...")
+    #         #Note: continue keyword instructs next iteration of while loop to execute
+    #     else:
+    #         print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
+    #         print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
+
+    #     current_time = time.monotonic()
+
+    # This code calculates and logs error signal and other data
+    gps.update()
+    
+    if (time.monotonic() - current_time) >= 0.1:
+        if not gps.has_fix:
+            print("waiting for fix...")
+        else:
+            current_pos = (gps.latitude , gps.longitude)
+            ref_bearing = desired_bearing(current_pos, target_pos)
+            gamma = bearing_tilt_comp(sensor)[2]
+            current_bearing = error_comp(gamma)
+            current_bearing_true = current_bearing - DECLINATION
+            if current_bearing_true < 0:
+                current_bearing_true += 360
+            error_sig = ref_bearing - current_bearing
+            distance = haversine(current_pos, target_pos)
+
+            log_sentence = str("{0:.9f}".format(current_pos[0])) + ',' + str("{0:.9f}".format(current_pos[1])) + ',' + str(distance) + ',' +  str(ref_bearing) + ',' + str(gps.track_angle_deg) + ',' + str(gps.speed_knots) + ',' + str(gamma) + ',' + str(current_bearing) + ',' + str(current_bearing_true) + ',' + str(error_sig) + '\n'
+            print(log_sentence)
+
+            with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
+                    file.write(bytes(log_sentence , 'utf-16'))
+                    #file.flush()
+        current_time = time.monotonic()
+
     
     # #Code to test calculating desired bearing
     # current = (-33.929071, 18.862272)
@@ -229,42 +274,42 @@ while True:
 
 
     # distance = haversine(current, target)
-    # ref_bearing = reference_bearing(current, target)
+    # ref_bearing = desired_bearing(current, target)
     # print(ref_bearing)
     # print(distance, "\n")
     # time.sleep(1)
 
-    #Code to test distance calculation accuracy
-    # print(gps.readline())
-    gps.update()
+    # #Code to test distance calculation accuracy
+    # # print(gps.readline())
+    # gps.update()
 
-    if (time.monotonic() - current_time) >= 1:
-        if not gps.has_fix:
-            # print("waiting for fix...")\
-            print("has fix = ", gps.has_fix)
-            #Note: continue keyword instructs next iteration of while loop to execute
-        else:
-            print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
-            print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
+    # if (time.monotonic() - current_time) >= 1:
+    #     if not gps.has_fix:
+    #         # print("waiting for fix...")\
+    #         print("has fix = ", gps.has_fix)
+    #         #Note: continue keyword instructs next iteration of while loop to execute
+    #     else:
+    #         print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
+    #         print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
 
-            # lat.append(gps.latitude)
-            # long.append(gps.longitude)
+    #         # lat.append(gps.latitude)
+    #         # long.append(gps.longitude)
 
-            # if (len(lat) == 10 ):
-            #     average_pos = ( ( sum(lat)/len(lat)) , ( sum(long)/len(long)) )
-            #     print("average_lat = {0:.9f}" .format(average_pos[0]))
-            #     print("average_long = {0:.9f}" .format(average_pos[1]))
-            #     break             
+    #         # if (len(lat) == 10 ):
+    #         #     average_pos = ( ( sum(lat)/len(lat)) , ( sum(long)/len(long)) )
+    #         #     print("average_lat = {0:.9f}" .format(average_pos[0]))
+    #         #     print("average_long = {0:.9f}" .format(average_pos[1]))
+    #         #     break             
 
-            current_pos = (gps.latitude, gps.longitude )
-            # target_pos = ( -33.929259777, 18.861877441)#average of 10 samples garden
-            target_pos = ( -33.929276466 , 18.861862183)#one sample, garden
-            # target_pos = ( -33.929245 , 18.861851)#from google earth
+    #         current_pos = (gps.latitude, gps.longitude )
+    #         # target_pos = ( -33.929259777, 18.861877441)#average of 10 samples garden
+    #         target_pos = ( -33.929276466 , 18.861862183)#one sample, garden
+    #         # target_pos = ( -33.929245 , 18.861851)#from google earth
 
-            distance = haversine( current_pos, target_pos)
-            print("distance = ", distance , "m", "\n")
+    #         distance = haversine( current_pos, target_pos)
+    #         print("distance = ", distance , "m", "\n")
 
-        current_time = time.monotonic()
+    #     current_time = time.monotonic()
 
     # #For Sail control system
     # print("adc_percentage = ",  (adc.value/2**16) * 100)
@@ -273,7 +318,7 @@ while True:
     # wind_bearing = ( alpha * 360)
     # if (wind_bearing > 180):
     #     wind_bearing -= 360
-    # # print("wind bearing = ", wind_bearing, "\n")
+    # print("wind bearing = ", wind_bearing, "\n")
     # if abs(wind_bearing) > 45:
     #     print("wind bearing = ", wind_bearing)
     #     PWM_val = ( (abs(wind_bearing) - angle_no_sail)/(180 - angle_no_sail) ) * (PWM_sail_max - PWM_sail_min) + PWM_sail_min
@@ -289,8 +334,10 @@ while True:
 
 
     # phi, theta, gamma = bearing_tilt_comp(sensor)
+    # gamma = error_comp(gamma)
     # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
     # sentence = bytes(str(phi), 'utf-16') + "," + bytes(str(theta), 'utf-16') + "," +bytes(str(gamma), 'utf-16') + "\n"
+    # time.sleep(1)
 
     # with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
     #         file.write(sentence)
@@ -333,24 +380,24 @@ while True:
 # #print(current_time)
 # while True:
 
-#     #Reads and prints gps data to serial
-#     gps.update()
+    # #Reads and prints gps data to serial
+    # gps.update()
 
-#     if (time.monotonic() - current_time) >= 1.0:
-#         if not gps.has_fix:
-#             print("waiting for fix...")
-#             #Note: continue keyword instructs next iteration of while loop to execute
-#         else:
-#             print("latitude: {0:.8f} degrees" .format(gps.latitude)) #
-#             print("longitude: {0:.8f} degrees" .format(gps.longitude))
-#             # print(gps.track_angle_deg)
+    # if (time.monotonic() - current_time) >= 1.0:
+    #     if not gps.has_fix:
+    #         print("waiting for fix...")
+    #         #Note: continue keyword instructs next iteration of while loop to execute
+    #     else:
+    #         print("latitude: {0:.8f} degrees" .format(gps.latitude)) #
+    #         print("longitude: {0:.8f} degrees" .format(gps.longitude))
+    #         print(gps.track_angle_deg)
 
-#             if gps.speed_knots is not None:
-#                 print("Speed: {} knots" .format(gps.speed_knots))
-#             if gps.track_angle_deg is not None:
-#                 print("Track angle: {} degrees" .format(gps.track_angle_deg))
+    #         if gps.speed_knots is not None:
+    #             print("Speed: {} knots" .format(gps.speed_knots))
+    #         if gps.track_angle_deg is not None:
+    #             print("Track angle: {} degrees" .format(gps.track_angle_deg))
 
-#         current_time = time.monotonic()
+    #     current_time = time.monotonic()
 
 
 #     #reads and writes RMC data to sd card
