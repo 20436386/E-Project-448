@@ -30,6 +30,15 @@ angle_no_sail = 45
 PWM_rudder_max = 102
 PWM_rudder_min = 48
 
+#For digital filter
+b = (0.06745527, 0.13491055, 0.06745527) 
+a = ( 1.,        -1.1429805,  0.4128016)
+full_flag = False
+x_idx = 0
+y_idx = 0
+x_vals = [0]*3
+y_vals = [0]*3
+
 #Returns bearing wrt magnetic north, no tilt compensation
 def bearing(sensor):
     mag = sensor.magnetic
@@ -106,6 +115,37 @@ def desired_bearing(current, target):
 
     return theta 
 
+def butter_filter(sample):
+    global full_flag
+    global x_idx
+    global y_idx
+    global x_vals
+    global y_vals
+
+    if not full_flag:
+        if(x_idx == 0):
+            x_vals[0] = sample
+            y_vals[0] = (b[0]*x_vals[0]) / a[0]
+            
+        elif(x_idx == 1):
+            x_vals[1] = sample
+            y_vals[1] = (b[0]*x_vals[1] + b[1]*x_vals[0] - a[1]*y_vals[0]) / a[0]
+        
+        elif(x_idx == 2):
+            x_vals[2] = sample
+            y_vals[2] = (b[0]*x_vals[2] + b[1]*x_vals[1] + b[2]*x_vals[0] - a[1]*y_vals[1] - a[2]*y_vals[0]) / a[0]
+            full_flag = True
+        x_idx = (x_idx + 1) % 3
+        y_idx = (y_idx + 1) % 3
+    
+    else:
+        x_vals[x_idx] = sample
+        y_vals[y_idx] = ( b[0]*x_vals[x_idx] + b[1]*x_vals[x_idx-1] + b[2]*x_vals[x_idx-2] - a[1]*y_vals[y_idx-1] - a[2]*y_vals[y_idx-2]  ) / a[0]
+        x_idx = (x_idx + 1) % 3
+        y_idx = (y_idx + 1) % 3
+
+    return y_vals[y_idx - 1]
+
 def blink(num, delay):
     for i in range(num):
         led.value = True
@@ -141,7 +181,7 @@ vfs = storage.VfsFat(sdcard)
 storage.mount(vfs, '/sd')    # Mount SD card under '/sd' path in filesystem.
 
 
-LOG_FILE = "/sd/error_sig_tst.txt"    # Example for writing to SD card path /sd/gps.txt
+LOG_FILE = "/sd/test.txt"    # Example for writing to SD card path /sd/gps.txt
 LOG_MODE = 'ab'
 
 
@@ -151,12 +191,14 @@ RX = board.RX
 uart = busio.UART(TX, RX, baudrate = 9600, bits = 8, parity = None, stop = 1, timeout = 10)
 gps = adafruit_gps.GPS(uart)#, debug = False)
 
+#These commands do nothing apparently
 #Turn on the basic GGA and RMC info
 gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+# gps.send_command(b'PMTK314,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
 #This is supposed to set update rate to twice a second 2Hz
 gps.send_command(b'PMTK220,1000')
 
-# gps_ident = bytes("$GNRMC", 'utf-16')
+gps_ident = bytes("$GNRMC", 'utf-16')
 
 
 # #set up pwm for servos
@@ -217,8 +259,15 @@ sensor = MPU9250(i2c)
 # long = []
 
 #This variable is for error signal test
-target_pos = (-33.957047462 , 18.809661865) #bottom side dam
+# target_pos = (-33.957047462 , 18.809661865) #bottom side dam
 # target_pos = (-33.956742287 , 18.807343483) #right side dam
+# These variables needed to log error signal and obtain rmc below 
+# gps_pos = [0]*3
+# gps_idx = -1
+# gps_bearing = 0
+# first_rmc = False
+
+count = 0
 
 current_time = time.monotonic()
 while True:
@@ -237,30 +286,67 @@ while True:
 
     #     current_time = time.monotonic()
 
-    # This code calculates and logs error signal and other data
-    gps.update()
+    # # This code calculates and logs error signal and other data
+    # nmea_sentence = gps.readline()
+    # if not nmea_sentence:
+    #     print("waiting for fix...")
+    #     continue
+    # print(nmea_sentence)
+    # #print(sentence)#str(sentence, "utf-16").strip()) #this was from documentation, doesnt work
+
+    # #This if statement takes of average 2.39702 ms to execute
+    # #Delay between acquiring RMC data is on avg 1 second
+    # #NB need to check if fix has been acquired before using this if statement
+    # if nmea_sentence[0 : 6] == gps_ident:#(0x24, 0x47, 0x4E, 0x52, 0x4D, 0x43):
+    #     first_rmc = True
+    #     rmc_data = str(nmea_sentence).split(',')
+
+    #     latitude = float(rmc_data[3])
+    #     latitude = int(latitude/100) + ((latitude % 100)/60)
+    #     # print("{0:.9f}".format(latitude))
+
+    #     longitude = float(rmc_data[5])
+    #     longitude = int(longitude/100) + ((longitude % 100)/60)
+
+    #     if rmc_data[4] == 'S':
+    #         latitude = -latitude
+
+    #     if rmc_data[6] == 'W':
+    #         longitude = -longitude
+
+    #     speed_knots = rmc_data[7]
+    #     track_angle_deg = rmc_data[8]
+
+    #     #This was not included in execution time of if statement
+    #     gps_idx = (gps_idx + 1) % 3
+    #     gps_pos[gps_idx] = (latitude, longitude)
+    #     # print(gps_pos)
+    #     # print("{0:.9f}".format(latitude), "{0:.9f}".format(longitude), speed, track_angle)
     
-    if (time.monotonic() - current_time) >= 0.1:
-        if not gps.has_fix:
-            print("waiting for fix...")
-        else:
-            current_pos = (gps.latitude , gps.longitude)
-            ref_bearing = desired_bearing(current_pos, target_pos)
-            gamma = bearing_tilt_comp(sensor)[2]
-            current_bearing = error_comp(gamma)
-            current_bearing_true = current_bearing - DECLINATION
-            if current_bearing_true < 0:
-                current_bearing_true += 360
-            error_sig = ref_bearing - current_bearing
-            distance = haversine(current_pos, target_pos)
+    # #This if statement takes 30.9774 ms to execute on average
+    # if ((time.monotonic() - current_time) >= 1) and first_rmc:
+    #     current_pos = (latitude , longitude)
+    #     ref_bearing = desired_bearing(current_pos, target_pos)
+    #     gamma = bearing_tilt_comp(sensor)[2]
+    #     current_bearing = error_comp(gamma)
+    #     current_bearing_true = current_bearing - DECLINATION
+    #     if current_bearing_true < 0:
+    #         current_bearing_true += 360
+    #     error_sig = ref_bearing - current_bearing_true
+    #     distance = haversine(current_pos, target_pos)
 
-            log_sentence = str("{0:.9f}".format(current_pos[0])) + ',' + str("{0:.9f}".format(current_pos[1])) + ',' + str(distance) + ',' +  str(ref_bearing) + ',' + str(gps.track_angle_deg) + ',' + str(gps.speed_knots) + ',' + str(gamma) + ',' + str(current_bearing) + ',' + str(current_bearing_true) + ',' + str(error_sig) + '\n'
-            print(log_sentence)
+    #     #This calculates bearing using current coordinates and coordinates two back
+    #     if all(gps_pos):
+    #         gps_bearing = desired_bearing(gps_pos[gps_idx - 2], gps_pos[gps_idx])
+    #         # print(gps_bearing)
 
-            with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
-                    file.write(bytes(log_sentence , 'utf-16'))
-                    #file.flush()
-        current_time = time.monotonic()
+    #     log_sentence = str("{0:.9f}".format(current_pos[0])) + ',' + str("{0:.9f}".format(current_pos[1])) + ',' + str(distance) + ',' +  str(ref_bearing) + ',' + str(track_angle_deg) + ',' + str(speed_knots)  + ',' + str(gps_bearing) + ',' + str(gamma) + ',' + str(current_bearing) + ',' + str(current_bearing_true) + ',' + str(error_sig) + '\n'
+    #     print(log_sentence)
+
+    #     # with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
+    #     #         file.write(bytes(log_sentence , 'utf-16'))
+    #     #         #file.flush()
+    #     current_time = time.monotonic()
 
     
     # #Code to test calculating desired bearing
@@ -333,11 +419,16 @@ while True:
     # time.sleep(1)
 
 
-    # phi, theta, gamma = bearing_tilt_comp(sensor)
-    # gamma = error_comp(gamma)
-    # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
-    # sentence = bytes(str(phi), 'utf-16') + "," + bytes(str(theta), 'utf-16') + "," +bytes(str(gamma), 'utf-16') + "\n"
-    # time.sleep(1)
+    #filter takes on average 5ms to execute
+    if time.monotonic()-current_time >= (0.1 - 0.005):
+        _,_, gamma = bearing_tilt_comp(sensor)
+        gamma_filter = butter_filter(gamma)
+        # print("bearing = ", gamma, "filtered bearing = ", gamma_filter)
+        print(gamma, ",", gamma_filter)
+        current_time = time.monotonic()
+
+
+        # sentence = bytes(str(phi), 'utf-16') + "," + bytes(str(theta), 'utf-16') + "," +bytes(str(gamma), 'utf-16') + "\n"
 
     # with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
     #         file.write(sentence)
@@ -346,14 +437,17 @@ while True:
     # current_time = time.monotonic()
     # time.sleep(1 - 0.027)
 
-
-    # phi, theta, gamma = bearing_tilt_comp(sensor)
-    # print("gamma = ", gamma, "with comp = ", error_comp(gamma))
-    # print(phi * (180/math.pi),",", theta * (180/math.pi), "," ,gamma) 
-    # print("no-comp = ", bearing(sensor))
-    # time.sleep(1)
-
-    # blink(3, 0.2)
+    #This was to store mag readings for filter design
+    # if time.monotonic()-current_time >= (0.1 - 0.023):
+    #     print(count)
+    #     phi, theta, gamma = bearing_tilt_comp(sensor)
+    #     log = str(gamma) + ','
+    #     with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
+    #         file.write(bytes(log , 'utf-16'))
+    #     if count == 500:
+    #         break;
+    #     count += 1
+    #     current_time = time.monotonic()
     
     
     
