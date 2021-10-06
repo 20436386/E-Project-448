@@ -30,14 +30,28 @@ angle_no_sail = 45
 PWM_rudder_max = 102
 PWM_rudder_min = 48
 
-#For digital filter
+##For digital filter:
+#filter coefficients:
 b = (0.06745527, 0.13491055, 0.06745527) 
 a = ( 1.,        -1.1429805,  0.4128016)
-full_flag = False
-x_idx = 0
-y_idx = 0
-x_vals = [0]*3
-y_vals = [0]*3
+#flag for filled array
+mag_full_flag = False
+#Magnetic value arrays
+#Note: mag_x_val[0] = inputs, mag_x_val[1] = outputs
+mag_x_val = [[],[]]
+mag_y_val = [[],[]]
+mag_z_val = [[],[]]
+#Acceleration value arrays
+acc_x_val = [[],[]]
+acc_y_val = [[],[]]
+acc_z_val = [[],[]]
+
+#returns size of global arrays
+def is_full(array):
+    if type(array) == float:
+        return 1
+    else:
+        return len(array)
 
 #Returns bearing wrt magnetic north, no tilt compensation
 def bearing(sensor):
@@ -50,25 +64,80 @@ def bearing(sensor):
 
 
 #Returns bearing wrt magnetic north, with tilt compensation
-def bearing_tilt_comp(sensor):
+def bearing_tilt_comp(sensor, filter_mag=False, filter_acc=False):
+    #Define global variables
+    global mag_x_val
+    global mag_y_val
+    global mag_z_val
+    global acc_x_val
+    global acc_y_val
+    global acc_z_val
+
     acc = sensor.acceleration
     mag = sensor.magnetic
 
-    #calculate roll and pitch angles
-    phi = math.atan2(acc[1],acc[2])
-    theta = math.atan( (-acc[0])/(acc[1]*math.sin(phi) + acc[2]*math.cos(phi)))
-    # print("phi = ", phi * (180/math.pi), "theta = ", theta * (180/math.pi))
+    if filter_mag:
+        mag_x_val[0], mag_x_val[1] = butter_filter(mag[0], mag_x_val[0], mag_x_val[1])
+        mag_y_val[0], mag_y_val[1] = butter_filter(mag[1], mag_y_val[0], mag_y_val[1])
+        mag_z_val[0], mag_z_val[1] = butter_filter(mag[2], mag_z_val[0], mag_z_val[1])
 
-    #Calculate tilt compensated bearing
+        # #update values with filtered values
+        # mag[0] = mag_x_val[1][2]
+        # mag[1] = mag_y_val[1][2]
+        # mag[2] = mag_z_val[1][2]
+
+        #Calculate filtered bearing
+        mag_fil = [0,0,0]
+        length = is_full(mag_x_val[1])
+        mag_fil[0] = mag_x_val[1][length - 1]
+        mag_fil[1] = mag_y_val[1][length - 1]
+        mag_fil[2] = mag_z_val[1][length - 1]
+
+    if filter_acc:
+        acc_x_val[0], acc_x_val[1] = butter_filter(acc[0], acc_x_val[0], acc_x_val[1])
+        acc_y_val[0], acc_y_val[1] = butter_filter(acc[1], acc_y_val[0], acc_y_val[1])
+        acc_z_val[0], acc_z_val[1] = butter_filter(acc[2], acc_z_val[0], acc_z_val[1])
+
+        acc_fil = [0,0,0]
+        length = is_full(acc_x_val[1])
+        # print(length)
+        acc_fil[0] = acc_x_val[1][length - 1]
+        acc_fil[1] = acc_y_val[1][length - 1]
+        acc_fil[2] = acc_z_val[1][length - 1]
+
+        phi, theta = pitch_roll(acc_fil)
+    else:
+        phi, theta = pitch_roll(acc)
+
+    #Calculate tilt compensated bearing(mag not filtered)
     Bfy = (mag[1]*math.cos(phi) + mag[2]*math.sin(phi))
     Bfx =  (mag[0]*math.cos(theta) + mag[1]*math.sin(theta)*math.sin(phi) - mag[2]*math.sin(theta)*math.cos(phi) )
     gamma = math.atan2( -Bfy, Bfx) * (180/math.pi)
+
+    #Calculate tilt compensated bearing(mag filtered)
+    Bfy = (mag_fil[1]*math.cos(phi) + mag_fil[2]*math.sin(phi))
+    Bfx =  (mag_fil[0]*math.cos(theta) + mag_fil[1]*math.sin(theta)*math.sin(phi) - mag_fil[2]*math.sin(theta)*math.cos(phi) )
+    gamma_fil = math.atan2( -Bfy, Bfx) * (180/math.pi)
+    
+    #limit interval to o -> 360
+    if(gamma_fil < 0):
+        gamma_fil =  (360 + gamma_fil)
     
     #limit interval to o -> 360
     if(gamma < 0):
         gamma =  (360 + gamma)
-    
-    return (phi, theta, gamma)
+
+    if filter_mag:
+        return (phi, theta, gamma, gamma_fil)
+    else:
+        return (phi, theta, gamma)
+
+def pitch_roll(acc):
+    phi = math.atan2(acc[1],acc[2])
+    theta = math.atan( (-acc[0])/(acc[1]*math.sin(phi) + acc[2]*math.cos(phi)))
+    # print("phi = ", phi * (180/math.pi), "theta = ", theta * (180/math.pi))
+    return phi, theta
+
 
 #This function will implement haversine formulae to calculate distance; returns distance in metres. Takes points in decimal degrees
 def haversine(current, target):
@@ -115,36 +184,32 @@ def desired_bearing(current, target):
 
     return theta 
 
-def butter_filter(sample):
-    global full_flag
-    global x_idx
-    global y_idx
-    global x_vals
-    global y_vals
+def butter_filter(sample, x_vals, y_vals):
 
-    if not full_flag:
-        if(x_idx == 0):
-            x_vals[0] = sample
-            y_vals[0] = (b[0]*x_vals[0]) / a[0]
+    length = len(x_vals)
+    # print(length)
+
+    if length < 3:
+        if(length == 0):
+            x_vals.append(sample)
+            y_vals.append((b[0]*x_vals[0]) / a[0])
             
-        elif(x_idx == 1):
-            x_vals[1] = sample
-            y_vals[1] = (b[0]*x_vals[1] + b[1]*x_vals[0] - a[1]*y_vals[0]) / a[0]
+        elif(length == 1):
+            x_vals.append(sample)
+            y_vals.append((b[0]*x_vals[1] + b[1]*x_vals[0] - a[1]*y_vals[0]) / a[0])
         
-        elif(x_idx == 2):
-            x_vals[2] = sample
-            y_vals[2] = (b[0]*x_vals[2] + b[1]*x_vals[1] + b[2]*x_vals[0] - a[1]*y_vals[1] - a[2]*y_vals[0]) / a[0]
-            full_flag = True
-        x_idx = (x_idx + 1) % 3
-        y_idx = (y_idx + 1) % 3
-    
+        elif(length == 2):
+            x_vals.append(sample)
+            y_vals.append((b[0]*x_vals[2] + b[1]*x_vals[1] + b[2]*x_vals[0] - a[1]*y_vals[1] - a[2]*y_vals[0]) / a[0])
+        # x_idx = (x_idx + 1) % 3
+        # y_idx = (y_idx + 1) % 3
     else:
-        x_vals[x_idx] = sample
-        y_vals[y_idx] = ( b[0]*x_vals[x_idx] + b[1]*x_vals[x_idx-1] + b[2]*x_vals[x_idx-2] - a[1]*y_vals[y_idx-1] - a[2]*y_vals[y_idx-2]  ) / a[0]
-        x_idx = (x_idx + 1) % 3
-        y_idx = (y_idx + 1) % 3
+        x_vals.append(sample)
+        y_vals.append( ( b[0]*x_vals[3] + b[1]*x_vals[2] + b[2]*x_vals[1] - a[1]*y_vals[2] - a[2]*y_vals[1]  ) / a[0])
+        x_vals.pop(0)
+        y_vals.pop(0)
 
-    return y_vals[y_idx - 1]
+    return x_vals, y_vals
 
 def blink(num, delay):
     for i in range(num):
@@ -420,12 +485,16 @@ while True:
 
 
     #filter takes on average 5ms to execute
-    if time.monotonic()-current_time >= (0.1 - 0.005):
-        _,_, gamma = bearing_tilt_comp(sensor)
-        gamma_filter = butter_filter(gamma)
+    if time.monotonic()-current_time >= (0.1- 0.005469):
+        count += 1
+        _,_, gamma, gamma_filter = bearing_tilt_comp(sensor, filter_mag=True, filter_acc=True )
+        # gamma_filter = butter_filter(gamma)
         # print("bearing = ", gamma, "filtered bearing = ", gamma_filter)
         print(gamma, ",", gamma_filter)
+        # print(time.monotonic() - current_time)
         current_time = time.monotonic()
+        if count == 500:
+            break
 
 
         # sentence = bytes(str(phi), 'utf-16') + "," + bytes(str(theta), 'utf-16') + "," +bytes(str(gamma), 'utf-16') + "\n"
