@@ -23,8 +23,9 @@ R = 6371
 
 ##For navigation
 rmc_status = 'V'
-# target_pos = (-33.957047462 , 18.809661865) #bottom side dam
-target_pos = (-33.956742287 , 18.807343483) #right side dam
+# target_pos = (-33.957047462 , 18.809661865) #Bottom side dam
+target_pos = (-33.956742287 , 18.807343483) #Right side dam
+# target_pos = (-33.929276466 , 18.861862183) #Garden
 
 ##For Sail control system
 PWM_sail_max = 120
@@ -44,8 +45,8 @@ I_k_prev = 0
 
 ##For digital filter:
 #filter coefficients:
-b = (0.06745527, 0.13491055, 0.06745527) 
-a = ( 1.,        -1.1429805,  0.4128016)
+b = (0.02785977, 0.05571953, 0.02785977) 
+a = (1. ,         -1.47548044,  0.58691951)
 #flag for filled array
 mag_full_flag = False
 #Magnetic value arrays
@@ -124,7 +125,7 @@ def bearing_tilt_comp(sensor, filter_mag=False, filter_acc=False):
 
         
 
-    #Calculate tilt compensated bearing(mag not filtered)
+    #Calculate tilt compensated bearing
     Bfy = (mag[1]*math.cos(phi) + mag[2]*math.sin(phi))
     Bfx =  (mag[0]*math.cos(theta) + mag[1]*math.sin(theta)*math.sin(phi) - mag[2]*math.sin(theta)*math.cos(phi) )
     gamma = math.atan2( -Bfy, Bfx) * (180/math.pi)
@@ -173,7 +174,7 @@ def haversine(current, target):
 
 #This will compensate for the error that occurs when using offset = (2.5, 296.0, 52.0), scale = (1.01161, 1.0369, 0.955044) - found at dam.
 def error_comp(mag_sample):
-    comp =  ( 2.57600925e-06*mag_sample**3 - 5.29452811e-04*mag_sample**2 + 8.79993961e-01*mag_sample + 1.53253617e+01)
+    comp =  ( -2.16780203e-07 *mag_sample**3 - 5.37464909e-04*mag_sample**2 + 8.40257454e-01*mag_sample + 7.58334508e+00)
     if comp >=360:
         comp -= 360
     if comp < 0:
@@ -259,12 +260,12 @@ RX = board.RX
 uart = busio.UART(TX, RX, baudrate = 9600, bits = 8, parity = None, stop = 1, timeout = 10)
 gps = adafruit_gps.GPS(uart)#, debug = False)
 
-#These commands do nothing apparently
-#Turn on the basic GGA and RMC info
-gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
-# gps.send_command(b'PMTK314,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
-#This is supposed to set update rate to twice a second 2Hz
-gps.send_command(b'PMTK220,1000')
+# #These commands do nothing apparently
+# #Turn on the basic GGA and RMC info
+# gps.send_command(b"PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
+# # gps.send_command(b'PMTK314,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0')
+# #This is supposed to set update rate to twice a second 2Hz
+# gps.send_command(b'PMTK220,1000')
 
 gps_ident = bytes("$GNRMC", 'utf-16')
 
@@ -272,7 +273,7 @@ gps_ident = bytes("$GNRMC", 'utf-16')
 #Initialise PWM for servos
 rudder_servo = pwmio.PWMOut(board.A2, frequency = 50, duty_cycle = (int)((75/1000)*(2**16)))
 #Set to 45 deg initially 
-sail_servo = pwmio.PWMOut(board.D9, frequency = 50, duty_cycle = (int)((100/1000)*(2**16)))
+sail_servo = pwmio.PWMOut(board.D9, frequency = 50, duty_cycle = (int)((PWM_sail_max/1000)*(2**16))) #100
 
 #Init ADC for wind sensor
 adc = analogio.AnalogIn(board.A3)
@@ -286,33 +287,53 @@ sensor = MPU9250(i2c)
 # print("calibrating in 5")
 # time.sleep(5)
 # sensor.cal_mag() 
+# blink(20, 0.3)
+# with open("/sd/calib.txt", LOG_MODE, encoding='utf-16') as file:
+#             file.write(bytes(str(sensor._akm._offset) , 'utf-16'))
+#             file.write(bytes(str(sensor._akm._scale) , 'utf-16'))
 
-#This variable is for error signal test
-# These variables needed to log error signal and obtain rmc below 
+#These variables for plan-b
 # gps_pos = [0]*3
 # gps_idx = -1
 # gps_bearing = 0
 
+
+#This is to determine desired bearing before, instead of on every clock cycle
+start_pos = (-33.929276466 , 18.861862183)
+ref_bearing = desired_bearing(start_pos, target_pos)
+
 # current_time = time.monotonic()
-#Note sampling time for digital compass is 73.0488267326733 ms without sail control system
+# #Note:
+#Digital compass sampling period is on avg (1450 samples taken) 68.9764607586208 ms without calculating ref_bearing every time i.e. calculating before while loop, and with an error comp on bearing values, and without integral control
+#Digital compass sampling period is on avg (1450 samples taken) 67.2002935862066 ms with calculating ref_bearing every time, and with an error comp on bearing values, and without integral control
+
 
 while True:
+        
 
-    # #This code obtains target gps coordinates
-    # # print(gps.readline())
-    # gps.update()
+#     # _,_,current_bearing = bearing_tilt_comp(sensor, filter_mag=True, filter_acc=True)
+#     # current_bearing = error_comp(current_bearing)
+#     # print(current_bearing)
+#     # count += 1
+#     # time.sleep(0.07)
 
-    # if (time.monotonic() - current_time) >= 1:
-    #     if not gps.has_fix:
-    #         print("waiting for fix...")
-    #         #Note: continue keyword instructs next iteration of while loop to execute
-    #     else:
-    #         print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
-    #         print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
 
-    #     current_time = time.monotonic()
+#     # #This code obtains target gps coordinates
+#     # # print(gps.readline())
+#     # gps.update()
+
+#     # if (time.monotonic() - current_time) >= 1:
+#     #     if not gps.has_fix:
+#     #         print("waiting for fix...")
+#     #         #Note: continue keyword instructs next iteration of while loop to execute
+#     #     else:
+#     #         print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
+#     #         print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
+
+#     #     current_time = time.monotonic()
 
     nmea_sentence = gps.readline()
+    # print(nmea_sentence)
 
     #This acquires and updates gps data every one second
     #This if statement takes of average 2.39702 ms to execute
@@ -356,8 +377,8 @@ while True:
         distance = haversine(current_pos, target_pos)
 
         if distance >= 5:
-            #Calculate desired bearing
-            ref_bearing = desired_bearing(current_pos, target_pos)
+            #Calculate desired bearing(only use if calibration of compass is spot on)
+            # ref_bearing = desired_bearing(current_pos, target_pos)
 
             #Sample actual bearing
             _,_,current_bearing = bearing_tilt_comp(sensor, filter_mag=True, filter_acc=True)
@@ -365,23 +386,24 @@ while True:
             # current_time = time.monotonic()
             # current_bearing = error_comp(current_bearing) #Dont know if i should use this
             current_bearing_true = current_bearing - DECLINATION
-            # print("current_bearing_true = ", current_bearing_true)
             #Ensure range is 0 -> 360
             if current_bearing_true < 0:
                 current_bearing_true += 360
-
-            #Calculate error signal
-            error_sig = ref_bearing - current_bearing_true
-        
+            # print("current_bearing_true = ", current_bearing_true)
+            # print(current_bearing)
+            
             # #This calculates bearing using current coordinates and coordinates two back plan-b
             # if all(gps_pos):
             #     gps_bearing = desired_bearing(gps_pos[gps_idx - 2], gps_pos[gps_idx])
             #     # print(gps_bearing)
 
-            #Rudder Controller (proportional)
-            # I_k = (k_i * error_sig * t_s)
+            #Calculate error signal
+            error_sig = -(ref_bearing - current_bearing_true)
+
+            ##Rudder Controller (proportional)
+            #I_k = (k_i * error_sig * t_s)
             rudder_sig = (k_p * error_sig) #+ (I_k + I_k_prev)
-            # I_k_prev = I_k
+            #I_k_prev = I_k
             # print("error_sig = ", error_sig)
             # print("rudder_sig = ",rudder_sig)
 
@@ -398,54 +420,32 @@ while True:
             #Apply control signal to Rudder actuator
             rudder_servo.duty_cycle = (int)((PWM_rudder_val/1000)*(2**16))
 
-            ##Need to implement sail control here
+            ##Sail controller
             # print("adc_percentage = ",  (adc.value/2**16) * 100)
-            # alpha = ( ( (adc.value/2**16) -ADC_min )/(ADC_max-ADC_min) )
+            alpha = ( ( (adc.value/2**16) -ADC_min )/(ADC_max-ADC_min) )
             # print("alpha = ", alpha * 100)
-            # wind_bearing = ( alpha * 360)
-            # if (wind_bearing > 180):
-            #     wind_bearing -= 360
+            app_wind = ( alpha * 360)
+            if (app_wind > 180):
+                app_wind -= 360
             # print("wind bearing = ", wind_bearing, "\n")
-            # if abs(wind_bearing) > 45:
-            #     print("wind bearing = ", wind_bearing)
-            #     PWM_val = ( (abs(wind_bearing) - angle_no_sail)/(180 - angle_no_sail) ) * (PWM_sail_max - PWM_sail_min) + PWM_sail_min
-            #     print("PWM_val = ", PWM_val, "\n")
-            #     sail_servo.duty_cycle = (int)((PWM_val/1000)*(2**16))
-            # else:
-            #     print("no-sail-zone, wind_bearing = ", wind_bearing)
+            if abs(app_wind) > 45:
+                # print("wind bearing = ", app_wind)
+                PWM_sail_val = ( (abs(app_wind) - angle_no_sail)/(180 - angle_no_sail) ) * (PWM_sail_max - PWM_sail_min) + PWM_sail_min
+                # print("PWM_val = ", PWM_sail_val, "\n")
+                sail_servo.duty_cycle = (int)((PWM_sail_val/1000)*(2**16))
+            else:
+                #Would ideally need to change to tacking mode here
+                PWM_sail_val = PWM_sail_min
+                print("no-sail-zone, wind_bearing = ", app_wind)
             #     print((sail_servo.duty_cycle/2**16)*1000)
 
-            #Log data. Format: latitude, longitude, distance, desired bearing, GPS track angle, GPS speed, current bearing(true), error signal, rudder controller signal, rudder pwm value
-            log_sentence = str("{0:.9f}".format(current_pos[0])) + ',' + str("{0:.9f}".format(current_pos[1])) + ',' + str(distance) + ',' +  str(ref_bearing) + ',' + str(track_angle_deg) + ',' + str(speed_knots) + ',' + str(current_bearing_true) + ',' + str(error_sig) + ',' + str(rudder_sig) + ',' + str(PWM_rudder_val) + '\n'
+            #Log data. Format: latitude, longitude, distance, desired bearing, GPS track angle, GPS speed, current bearing(true), error signal, rudder controller signal, rudder PWM value, alpha, apparent wind, sail PWM value
+            log_sentence = str("{0:.9f}".format(current_pos[0])) + ',' + str("{0:.9f}".format(current_pos[1])) + ',' + str(distance) + ',' +  str(ref_bearing) + ',' + str(track_angle_deg) + ',' + str(speed_knots) + ',' + str(current_bearing_true) + ',' + str(error_sig) + ',' + str(rudder_sig) + ',' + str(PWM_rudder_val) + ',' + str(alpha) + ',' +  str(app_wind) + ',' + str(PWM_sail_val) + '\n'
             # print(log_sentence)
             with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
                     file.write(bytes(log_sentence , 'utf-16'))
                     #file.flush()
-        # else:
-             # with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
-            #         file.write(bytes("Target position acquired :)" , 'utf-16'))
+        else:
+             with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
+                    file.write(bytes("Target position acquired :)" , 'utf-16'))
             #         #file.flush()
-
-
-
-    # #For Sail control system
-    # print("adc_percentage = ",  (adc.value/2**16) * 100)
-    # alpha = ( ( (adc.value/2**16) -ADC_min )/(ADC_max-ADC_min) )
-    # print("alpha = ", alpha * 100)
-    # wind_bearing = ( alpha * 360)
-    # if (wind_bearing > 180):
-    #     wind_bearing -= 360
-    # print("wind bearing = ", wind_bearing, "\n")
-    # if abs(wind_bearing) > 45:
-    #     print("wind bearing = ", wind_bearing)
-    #     PWM_val = ( (abs(wind_bearing) - angle_no_sail)/(180 - angle_no_sail) ) * (PWM_sail_max - PWM_sail_min) + PWM_sail_min
-    #     print("PWM_val = ", PWM_val, "\n")
-    #     sail_servo.duty_cycle = (int)((PWM_val/1000)*(2**16))
-    # else:
-    #     print("no-sail-zone, wind_bearing = ", wind_bearing)
-    #     print((sail_servo.duty_cycle/2**16)*1000)
-
-    # # print("adc.value = ", (adc.value/2**16))
-    # # print("voltage = ", (adc.value/2**16) * 3.3, "\n")
-    # time.sleep(1)
-    
