@@ -42,8 +42,9 @@ $\pm 3^{\circ}$ accuracy. It features automatic temperature compensation and ope
 sensor has a working voltage of 12~30VDC, and its output is a 4-20 mA signal. 
 
 \section{Servo motors}
-Two servo motors are required: one for controlling the mainsail, and the other for controlling the rudder. The decision was made to use the preinstalled servo motors as the vessel was designed operate with these specific 
-servo motors, it also system design costs low. The manual specifies that a metal geared servo is used for rudder control
+Two servo motors are required: one for controlling the mainsail, and the other for controlling the rudder. The decision was made to use the preinstalled servo motors as 
+the vessel was designed operate with these specific 
+servo motors, it also keeps system design costs low. The manual specifies that a metal geared servo is used for rudder control
 and a sail winch servo is used to control the sail position. Aside from this, no other information is given in the manual about the servo motors.  
 
 \section{GPS receiver}
@@ -56,9 +57,12 @@ tracking sensitivity of -162dBm, consumes $<25mA$ during continuous operation,
 has a first positioning time of 32 seconds, maximum update rate of 10Hz, and also features built in antenna short circuit protection.
 
 \section{Digital compass}
-The digital compass is used to determine the bearing of the sailing vessel, which is compared to the reference bearing to determine if the vessel is off course. 
-The development of a digital compass requires a magnetometer and an accelerometer. The two options that were considered were a AltIMU-10-V4\cite{altimu-10} made by Pololu Electronics
-and a MPU-9250/6500 9-axis IMU\cite{mpu-9250}. Both options feature a 3-axis magnetometer, 3-axis accelerometer, 3-axis gyroscope, and three 16-bit ADC with signal conditioning. The 
+The digital compass is used to determine the bearing of the sailing vessel, which is compared to the reference bearing to determine if the vessel is off course. It is 
+required that the compass be able to perform tilt compensation, as the vessel will not always be on a level surface out at sea. If the digital compass is tilted and used
+to determine bearing without tilt compensation, the bearing will not be accurate. To perform tilt compensation a magnetometer is needed to determine magnetic field vector, and a 
+accelerometer is needed to determine the acceleration due to gravity vector. An IMU is a device that contains both a 3-axis magnetometer, 3-axis accelerometer and 3-axis gyroscope.
+The two options that were considered were a AltIMU-10-V4\cite{altimu-10} made by Pololu Electronics and a MPU-9250/6500 9-axis IMU\cite{mpu-9250}. Both options feature 
+16-bit ADC with signal conditioning. The 
 Alt-IMU-10-V4 also features a digital barometer which is not needed for the purposes of this project. The MPU-9250/6500 was chosen for its low cost when compared 
 to the AltIMU-10-V4. The MPU-9250/6500 has a supply voltage of 3.3V, an operating current of 3.5mA and an $I^{2}C$ interface.
 
@@ -143,7 +147,7 @@ actual bearing, bearing error signal and rudder PWM value.
 
 \subsubsection{Sytem}
 A similar test will be done on water at the Maties canoe club to verify the successful operation of the entire system - navigational and control systems. The test
-is similar to the second test done for the rudder control except the sail control will not be excluded, and the setup is as follows: a target coordinate is 
+is similar to the second test done for the rudder control except the sail control will be excluded, and the setup is as follows: a target coordinate is 
 programmed into the system and the digital compass is calibrated, the sailboat is placed at a suitable starting point, data will be logged throughout the test. 
 The data that is logged is: current GPS coordinate, distance to target, desired bearing, actual bearing, bearing error signal, rudder servo PWM value, apparent 
 wind direction, sail position value, sail servo PWM value.

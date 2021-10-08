@@ -6,19 +6,20 @@
 \section{Micro-controller}
 % discuss how all functional blocks connect and communicate with each other 
 The Adafruit STM32F405 feather has a supply voltage of 3.7V and consumes up to $80mA$ when operational, it is powered by a 5000mAh 3.7V lithium polymer 
-battery connected with a jst connection. The GPS receiver, MPU-9250/6500 IMU, and the micro-SD socket are powered by the 3.3V regulator of the feather. 
-The micro-SD card is connected to the feather via a SPI connection. The STM32F405 micro-controller pull-up resistors are setup for MOSI, MISO and 
-chip select lines, as the development board does not include pull-up resistors. The chip select line is connected to a GPIO pin on the micro-controller.
-%Try find clock speed used for SPI in circuit python
-The micro-SD card is formatted to FAT32 and the micro-controller uses the FAT filesystem protocol when logging data.
+battery connected with a jst connection. The board features a 3.3V regulator which is to regulate the battery power, there are also pins to distribute 
+the 3.3V regulated power off-board. The 3.3V regulator is used to power the GPS receiver, MPU-9250/6500 IMU, and the micro-SD socket. The board has a USB-C 
+female connector which is used to load the main program and for debugging during the design process. The board is capable of running circuit python, which was
+used in the development of this project. 
+%Not sure if i should mention this :(
 
 
 \section{GPS receiver}
-The GPS receiver has a power supply voltage of 3.3V and is powered by the Feathers 3.3V regulator. It communicates with the micro-controller via a 
-UART connection. The GPS receiver continually receives data at a frequency which is set during the configuration process. Data received by the GPS 
-receiver is in the form of ASCII encoded sentences which follow the NMEA protocol\cite{nmea}. The NMEA protocol defines a number of ASCII identifiers which occur 
-at the beginning of a sentence and are used to identify the type of data present in the sentence. Table \ref{table:NMEA} shows the specific NMEA sentences and 
-their corresponding ASCII identifiers which are relevant to this project.
+The GPS receiver has a power supply voltage of 3.3V and is powered by the Feathers 3.3V regulator. It is connected to a pin on the feather which is 
+configured as UART, with a BAUD rate of 9600. The GPS receiver continually receives data at a frequency which is set during the configuration process, in 
+this case its every second. Data sent by the GPS receiver is in the form of ASCII encoded sentences which follow the NMEA protocol\cite{nmea}. The NMEA 
+protocol defines a number of ASCII identifiers which occur at the beginning of each ASCII sentence, they are used to identify the type of data 
+contained in the sentence. Table \ref{table:NMEA} shows the specific NMEA sentences which are relevant to this project and their corresponding ASCII 
+identifiers.
 \\
 
 \begin{table}[!h]
@@ -43,11 +44,91 @@ their corresponding ASCII identifiers which are relevant to this project.
     \end{tabular}
 \end{table}
 
-The GPS receiver can be configured by sending the appropriate PMTK command packets\cite{pmtk}. These commands are the same for all GPS receivers. The GPS receiver was
-set to send GGA and RMC NMEA sentences, and the update rate was set to $2Hz$ by sending the appropriate PMTK commands.
+% Not sure it uses PMTK
+% The GPS receiver can be configured by sending the appropriate PMTK command packets\cite{pmtk}. These commands are the same for all GPS receivers. The GPS receiver was
+% set to send GGA and RMC NMEA sentences, and the update rate was set to $2Hz$ by sending the appropriate PMTK commands.
+
+\section{Wind Direction Sensor}
+The wind direction sensor has a supply voltage in the range 12~30VDC, and is powered by two 9V alkaline batteries in series. It outputs a $4-20mA$ analog signal,
+which is connected directly to pin A4 of the Feather. Pin A4 on the Feather connects to a 5V tolerant pin on the STM32F405 micro-controller. This pin was 
+configured to use one of the micro-controllers 12-bit ADC, which has a sampling range of $0V$ to $3.3V$. A shunt resistor with a value of $160\Omega$ is 
+connected to the sensor output. This value was calculated to produce a voltage over the resister in the range of $642mV$ to $3.2V$. The Actual voltage range
+measured over the shunt resister was $642mV$ to $3.07V$.
+
+All pins on the STM32F405 micro-controller are capable of sinking or sourcing $25mA$ maximum, there is therefore no chance of the sensor damaging the micro-controller
+pin. A digital buffer was initially considered to prevent the micro-controller from loading the sensor output circuit, but was not used as the ADC inputs are
+high impedance. The STM32F405 data sheet\cite{STM32F405} specifies that for an ADC input, the max external impedance allowed for an error below $1/4$ of the LSB as $50K\Omega$. 
+The shunt resistors value is multitudes smaller than this.     
+
+\section{Servo Motors}
+Both the rudder servo motor and the sail servo winch are powered by a 6V source consisting of four 1.5V alkaline batteries. The rudder servo motor is connected to pin
+A2 of the feather, the Sail winch servo motor is connected to pin D9 of the Feather. Both these pins are configured to output a 50HZ PWM signal, with a duty cycle set
+by the rudder and sail position controllers. The rudder angle is measured from the centre line of the boat, this corresponds to the neutral position of the rudder. Positive 
+rudder angle is measured from neutral position to the starboard side of the vessel, negative rudder angle is measured from the neutral position to port side of the vessel. 
+Sail position is measured in degrees from the centre line of the vessel to either the port or starboard side. The maximum and minimum PWM values for both servo motors was 
+determined experimentally and is summarized in table \ref{table:pwm}, along with the corresponding angles. 
+
+\begin{table}[!h]
+    \centering
+    \caption{Servo motor PWM limits}
+    \label{table:pwm}
+    \begin{tabularx}{\columnwidth}{ | X | X | X | X | X | }
+        
+        \hline
+        Servo motor & PWM\_Min & PWM\_Min corresponding angle & PWM\_Max & PWM\_Max corresponding angle \\
+        \hline
+        Rudder & 48 & $60^{\circ}$ & 102 & $-60^{\circ}$ \\
+        \hline
+        Sail & 72 &  $0^{\circ}$ & 120 & $80^{\circ}$\\
+        \hline
+    \end{tabularx}
+\end{table}
+
+The PWM duty cycle value is stored in a 16 bit register and is determined using Eq. \ref{eq:duty_cycle}.
+
+\begin{equation}
+    \label{eq:duty_cycle}
+    duty\_cycle = (\frac{PWM\_value}{1000}) 2^{16}
+\end{equation}
+
+\section{Micro-SD card}
+The micro-SD card socket has a supply voltage of 3.3V and is powered with the Feathers 3.3V regulator. It is connected to the Feather using a SPI interface. The micro-SD card sockets MOSI, MISO,
+ and clock lines are connected directly to the corresponding pins on the Feather, the chip select line is connected to pin 6 of the Feather. The micro-SD card is formatted with the FAT32 file 
+ system, and as, such writing to the micro-SD card is done with FAT32 protocol.
+
 
 \section{Digital compass}
+The MPU-9250/6500 IMUhas a supply voltage of 3.3V and is powered by the Feather boards 3.3V regulator. It is connected to the Feather via a $I^{2}C$ connection. The IMU has an address pin 
+which is grounded. The purpose of the address pin is for setting the LSB of the $I^{2}C$, this allows two IMU's to be connected to the same bus, which is not needed in this system. 
+
+\subsection{Tilt Compensation}
+To perform tilt compensation, firstly pitch and roll angles of the inertial frame of the vessel must be found. Eq. \ref{eq:acc_1} is used to transform a sampled accelration vector back to 
+the NED frame of reference. In this eqution $\vec{A}_s$ represents the acceleration vector which has been 
+sampled from the IMU, g represents the acceleration due to gravity and $\vec{R_{x,\phi}}$, $\vec{R_{y,\theta}}$, $\vec{R_{z,\psi}}$ represent equations \ref{eq:R_x}, \ref{eq:R_y}, \ref{eq:R_z} 
+respectively. 
+
+\begin{equation}
+    \label{eq:acc_1}
+    \vec{R_{y,\theta}}\vec{R_{x,\phi}}\vec{A_s} = \begin{bmatrix} 0 & 0 & g \end{bmatrix}^T
+\end{equation}
+
+Expanding Eq. \ref{eq:acc_1}, gives Eq. \ref{eq:acc_1_expand}. The components of the sampled vector are $A_{sx}$, $A_{sy}$ and $A_{sz}$.
+
+\begin{equation}
+    \label{eq:acc_1}
+    \begin{bmatrix} cos\theta & 0 & sin\theta \\ 0 & 1 & 0 \\ -sin\theta & 0 & cos\theta \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & cos\phi & -sin\phi \\ 0 & sin\phi & cos\phi \end{bmatrix} \begin{bmatrix} A_{sx} \\ A_{sy} \\ A_{sz} \end{bmatrix}= \begin{bmatrix} 0 & 0 & g \end{bmatrix}^T
+\end{equation}
+
+
 
 \subsection{calibration}
+
+\subsection{Digital filter}
+
+
+\section{Power System}
+%include power consumption of all components here
+
+\section{PCB}
 
 

@@ -172,9 +172,9 @@ def haversine(current, target):
 
     return d * 1000
 
-#This will compensate for the error that occurs when using offset = (2.5, 296.0, 52.0), scale = (1.01161, 1.0369, 0.955044) - found at dam.
+#This will compensate for the error that occurs when calibrating with 12V and then connecting to boat
 def error_comp(mag_sample):
-    comp =  ( -2.16780203e-07 *mag_sample**3 - 5.37464909e-04*mag_sample**2 + 8.40257454e-01*mag_sample + 7.58334508e+00)
+    comp =  ( 5.11524082e-06 *mag_sample**3 -1.80381786e-03*mag_sample**2 + 1.02792250e+00*mag_sample + 1.55315690e+01)
     if comp >=360:
         comp -= 360
     if comp < 0:
@@ -302,13 +302,19 @@ sensor = MPU9250(i2c)
 start_pos = (-33.929276466 , 18.861862183)
 ref_bearing = desired_bearing(start_pos, target_pos)
 
-# current_time = time.monotonic()
+current_time = time.monotonic()
 # #Note:
 #Digital compass sampling period is on avg (1450 samples taken) 68.9764607586208 ms without calculating ref_bearing every time i.e. calculating before while loop, and with an error comp on bearing values, and without integral control
 #Digital compass sampling period is on avg (1450 samples taken) 67.2002935862066 ms with calculating ref_bearing every time, and with an error comp on bearing values, and without integral control
 
-
 while True:
+
+    # if (time.monotonic() - current_time) >= (0.07 - 0.0051):
+    #     _,_,gamma = bearing_tilt_comp(sensor, filter_acc=True, filter_mag=True)
+    #     print("gamma = ", gamma, "error comp = ", error_comp(gamma))
+    #     # print(gamma)
+    #     # print((time.monotonic() - current_time)*1000)
+    #     current_time = time.monotonic()
         
 
 #     # _,_,current_bearing = bearing_tilt_comp(sensor, filter_mag=True, filter_acc=True)
@@ -384,13 +390,13 @@ while True:
             _,_,current_bearing = bearing_tilt_comp(sensor, filter_mag=True, filter_acc=True)
             # print(time.monotonic() - current_time)
             # current_time = time.monotonic()
-            # current_bearing = error_comp(current_bearing) #Dont know if i should use this
+            current_bearing = error_comp(current_bearing) #Dont know if i should use this
             current_bearing_true = current_bearing - DECLINATION
             #Ensure range is 0 -> 360
             if current_bearing_true < 0:
                 current_bearing_true += 360
             # print("current_bearing_true = ", current_bearing_true)
-            # print(current_bearing)
+            print(current_bearing)
             
             # #This calculates bearing using current coordinates and coordinates two back plan-b
             # if all(gps_pos):
@@ -436,14 +442,14 @@ while True:
             else:
                 #Would ideally need to change to tacking mode here
                 PWM_sail_val = PWM_sail_min
-                print("no-sail-zone, wind_bearing = ", app_wind)
+                # print("no-sail-zone, wind_bearing = ", app_wind)
             #     print((sail_servo.duty_cycle/2**16)*1000)
 
             #Log data. Format: latitude, longitude, distance, desired bearing, GPS track angle, GPS speed, current bearing(true), error signal, rudder controller signal, rudder PWM value, alpha, apparent wind, sail PWM value
             log_sentence = str("{0:.9f}".format(current_pos[0])) + ',' + str("{0:.9f}".format(current_pos[1])) + ',' + str(distance) + ',' +  str(ref_bearing) + ',' + str(track_angle_deg) + ',' + str(speed_knots) + ',' + str(current_bearing_true) + ',' + str(error_sig) + ',' + str(rudder_sig) + ',' + str(PWM_rudder_val) + ',' + str(alpha) + ',' +  str(app_wind) + ',' + str(PWM_sail_val) + '\n'
             # print(log_sentence)
-            with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
-                    file.write(bytes(log_sentence , 'utf-16'))
+            # with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
+            #         file.write(bytes(log_sentence , 'utf-16'))
                     #file.flush()
         else:
              with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:

@@ -30,8 +30,15 @@
 \BOOKMARK [0][-]{chapter.4}{Detail Designs}{}% 30
 \BOOKMARK [1][-]{section.4.1}{Micro-controller}{chapter.4}% 31
 \BOOKMARK [1][-]{section.4.2}{GPS receiver}{chapter.4}% 32
-\BOOKMARK [1][-]{section.4.3}{Digital compass}{chapter.4}% 33
-\BOOKMARK [2][-]{subsection.4.3.1}{calibration}{section.4.3}% 34
-\BOOKMARK [0][-]{chapter.5}{Summary and Conclusion}{}% 35
-\BOOKMARK [0][-]{appendix.A}{Project Planning Schedule}{}% 36
-\BOOKMARK [0][-]{appendix.B}{Outcomes Compliance}{}% 37
+\BOOKMARK [1][-]{section.4.3}{Wind Direction Sensor}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.4}{Servo Motors}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.5}{Micro-SD card}{chapter.4}% 35
+\BOOKMARK [1][-]{section.4.6}{Digital compass}{chapter.4}% 36
+\BOOKMARK [2][-]{subsection.4.6.1}{Tilt Compensation}{section.4.6}% 37
+\BOOKMARK [2][-]{subsection.4.6.2}{calibration}{section.4.6}% 38
+\BOOKMARK [2][-]{subsection.4.6.3}{Digital filter}{section.4.6}% 39
+\BOOKMARK [1][-]{section.4.7}{Power System}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.8}{PCB}{chapter.4}% 41
+\BOOKMARK [0][-]{chapter.5}{Summary and Conclusion}{}% 42
+\BOOKMARK [0][-]{appendix.A}{Project Planning Schedule}{}% 43
+\BOOKMARK [0][-]{appendix.B}{Outcomes Compliance}{}% 44

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  4 OCT 2021 23:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  8 OCT 2021 23:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1108,43 +1108,43 @@ LaTeX Warning: Reference `' on page 13 undefined on input line 261.
 
 [13]
 
-LaTeX Warning: Reference `fig:reference_frame' on page 14 undefined on input line 275.
+LaTeX Warning: Reference `fig:reference_frame' on page 14 undefined on input line 276.
 
 <literature/fig/reference-frame.png, id=172, 746.79pt x 759.83875pt>
 File: literature/fig/reference-frame.png Graphic file (type png)
 <use literature/fig/reference-frame.png>
-Package pdftex.def Info: literature/fig/reference-frame.png  used on input line 279.
+Package pdftex.def Info: literature/fig/reference-frame.png  used on input line 280.
 (pdftex.def)             Requested size: 227.62206pt x 231.59395pt.
 
-LaTeX Warning: Reference `eq:R_x' on page 14 undefined on input line 286.
+LaTeX Warning: Reference `eq:R_x' on page 14 undefined on input line 287.
 
 
-LaTeX Warning: Reference `eq:R_y' on page 14 undefined on input line 286.
+LaTeX Warning: Reference `eq:R_y' on page 14 undefined on input line 287.
 
 
-LaTeX Warning: Reference `eq:R_z' on page 14 undefined on input line 286.
+LaTeX Warning: Reference `eq:R_z' on page 14 undefined on input line 287.
 
 
-LaTeX Warning: Citation `e_compass' on page 14 undefined on input line 286.
+LaTeX Warning: Citation `e_compass' on page 14 undefined on input line 287.
 
 [14 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/reference-frame.png>]
 
-LaTeX Warning: Reference `mag_declination' on page 15 undefined on input line 311.
+LaTeX Warning: Reference `mag_declination' on page 15 undefined on input line 312.
 
 <literature/fig/mag_declination.jpg, id=180, 822.07124pt x 457.71pt>
 File: literature/fig/mag_declination.jpg Graphic file (type jpg)
 <use literature/fig/mag_declination.jpg>
-Package pdftex.def Info: literature/fig/mag_declination.jpg  used on input line 315.
+Package pdftex.def Info: literature/fig/mag_declination.jpg  used on input line 316.
 (pdftex.def)             Requested size: 409.71692pt x 228.12111pt.
 
-LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 316.
+LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 317.
 
 
-LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 316.
+LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 317.
 
 ) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/system_design/system_design.tex [15 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/mag_declination.jpg>] [16]
 Chapter 3.
-<system_design/fig/system_diagram.png, id=195, 601.24625pt x 420.57124pt>
+<system_design/fig/system_diagram.png, id=197, 601.24625pt x 420.57124pt>
 File: system_design/fig/system_diagram.png Graphic file (type png)
 <use system_design/fig/system_diagram.png>
 Package pdftex.def Info: system_design/fig/system_diagram.png  used on input line 8.
@@ -1172,20 +1172,20 @@ LaTeX Warning: Citation `wind_sensor' on page 18 undefined on input line 39.
 
 [18]
 
-LaTeX Warning: Citation `GPS' on page 19 undefined on input line 53.
+LaTeX Warning: Citation `GPS' on page 19 undefined on input line 54.
 
 
-LaTeX Warning: Citation `altimu-10' on page 19 undefined on input line 60.
+LaTeX Warning: Citation `altimu-10' on page 19 undefined on input line 64.
 
 
-LaTeX Warning: Citation `mpu-9250' on page 19 undefined on input line 61.
+LaTeX Warning: Citation `mpu-9250' on page 19 undefined on input line 64.
 
 
-LaTeX Warning: Citation `sd' on page 19 undefined on input line 69.
+LaTeX Warning: Citation `sd' on page 19 undefined on input line 73.
 
 [19]
 
-LaTeX Warning: Reference `' on page 20 undefined on input line 97.
+LaTeX Warning: Reference `' on page 20 undefined on input line 101.
 
 [20] [21]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/detail_design.tex [22]
 Chapter 4.
@@ -1193,30 +1193,59 @@ Chapter 4.
 LaTeX Warning: Citation `nmea' on page 23 undefined on input line 19.
 
 
-LaTeX Warning: Reference `table:NMEA' on page 23 undefined on input line 20.
+LaTeX Warning: Reference `table:NMEA' on page 23 undefined on input line 21.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 17--23
+Underfull \hbox (badness 10000) in paragraph at lines 17--24
 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+[23
 
-LaTeX Warning: Citation `pmtk' on page 23 undefined on input line 46.
+]
 
-) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [23
+LaTeX Warning: Citation `STM32F405' on page 24 undefined on input line 60.
 
-] [24]
+
+LaTeX Warning: Reference `table:pwm' on page 24 undefined on input line 69.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `eq:duty_cycle' on page 24 undefined on input line 87.
+
+[24]
+
+LaTeX Warning: Reference `eq:acc_1' on page 25 undefined on input line 105.
+
+
+LaTeX Warning: Reference `eq:R_x' on page 25 undefined on input line 107.
+
+
+LaTeX Warning: Reference `eq:R_y' on page 25 undefined on input line 107.
+
+
+LaTeX Warning: Reference `eq:R_z' on page 25 undefined on input line 107.
+
+
+LaTeX Warning: Reference `eq:acc_1' on page 25 undefined on input line 115.
+
+
+LaTeX Warning: Reference `eq:acc_1_expand' on page 25 undefined on input line 115.
+
+) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [25] [26]
 Chapter 5.
 )
 No file stellenbosch_ee_report.bbl.
-(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/appendices/appendices.tex [25
+(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/appendices/appendices.tex [27
 
 ]
 Appendix A.
-[26
+[28
 
 ]
 Appendix B.
@@ -1226,7 +1255,7 @@ Package caption Warning: Unused \captionsetup[algorithm] on input line 95.
 See the caption package documentation for explanation.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
-[27
+[29
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
@@ -1241,7 +1270,7 @@ Package rerunfilecheck Warning: File `stellenbosch_ee_report.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `stellenbosch_ee_report.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  68FBC16181BB8956CFD3FB92623E10D1;2303.
+(rerunfilecheck)             After:  365BD98718EACF16B73BE8D5D8D72A0E;2738.
 
 LaTeX Warning: There were undefined references.
 
@@ -1251,18 +1280,18 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
  ) 
 Here is how much of TeX's memory you used:
- 24661 strings out of 494485
- 449306 string characters out of 6175792
- 540979 words of memory out of 5000000
- 27782 multiletter control sequences out of 15000+600000
- 599666 words of font info for 110 fonts, out of 8000000 for 9000
+ 24702 strings out of 494485
+ 449904 string characters out of 6175792
+ 543979 words of memory out of 5000000
+ 27804 multiletter control sequences out of 15000+600000
+ 607522 words of font info for 118 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  40i,12n,63p,1008b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (35 pages, 1256289 bytes).
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx8.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmmib10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
+Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (37 pages, 1285829 bytes).
 PDF statistics:
- 345 PDF objects out of 1000 (max. 8388607)
- 275 compressed objects within 3 object streams
- 117 named destinations out of 1000 (max. 500000)
- 19502 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 378 PDF objects out of 1000 (max. 8388607)
+ 303 compressed objects within 4 object streams
+ 130 named destinations out of 1000 (max. 500000)
+ 20526 words of extra memory for PDF output out of 20736 (max. 10000000)
 

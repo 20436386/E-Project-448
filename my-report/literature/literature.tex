@@ -266,6 +266,7 @@ control of two sails, two rudder servo's, boom position sensing, wind speed sens
 communications subsystem for short and long range communication with the vessel.
 
 \subsection{Establishing frame of reference}
+\label{sec:reference_frame}
 
 It is important to establish a fixed frame of reference which can be used to determine the orientation of a vessel at sea. The fixed frame of reference that will be used in this report 
 is the industry standard "NED" (North, East, Down) coordinate system. The NED coordinate system is orientated such that at any position on the earth the x-axis is aligned with true north, 
@@ -286,17 +287,17 @@ Rotation of the inertial frame about the x-axis is known as the roll angle ($\ph
 the NED frame using transformation matrices in Eq. \ref{eq:R_x}, \ref{eq:R_y}, \ref{eq:R_z} \cite{e_compass}. 
 
 \begin{equation}
-    R_{x,\phi} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & \cos\phi & -\sin\phi \\ 0 & \sin\phi & \cos\phi \end{bmatrix}
+    \vec{R_{x,\phi}} = \begin{bmatrix} 1 & 0 & 0 \\ 0 & \cos\phi & -\sin\phi \\ 0 & \sin\phi & \cos\phi \end{bmatrix}
     \label{eq:R_x}
 \end{equation}
 
 \begin{equation}
-    R_{y,\theta} = \begin{bmatrix} \cos\theta & 0 & \sin\theta \\ 0 & 1 & 0 \\ -\sin\theta & 0 & \cos\theta \end{bmatrix}
+    \vec{R_{y,\theta}} = \begin{bmatrix} \cos\theta & 0 & \sin\theta \\ 0 & 1 & 0 \\ -\sin\theta & 0 & \cos\theta \end{bmatrix}
     \label{eq:R_y}
 \end{equation}
 
 \begin{equation}
-    R_{z,\psi} = \begin{bmatrix} \cos\psi & -\sin\psi & 0 \\ \sin\psi & \cos\psi & 0 \\ 0 & 0 & 1 \end{bmatrix}
+    \vec{R_{z,\psi}} = \begin{bmatrix} \cos\psi & -\sin\psi & 0 \\ \sin\psi & \cos\psi & 0 \\ 0 & 0 & 1 \end{bmatrix}
     \label{eq:R_z}
 \end{equation}
 
