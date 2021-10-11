@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  8 OCT 2021 23:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  12 OCT 2021 00:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1237,15 +1237,61 @@ LaTeX Warning: Reference `eq:acc_1' on page 25 undefined on input line 115.
 
 LaTeX Warning: Reference `eq:acc_1_expand' on page 25 undefined on input line 115.
 
-) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [25] [26]
+
+LaTeX Warning: Reference `eq:acc_2' on page 25 undefined on input line 122.
+
+
+LaTeX Warning: Reference `eq:acc_3' on page 25 undefined on input line 122.
+
+
+LaTeX Warning: Reference `eq:acc_4' on page 25 undefined on input line 122.
+
+
+LaTeX Warning: Reference `eq:acc_5' on page 25 undefined on input line 122.
+
+[25]
+
+LaTeX Warning: Reference `eq:roll' on page 26 undefined on input line 139.
+
+
+LaTeX Warning: Reference `eq:acc_5' on page 26 undefined on input line 139.
+
+
+LaTeX Warning: Reference `eq:pitch' on page 26 undefined on input line 146.
+
+
+LaTeX Warning: Reference `eq:acc_4' on page 26 undefined on input line 146.
+
+
+LaTeX Warning: Reference `eq:mag_1' on page 26 undefined on input line 154.
+
+
+LaTeX Warning: Reference `eq:R_z' on page 26 undefined on input line 154.
+
+
+LaTeX Warning: Reference `eq:mag_1' on page 26 undefined on input line 161.
+
+
+LaTeX Warning: Reference `eq:mag_2' on page 26 undefined on input line 161.
+
+
+LaTeX Warning: Reference `eq:mag_3' on page 26 undefined on input line 161.
+
+
+LaTeX Warning: Reference `eq:yaw' on page 26 undefined on input line 173.
+
+
+LaTeX Warning: Reference `eq:mag_3' on page 26 undefined on input line 173.
+
+[26]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [27]
 Chapter 5.
 )
 No file stellenbosch_ee_report.bbl.
-(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/appendices/appendices.tex [27
+(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/appendices/appendices.tex [28
 
 ]
 Appendix A.
-[28
+[29
 
 ]
 Appendix B.
@@ -1255,7 +1301,7 @@ Package caption Warning: Unused \captionsetup[algorithm] on input line 95.
 See the caption package documentation for explanation.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
-[29
+[30
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
@@ -1270,7 +1316,7 @@ Package rerunfilecheck Warning: File `stellenbosch_ee_report.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `stellenbosch_ee_report.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  365BD98718EACF16B73BE8D5D8D72A0E;2738.
+(rerunfilecheck)             After:  7031A00A6A890864325074BCD49F1139;2738.
 
 LaTeX Warning: There were undefined references.
 
@@ -1280,18 +1326,18 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
  ) 
 Here is how much of TeX's memory you used:
- 24702 strings out of 494485
- 449904 string characters out of 6175792
- 543979 words of memory out of 5000000
- 27804 multiletter control sequences out of 15000+600000
+ 24722 strings out of 494485
+ 450137 string characters out of 6175792
+ 544979 words of memory out of 5000000
+ 27814 multiletter control sequences out of 15000+600000
  607522 words of font info for 118 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  40i,12n,63p,1008b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx8.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmmib10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (37 pages, 1285829 bytes).
+Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (38 pages, 1295398 bytes).
 PDF statistics:
- 378 PDF objects out of 1000 (max. 8388607)
- 303 compressed objects within 4 object streams
- 130 named destinations out of 1000 (max. 500000)
+ 393 PDF objects out of 1000 (max. 8388607)
+ 317 compressed objects within 4 object streams
+ 140 named destinations out of 1000 (max. 500000)
  20526 words of extra memory for PDF output out of 20736 (max. 10000000)
 

@@ -88,7 +88,7 @@ The PWM duty cycle value is stored in a 16 bit register and is determined using 
 
 \begin{equation}
     \label{eq:duty_cycle}
-    duty\_cycle = (\frac{PWM\_value}{1000}) 2^{16}
+    duty\_cycle = (\frac{PWM\_value}{1000}) \cdot 2^{16}
 \end{equation}
 
 \section{Micro-SD card}
@@ -99,29 +99,98 @@ The micro-SD card socket has a supply voltage of 3.3V and is powered with the Fe
 
 \section{Digital compass}
 The MPU-9250/6500 IMUhas a supply voltage of 3.3V and is powered by the Feather boards 3.3V regulator. It is connected to the Feather via a $I^{2}C$ connection. The IMU has an address pin 
-which is grounded. The purpose of the address pin is for setting the LSB of the $I^{2}C$, this allows two IMU's to be connected to the same bus, which is not needed in this system. 
+which is grounded. The purpose of the address pin is for setting the LSB of the $I^{2}C$, this allows two IMU's to be connected to the same bus, which is not needed in this case. 
 
 \subsection{Tilt Compensation}
-To perform tilt compensation, firstly pitch and roll angles of the inertial frame of the vessel must be found. Eq. \ref{eq:acc_1} is used to transform a sampled accelration vector back to 
-the NED frame of reference. In this eqution $\vec{A}_s$ represents the acceleration vector which has been 
-sampled from the IMU, g represents the acceleration due to gravity and $\vec{R_{x,\phi}}$, $\vec{R_{y,\theta}}$, $\vec{R_{z,\psi}}$ represent equations \ref{eq:R_x}, \ref{eq:R_y}, \ref{eq:R_z} 
+To perform tilt compensation, firstly pitch and roll angles of the inertial frame of the vessel must be found. Eq. \ref{eq:acc_1} is used to transform a sampled acceleration vector back to 
+the NED frame of reference, where there exists only a z-component with magnitude 9.81 $m/s^2$. In this eqution $\vec{A}_s$ represents the acceleration vector which has been 
+sampled from the IMU, g is acceleration due to gravity and $\vec{R_{x,\phi}}$, $\vec{R_{y,\theta}}$, $\vec{R_{z,\psi}}$ represent equations \ref{eq:R_x}, \ref{eq:R_y}, \ref{eq:R_z} 
 respectively. 
 
 \begin{equation}
     \label{eq:acc_1}
-    \vec{R_{y,\theta}}\vec{R_{x,\phi}}\vec{A_s} = \begin{bmatrix} 0 & 0 & g \end{bmatrix}^T
+    \vec{R_{y,\theta}} \cdot \vec{R_{x,\phi}} \cdot \vec{A_s} = \begin{bmatrix} 0 & 0 & g \end{bmatrix}^T
 \end{equation}
 
-Expanding Eq. \ref{eq:acc_1}, gives Eq. \ref{eq:acc_1_expand}. The components of the sampled vector are $A_{sx}$, $A_{sy}$ and $A_{sz}$.
+Expanding Eq. \ref{eq:acc_1}, gives Eq. \ref{eq:acc_1_expand}. The components of the sampled acceleration vector are $A_{sx}$, $A_{sy}$ and $A_{sz}$.
 
 \begin{equation}
-    \label{eq:acc_1}
-    \begin{bmatrix} cos\theta & 0 & sin\theta \\ 0 & 1 & 0 \\ -sin\theta & 0 & cos\theta \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & cos\phi & -sin\phi \\ 0 & sin\phi & cos\phi \end{bmatrix} \begin{bmatrix} A_{sx} \\ A_{sy} \\ A_{sz} \end{bmatrix}= \begin{bmatrix} 0 & 0 & g \end{bmatrix}^T
+    \label{eq:acc_2}
+    \begin{bmatrix} cos\theta & 0 & sin\theta \\ 0 & 1 & 0 \\ -sin\theta & 0 & cos\theta \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & cos\phi & -sin\phi \\ 0 & sin\phi & cos\phi \end{bmatrix} \begin{bmatrix} A_{sx} \\ A_{sy} \\ A_{sz} \end{bmatrix}= \begin{bmatrix} 0 \\ 0 \\ g \end{bmatrix}
+\end{equation}
+
+Expanding Eq.\ref{eq:acc_2} further gives Eq.\ref{eq:acc_3},then Eq. \ref{eq:acc_4} and \ref{eq:acc_5}.
+
+\begin{equation}
+    \label{eq:acc_3}
+    \begin{bmatrix} cos\theta & sin\theta sin\phi & sin\theta cos\phi \\ 0 & cos\phi & -sin\phi \\ -sin\theta & cos\theta sin\phi & cos\theta cos\phi \end{bmatrix} \begin{bmatrix} A_{sx} \\ A_{sy} \\ A_{sz} \end{bmatrix}= \begin{bmatrix} 0 \\ 0 \\ g \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \label{eq:acc_4}
+    A_{s,x}cos\theta + A_{s,y}sin\theta sin\phi + A_{s,z}sin\theta cos\phi = 0
+\end{equation}
+
+\begin{equation}
+    \label{eq:acc_5}
+    A_{s,y}cos\phi - A_{s,z}sin\phi = 0
+\end{equation}
+
+Roll angle $\phi$ can be found using Eq.\ref{eq:roll} which results from rearranging terms in Eq.\ref{eq:acc_5}
+
+\begin{equation}
+    \label{eq:roll}
+    \phi = \arctan (\frac{A_{s,y}}{A_{s,z}})
+\end{equation}
+
+By substituting roll angle $\phi$ into Eq.\ref{eq:pitch} - which is derived from Eq.\ref{eq:acc_4} - pitch angle $\theta$ is found.
+
+\begin{equation}
+    \label{eq:pitch}
+    \theta = \arctan( \frac{ -A_{s,x}}{A_{s,y}sin\phi + A_{s,z}cos\phi})
+\end{equation}
+
+Now that pitch and roll angles of the inertial frame of the vessel are known, a sampled magnetometer vector - $\vec{B_{s}}$ - can be transformed to the NED frame of reference. This is done
+using Eq.\ref{eq:mag_1}, where $\vec{B_{r}}$ is the transformed vector. Eq.\ref{eq:R_z} is not used here as this will eliminate yaw angle $\psi$ whixh in needed to determine the resulting bearing
+
+\begin{equation}
+    \label{eq:mag_1}
+    \vec{B_{r}} = \vec{R_{y,\theta}} \cdot \vec{R_{x,\phi}} \cdot \vec{B_{s}}
+\end{equation}
+
+Eq.\ref{eq:mag_1} is then expanded, giving Eq.\ref{eq:mag_2} and Eq.\ref{eq:mag_3}.
+
+\begin{equation}
+    \label{eq:mag_2}
+    \begin{bmatrix} B_{r,x} \\ B_{r,y} \\ B_{r,z} \end{bmatrix} = \begin{bmatrix} cos\theta & 0 & sin\theta \\ 0 & 1 & 0 \\ -sin\theta & 0 & cos\theta \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & cos\phi & -sin\phi \\ 0 & sin\phi & cos\phi \end{bmatrix} \begin{bmatrix} B_{s,x} \\ B_{s,y} \\ B_{s,z} \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \label{eq:mag_3}
+    \begin{bmatrix} B_{r,x} \\ B_{r,y} \\ B_{r,z} \end{bmatrix} = \begin{bmatrix} B_{s,x} cos\theta + B_{s,y} sin\theta sin\phi + B_{s,z} sin\theta cos\phi \\ 0 + B_{s,y} cos\phi - B_{s,z} sin\phi \\ -B_{s,x} sin\theta +  B_{s,y} cos\theta sin\phi + B_{s,z} cos\theta cos\phi \end{bmatrix} 
+\end{equation}
+
+Eq.\ref{eq:yaw} is now derived using Eq.\ref{eq:mag_3}, where yaw angle $\psi$ represents the tilt compensated bearing of the vessel. The ATAN2() function in python is used to determining 
+the yaw angle, it returns a value in the range of $-180^{\circ}$ to $180^{\circ}$. The following check is therefore done in software: if the yaw angle in negative then $360^{\circ}$ is added
+to it. This ensures bearing is in the range $0^{\circ}$ to $360^{\circ}$.
+
+\begin{equation}
+    \label{eq:yaw}
+    \psi =  \frac{-B_{r,y}}{B_{r,x}} \newline
+        =\arctan (\frac{B_{s,z} sin\phi - B_{s,y} cos\phi }  {B_{s,x} cos\theta + B_{s,y} sin\theta sin\phi + B_{s,z} sin\theta cos\phi})
 \end{equation}
 
 
 
-\subsection{calibration}
+
+
+
+
+
+
+
+
+\subsection{Calibration}
 
 \subsection{Digital filter}
 

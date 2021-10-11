@@ -24,12 +24,14 @@ R = 6371
 ##For navigation
 rmc_status = 'V'
 # target_pos = (-33.957047462 , 18.809661865) #Bottom side dam
-target_pos = (-33.956742287 , 18.807343483) #Right side dam
+# target_pos = (-33.956742287 , 18.807343483) #Right side dam
+target_pos = (-33.957016468, 18.807586670 ) #Right side dam
 # target_pos = (-33.929276466 , 18.861862183) #Garden
 
 ##For Sail control system
 PWM_sail_max = 120
-PWM_sail_min = 72
+# PWM_sail_min = 72
+PWM_sail_min = 75
 ADC_min = 0.22
 ADC_max = 0.96
 angle_no_sail = 45
@@ -299,8 +301,8 @@ sensor = MPU9250(i2c)
 
 
 #This is to determine desired bearing before, instead of on every clock cycle
-start_pos = (-33.929276466 , 18.861862183)
-ref_bearing = desired_bearing(start_pos, target_pos)
+# start_pos = (-33.929276466 , 18.861862183)
+# ref_bearing = desired_bearing(start_pos, target_pos)
 
 current_time = time.monotonic()
 # #Note:
@@ -324,19 +326,19 @@ while True:
 #     # time.sleep(0.07)
 
 
-#     # #This code obtains target gps coordinates
-#     # # print(gps.readline())
-#     # gps.update()
+    # #This code obtains target gps coordinates
+    # # print(gps.readline())
+    # gps.update()
 
-#     # if (time.monotonic() - current_time) >= 1:
-#     #     if not gps.has_fix:
-#     #         print("waiting for fix...")
-#     #         #Note: continue keyword instructs next iteration of while loop to execute
-#     #     else:
-#     #         print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
-#     #         print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
+    # if (time.monotonic() - current_time) >= 1:
+    #     if not gps.has_fix:
+    #         print("waiting for fix...")
+    #         #Note: continue keyword instructs next iteration of while loop to execute
+    #     else:
+    #         print("latitude: {0:.9f} degrees" .format(gps.latitude)) 
+    #         print("longitude: {0:.9f} degrees" .format(gps.longitude), "\n\n")
 
-#     #     current_time = time.monotonic()
+    #     current_time = time.monotonic()
 
     nmea_sentence = gps.readline()
     # print(nmea_sentence)
@@ -384,19 +386,19 @@ while True:
 
         if distance >= 5:
             #Calculate desired bearing(only use if calibration of compass is spot on)
-            # ref_bearing = desired_bearing(current_pos, target_pos)
+            ref_bearing = desired_bearing(current_pos, target_pos)
 
             #Sample actual bearing
             _,_,current_bearing = bearing_tilt_comp(sensor, filter_mag=True, filter_acc=True)
             # print(time.monotonic() - current_time)
             # current_time = time.monotonic()
-            current_bearing = error_comp(current_bearing) #Dont know if i should use this
+            # current_bearing = error_comp(current_bearing) #Dont know if i should use this
             current_bearing_true = current_bearing - DECLINATION
             #Ensure range is 0 -> 360
             if current_bearing_true < 0:
                 current_bearing_true += 360
             # print("current_bearing_true = ", current_bearing_true)
-            print(current_bearing)
+            # print(current_bearing, current_bearing_true)
             
             # #This calculates bearing using current coordinates and coordinates two back plan-b
             # if all(gps_pos):
@@ -404,7 +406,15 @@ while True:
             #     # print(gps_bearing)
 
             #Calculate error signal
-            error_sig = -(ref_bearing - current_bearing_true)
+            error_sig = ref_bearing - current_bearing_true
+            #Check if clockwise rotation or anti-clockwise rotation is more efficient
+            if (abs(error_sig) > 180):
+                if (error_sig > 180):
+                    error_sig -= 360
+                if (error_sig < -180):
+                    error_sig += 360
+            #PWM is opposite to theory calculations, therefore switch direction
+            error_sig = -(error_sig)
 
             ##Rudder Controller (proportional)
             #I_k = (k_i * error_sig * t_s)
@@ -451,7 +461,7 @@ while True:
             # with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
             #         file.write(bytes(log_sentence , 'utf-16'))
                     #file.flush()
-        else:
-             with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
-                    file.write(bytes("Target position acquired :)" , 'utf-16'))
+        # else:
+            # with open(LOG_FILE, LOG_MODE, encoding='utf-16') as file:
+            #         file.write(bytes("Target position acquired :)" , 'utf-16'))
             #         #file.flush()

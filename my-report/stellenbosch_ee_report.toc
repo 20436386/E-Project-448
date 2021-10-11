@@ -55,10 +55,10 @@
 \contentsline {section}{\numberline {4.5}Micro-SD card}{25}{section.4.5}% 
 \contentsline {section}{\numberline {4.6}Digital compass}{25}{section.4.6}% 
 \contentsline {subsection}{\numberline {4.6.1}Tilt Compensation}{25}{subsection.4.6.1}% 
-\contentsline {subsection}{\numberline {4.6.2}calibration}{26}{subsection.4.6.2}% 
-\contentsline {subsection}{\numberline {4.6.3}Digital filter}{26}{subsection.4.6.3}% 
-\contentsline {section}{\numberline {4.7}Power System}{26}{section.4.7}% 
-\contentsline {section}{\numberline {4.8}PCB}{26}{section.4.8}% 
-\contentsline {chapter}{\numberline {5}Summary and Conclusion}{27}{chapter.5}% 
-\contentsline {chapter}{\numberline {A}Project Planning Schedule}{28}{appendix.A}% 
-\contentsline {chapter}{\numberline {B}Outcomes Compliance}{29}{appendix.B}% 
+\contentsline {subsection}{\numberline {4.6.2}Calibration}{27}{subsection.4.6.2}% 
+\contentsline {subsection}{\numberline {4.6.3}Digital filter}{27}{subsection.4.6.3}% 
+\contentsline {section}{\numberline {4.7}Power System}{27}{section.4.7}% 
+\contentsline {section}{\numberline {4.8}PCB}{27}{section.4.8}% 
+\contentsline {chapter}{\numberline {5}Summary and Conclusion}{28}{chapter.5}% 
+\contentsline {chapter}{\numberline {A}Project Planning Schedule}{29}{appendix.A}% 
+\contentsline {chapter}{\numberline {B}Outcomes Compliance}{30}{appendix.B}% 
