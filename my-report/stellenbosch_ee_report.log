@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  12 OCT 2021 00:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.6.29)  15 OCT 2021 15:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1072,75 +1072,75 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [7] [8 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/phillip_lake_test.png>]
 
-LaTeX Warning: Reference `eq:sail_dynamics' on page 9 undefined on input line 150.
-
-
 LaTeX Warning: Reference `eq:sail_dynamics' on page 9 undefined on input line 151.
 
 
-LaTeX Warning: Reference `eq:sail_dynamics' on page 9 undefined on input line 159.
+LaTeX Warning: Reference `eq:sail_dynamics' on page 9 undefined on input line 152.
+
+
+LaTeX Warning: Reference `eq:sail_dynamics' on page 9 undefined on input line 160.
 
 [9]
 
-LaTeX Warning: Reference `fig:robotics_test_result' on page 10 undefined on input line 176.
+LaTeX Warning: Reference `fig:robotics_test_result' on page 10 undefined on input line 177.
 
 <literature/fig/robotics_test_result.png, id=144, 723.70375pt x 825.0825pt>
 File: literature/fig/robotics_test_result.png Graphic file (type png)
 <use literature/fig/robotics_test_result.png>
-Package pdftex.def Info: literature/fig/robotics_test_result.png  used on input line 182.
+Package pdftex.def Info: literature/fig/robotics_test_result.png  used on input line 183.
 (pdftex.def)             Requested size: 273.14923pt x 311.40694pt.
 
-LaTeX Warning: Citation `robotics5010005' on page 10 undefined on input line 183.
+LaTeX Warning: Citation `robotics5010005' on page 10 undefined on input line 184.
 
 
-LaTeX Warning: Citation `robotics5010005' on page 10 undefined on input line 183.
+LaTeX Warning: Citation `robotics5010005' on page 10 undefined on input line 184.
 
 
-LaTeX Warning: Reference `problem_statement' on page 10 undefined on input line 191.
+LaTeX Warning: Reference `problem_statement' on page 10 undefined on input line 192.
 
 [10 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/robotics_test_result.png>]
 
-LaTeX Warning: Citation `Alves2008FAStA' on page 11 undefined on input line 197.
+LaTeX Warning: Citation `Alves2008FAStA' on page 11 undefined on input line 198.
 
 [11] [12]
 
-LaTeX Warning: Reference `' on page 13 undefined on input line 261.
+LaTeX Warning: Reference `' on page 13 undefined on input line 262.
 
 [13]
 
-LaTeX Warning: Reference `fig:reference_frame' on page 14 undefined on input line 276.
+LaTeX Warning: Reference `fig:reference_frame' on page 14 undefined on input line 277.
 
 <literature/fig/reference-frame.png, id=172, 746.79pt x 759.83875pt>
 File: literature/fig/reference-frame.png Graphic file (type png)
 <use literature/fig/reference-frame.png>
-Package pdftex.def Info: literature/fig/reference-frame.png  used on input line 280.
+Package pdftex.def Info: literature/fig/reference-frame.png  used on input line 281.
 (pdftex.def)             Requested size: 227.62206pt x 231.59395pt.
 
-LaTeX Warning: Reference `eq:R_x' on page 14 undefined on input line 287.
+LaTeX Warning: Reference `eq:R_x' on page 14 undefined on input line 288.
 
 
-LaTeX Warning: Reference `eq:R_y' on page 14 undefined on input line 287.
+LaTeX Warning: Reference `eq:R_y' on page 14 undefined on input line 288.
 
 
-LaTeX Warning: Reference `eq:R_z' on page 14 undefined on input line 287.
+LaTeX Warning: Reference `eq:R_z' on page 14 undefined on input line 288.
 
 
-LaTeX Warning: Citation `e_compass' on page 14 undefined on input line 287.
+LaTeX Warning: Citation `e_compass' on page 14 undefined on input line 288.
 
 [14 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/reference-frame.png>]
 
-LaTeX Warning: Reference `mag_declination' on page 15 undefined on input line 312.
+LaTeX Warning: Reference `mag_declination' on page 15 undefined on input line 313.
 
 <literature/fig/mag_declination.jpg, id=180, 822.07124pt x 457.71pt>
 File: literature/fig/mag_declination.jpg Graphic file (type jpg)
 <use literature/fig/mag_declination.jpg>
-Package pdftex.def Info: literature/fig/mag_declination.jpg  used on input line 316.
+Package pdftex.def Info: literature/fig/mag_declination.jpg  used on input line 317.
 (pdftex.def)             Requested size: 409.71692pt x 228.12111pt.
 
-LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 317.
+LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 318.
 
 
-LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 317.
+LaTeX Warning: Citation `Mag_declination' on page 15 undefined on input line 318.
 
 ) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/system_design/system_design.tex [15 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/literature/fig/mag_declination.jpg>] [16]
 Chapter 3.
@@ -1165,7 +1165,7 @@ LaTeX Warning: Reference `fig:system_diagram' on page 17 undefined on input line
 LaTeX Warning: Citation `black_pill' on page 18 undefined on input line 25.
 
 
-LaTeX Warning: Citation `feather' on page 18 undefined on input line 25.
+LaTeX Warning: Citation `STM32F405-specs' on page 18 undefined on input line 25.
 
 
 LaTeX Warning: Citation `wind_sensor' on page 18 undefined on input line 39.
@@ -1175,19 +1175,39 @@ LaTeX Warning: Citation `wind_sensor' on page 18 undefined on input line 39.
 LaTeX Warning: Citation `GPS' on page 19 undefined on input line 54.
 
 
-LaTeX Warning: Citation `altimu-10' on page 19 undefined on input line 64.
+LaTeX Warning: Reference `fig:tilt_error' on page 19 undefined on input line 62.
 
 
-LaTeX Warning: Citation `mpu-9250' on page 19 undefined on input line 64.
+LaTeX Warning: Citation `tilt_error' on page 19 undefined on input line 63.
 
 
-LaTeX Warning: Citation `sd' on page 19 undefined on input line 73.
+LaTeX Warning: Citation `altimu-10' on page 19 undefined on input line 65.
 
-[19]
 
-LaTeX Warning: Reference `' on page 20 undefined on input line 101.
+LaTeX Warning: Citation `mpu-9250' on page 19 undefined on input line 65.
 
-[20] [21]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/detail_design.tex [22]
+<system_design/fig/tilt_error.png, id=214, 771.88374pt x 581.17125pt>
+File: system_design/fig/tilt_error.png Graphic file (type png)
+<use system_design/fig/tilt_error.png>
+Package pdftex.def Info: system_design/fig/tilt_error.png  used on input line 72.
+(pdftex.def)             Requested size: 227.62206pt x 171.38196pt.
+
+LaTeX Warning: Citation `tilt_error' on page 19 undefined on input line 73.
+
+
+LaTeX Warning: Citation `tilt_error' on page 19 undefined on input line 73.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Citation `sd' on page 19 undefined on input line 81.
+
+[19] [20 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/system_design/fig/tilt_error.png>]
+
+LaTeX Warning: Reference `' on page 21 undefined on input line 114.
+
+[21]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/detail_design.tex [22]
 Chapter 4.
 
 LaTeX Warning: Citation `nmea' on page 23 undefined on input line 19.
@@ -1207,137 +1227,342 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 ]
 
-LaTeX Warning: Citation `STM32F405' on page 24 undefined on input line 60.
+LaTeX Warning: Citation `STM32F405-datasheet' on page 24 undefined on input line 61.
 
 
-LaTeX Warning: Reference `table:pwm' on page 24 undefined on input line 69.
+LaTeX Warning: Reference `table:pwm' on page 24 undefined on input line 70.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `eq:duty_cycle' on page 24 undefined on input line 87.
-
 [24]
 
-LaTeX Warning: Reference `eq:acc_1' on page 25 undefined on input line 105.
+LaTeX Warning: Reference `eq:acc_1' on page 25 undefined on input line 101.
 
 
-LaTeX Warning: Reference `eq:R_x' on page 25 undefined on input line 107.
+LaTeX Warning: Reference `eq:R_x' on page 25 undefined on input line 103.
 
 
-LaTeX Warning: Reference `eq:R_y' on page 25 undefined on input line 107.
+LaTeX Warning: Reference `eq:R_y' on page 25 undefined on input line 103.
 
 
-LaTeX Warning: Reference `eq:R_z' on page 25 undefined on input line 107.
+LaTeX Warning: Reference `eq:R_z' on page 25 undefined on input line 103.
 
 
-LaTeX Warning: Reference `eq:acc_1' on page 25 undefined on input line 115.
+LaTeX Warning: Reference `eq:acc_1' on page 25 undefined on input line 111.
 
 
-LaTeX Warning: Reference `eq:acc_1_expand' on page 25 undefined on input line 115.
+LaTeX Warning: Reference `eq:acc_1_expand' on page 25 undefined on input line 111.
 
 
-LaTeX Warning: Reference `eq:acc_2' on page 25 undefined on input line 122.
+LaTeX Warning: Reference `eq:acc_2' on page 25 undefined on input line 118.
 
 
-LaTeX Warning: Reference `eq:acc_3' on page 25 undefined on input line 122.
+LaTeX Warning: Reference `eq:acc_3' on page 25 undefined on input line 118.
 
 
-LaTeX Warning: Reference `eq:acc_4' on page 25 undefined on input line 122.
+LaTeX Warning: Reference `eq:acc_4' on page 25 undefined on input line 118.
 
 
-LaTeX Warning: Reference `eq:acc_5' on page 25 undefined on input line 122.
+LaTeX Warning: Reference `eq:acc_5' on page 25 undefined on input line 118.
 
 [25]
 
-LaTeX Warning: Reference `eq:roll' on page 26 undefined on input line 139.
+LaTeX Warning: Reference `eq:roll' on page 26 undefined on input line 135.
 
 
-LaTeX Warning: Reference `eq:acc_5' on page 26 undefined on input line 139.
+LaTeX Warning: Reference `eq:acc_5' on page 26 undefined on input line 135.
 
 
-LaTeX Warning: Reference `eq:pitch' on page 26 undefined on input line 146.
+LaTeX Warning: Reference `eq:pitch' on page 26 undefined on input line 142.
 
 
-LaTeX Warning: Reference `eq:acc_4' on page 26 undefined on input line 146.
+LaTeX Warning: Reference `eq:acc_4' on page 26 undefined on input line 142.
 
 
-LaTeX Warning: Reference `eq:mag_1' on page 26 undefined on input line 154.
+LaTeX Warning: Reference `eq:mag_1' on page 26 undefined on input line 150.
 
 
-LaTeX Warning: Reference `eq:R_z' on page 26 undefined on input line 154.
+LaTeX Warning: Reference `eq:R_z' on page 26 undefined on input line 150.
 
 
-LaTeX Warning: Reference `eq:mag_1' on page 26 undefined on input line 161.
+LaTeX Warning: Reference `eq:mag_1' on page 26 undefined on input line 157.
 
 
-LaTeX Warning: Reference `eq:mag_2' on page 26 undefined on input line 161.
+LaTeX Warning: Reference `eq:mag_2' on page 26 undefined on input line 157.
 
 
-LaTeX Warning: Reference `eq:mag_3' on page 26 undefined on input line 161.
+LaTeX Warning: Reference `eq:mag_3' on page 26 undefined on input line 157.
 
 
-LaTeX Warning: Reference `eq:yaw' on page 26 undefined on input line 173.
+Underfull \hbox (badness 10000) in paragraph at lines 167--169
+
+ []
 
 
-LaTeX Warning: Reference `eq:mag_3' on page 26 undefined on input line 173.
+LaTeX Warning: Reference `eq:yaw' on page 26 undefined on input line 170.
 
-[26]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/conclusion/conclusion.tex [27]
+
+LaTeX Warning: Reference `eq:mag_3' on page 26 undefined on input line 170.
+
+[26]
+
+LaTeX Warning: Reference `' on page 27 undefined on input line 181.
+
+
+LaTeX Warning: Reference `eq:hard-iron' on page 27 undefined on input line 188.
+
+
+LaTeX Warning: Reference `eq:soft-iron_3' on page 27 undefined on input line 188.
+
+
+LaTeX Warning: Reference `eq:calibrate' on page 27 undefined on input line 189.
+
+[27]
+
+LaTeX Warning: Reference `fig:calibration' on page 28 undefined on input line 217.
+
+
+LaTeX Warning: Reference `fig:uncalibrated' on page 28 undefined on input line 217.
+
+
+LaTeX Warning: Reference `fig:calibrated' on page 28 undefined on input line 218.
+
+<detail_design/fig/unclibrated-mag.png, id=293, 462.528pt x 346.896pt>
+File: detail_design/fig/unclibrated-mag.png Graphic file (type png)
+<use detail_design/fig/unclibrated-mag.png>
+Package pdftex.def Info: detail_design/fig/unclibrated-mag.png  used on input line 225.
+(pdftex.def)             Requested size: 182.09486pt x 136.56984pt.
+<detail_design/fig/calibrated-mag.png, id=294, 462.528pt x 346.896pt>
+File: detail_design/fig/calibrated-mag.png Graphic file (type png)
+<use detail_design/fig/calibrated-mag.png>
+Package pdftex.def Info: detail_design/fig/calibrated-mag.png  used on input line 231.
+(pdftex.def)             Requested size: 182.09486pt x 136.56984pt.
+
+LaTeX Warning: Reference `table:filter' on page 28 undefined on input line 250.
+
+[28 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/fig/unclibrated-mag.png> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/fig/calibrated-mag.png>]
+
+LaTeX Warning: Reference `eq:filter_tf' on page 29 undefined on input line 282.
+
+
+LaTeX Warning: Reference `eq:filter_b' on page 29 undefined on input line 283.
+
+
+LaTeX Warning: Reference `eq:filter_a' on page 29 undefined on input line 283.
+
+
+LaTeX Warning: Reference `eq:filter_code' on page 29 undefined on input line 302.
+
+
+LaTeX Warning: Reference `fig:lpf_output' on page 29 undefined on input line 313.
+
+
+LaTeX Warning: Reference `fig:filter_step' on page 29 undefined on input line 314.
+
+[29]
+<detail_design/fig/Filter_output.png, id=314, 1387.584pt x 706.0779pt>
+File: detail_design/fig/Filter_output.png Graphic file (type png)
+<use detail_design/fig/Filter_output.png>
+Package pdftex.def Info: detail_design/fig/Filter_output.png  used on input line 318.
+(pdftex.def)             Requested size: 446.13727pt x 227.01614pt.
+<detail_design/fig/Step_response.png, id=315, 1387.584pt x 706.0779pt>
+File: detail_design/fig/Step_response.png Graphic file (type png)
+<use detail_design/fig/Step_response.png>
+Package pdftex.def Info: detail_design/fig/Step_response.png  used on input line 325.
+(pdftex.def)             Requested size: 446.13727pt x 227.01614pt.
+
+
+LaTeX Warning: Citation `mah' on page 30 undefined on input line 334.
+
+
+LaTeX Warning: Citation `feather' on page 30 undefined on input line 338.
+
+[30 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/fig/Filter_output.png> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/fig/Step_response.png>]
+
+LaTeX Warning: Reference `fig:pcb' on page 31 undefined on input line 346.
+
+
+LaTeX Warning: Reference `appen:system' on page 31 undefined on input line 346.
+
+<detail_design/fig/system_pcb.png, id=325, 1360.08125pt x 929.4725pt>
+File: detail_design/fig/system_pcb.png Graphic file (type png)
+<use detail_design/fig/system_pcb.png>
+Package pdftex.def Info: detail_design/fig/system_pcb.png  used on input line 350.
+(pdftex.def)             Requested size: 364.19667pt x 248.89027pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `fig:control-system' on page 31 undefined on input line 360.
+
+[31]
+<detail_design/fig/control_system.png, id=333, 856.19875pt x 284.06125pt>
+File: detail_design/fig/control_system.png Graphic file (type png)
+<use detail_design/fig/control_system.png>
+Package pdftex.def Info: detail_design/fig/control_system.png  used on input line 368.
+(pdftex.def)             Requested size: 446.13727pt x 148.0161pt.
+
+
+LaTeX Warning: Reference `table: ...' on page 32 undefined on input line 376.
+
+
+LaTeX Warning: Reference `eq:sail-control-alpha' on page 32 undefined on input line 395.
+
+[32 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/fig/system_pcb.png> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/detail_design/fig/control_system.png>]
+
+LaTeX Warning: Reference `eq:sail-control-algorithm' on page 33 undefined on input line 408.
+
+
+LaTeX Warning: Reference `table:pwm' on page 33 undefined on input line 409.
+
+
+LaTeX Warning: Reference `eq:duty_cycle' on page 33 undefined on input line 409.
+
+
+LaTeX Warning: Reference `sec:robotics-paper' on page 33 undefined on input line 424.
+
+
+LaTeX Warning: Reference `eq:sail_dynamics' on page 33 undefined on input line 425.
+
+
+LaTeX Warning: Reference `sec:robotics-paper' on page 33 undefined on input line 426.
+
+
+LaTeX Warning: Reference `eq:control-law' on page 33 undefined on input line 429.
+
+
+LaTeX Warning: Reference `eq:error-sig' on page 33 undefined on input line 430.
+
+[33]
+
+LaTeX Warning: Reference `eq:pwm-sig-rudder' on page 34 undefined on input line 446.
+
+
+LaTeX Warning: Reference `eq:duty_cycle' on page 34 undefined on input line 446.
+
+
+LaTeX Warning: Reference `table:pwm' on page 34 undefined on input line 446.
+
+
+LaTeX Warning: Reference `eq:haversine1' on page 34 undefined on input line 458.
+
+
+LaTeX Warning: Reference `eq:haversine2' on page 34 undefined on input line 458.
+
+
+LaTeX Warning: Reference `eq:haversine1' on page 34 undefined on input line 472.
+
+
+LaTeX Warning: Reference `eq:ref-heading' on page 34 undefined on input line 477.
+
+[34]) (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/results.tex [35]
 Chapter 5.
-)
-No file stellenbosch_ee_report.bbl.
-(/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/appendices/appendices.tex [28
 
-]
-Appendix A.
-[29
+LaTeX Warning: Reference `fig:rooi-plane-loop' on page 36 undefined on input line 6.
 
-]
-Appendix B.
-)
+<results/fig/rooi_plane_loop.png, id=371, 722.7pt x 722.7pt>
+File: results/fig/rooi_plane_loop.png Graphic file (type png)
+<use results/fig/rooi_plane_loop.png>
+Package pdftex.def Info: results/fig/rooi_plane_loop.png  used on input line 12.
+(pdftex.def)             Requested size: 364.19667pt x 364.1942pt.
+[36
 
-Package caption Warning: Unused \captionsetup[algorithm] on input line 95.
-See the caption package documentation for explanation.
+ </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/rooi_plane_loop.png>]
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
-[30
-
-]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
- (/home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 141.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 141.
+LaTeX Warning: Reference `fig:digital-compass-test-1' on page 37 undefined on input line 21.
 
 
-Package rerunfilecheck Warning: File `stellenbosch_ee_report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Warning: Reference `fig:digital-compass-test-1-error' on page 37 undefined on input line 22.
 
-Package rerunfilecheck Info: Checksums for `stellenbosch_ee_report.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  7031A00A6A890864325074BCD49F1139;2738.
+<results/fig/digital-compass-test-1.png, id=380, 863.47594pt x 386.94562pt>
+File: results/fig/digital-compass-test-1.png Graphic file (type png)
+<use results/fig/digital-compass-test-1.png>
+Package pdftex.def Info: results/fig/digital-compass-test-1.png  used on input line 29.
+(pdftex.def)             Requested size: 409.71692pt x 183.60033pt.
+<results/fig/digital-compass-test-1-error.png, id=381, 856.70062pt x 383.18156pt>
+File: results/fig/digital-compass-test-1-error.png Graphic file (type png)
+<use results/fig/digital-compass-test-1-error.png>
+Package pdftex.def Info: results/fig/digital-compass-test-1-error.png  used on input line 36.
+(pdftex.def)             Requested size: 409.71692pt x 183.25851pt.
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: Reference `subfig:digital-compass-test-2' on page 37 undefined on input line 44.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: Reference `subfig:digital-compass-test-2-error' on page 37 undefined on input line 45.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
- ) 
-Here is how much of TeX's memory you used:
- 24722 strings out of 494485
- 450137 string characters out of 6175792
- 544979 words of memory out of 5000000
- 27814 multiletter control sequences out of 15000+600000
- 607522 words of font info for 118 fonts, out of 8000000 for 9000
- 59 hyphenation exceptions out of 8191
- 40i,12n,63p,1008b,771s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx8.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmmib10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbo10.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on /home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/stellenbosch_ee_report.pdf (38 pages, 1295398 bytes).
-PDF statistics:
- 393 PDF objects out of 1000 (max. 8388607)
- 317 compressed objects within 4 object streams
- 140 named destinations out of 1000 (max. 500000)
- 20526 words of extra memory for PDF output out of 20736 (max. 10000000)
+<results/fig/digital-compass-test-2.png, id=382, 861.2175pt x 354.57469pt>
+File: results/fig/digital-compass-test-2.png Graphic file (type png)
+<use results/fig/digital-compass-test-2.png>
+Package pdftex.def Info: results/fig/digital-compass-test-2.png  used on input line 52.
+(pdftex.def)             Requested size: 409.71692pt x 168.68983pt.
+<results/fig/digital-compass-test-2-error.png, id=383, 865.73438pt x 353.06906pt>
+File: results/fig/digital-compass-test-2-error.png Graphic file (type png)
+<use results/fig/digital-compass-test-2-error.png>
+Package pdftex.def Info: results/fig/digital-compass-test-2-error.png  used on input line 59.
+(pdftex.def)             Requested size: 409.71692pt x 167.09538pt.
+[37 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/digital-compass-test-1.png (PNG copy)> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/digital-compass-test-1-error.png (PNG copy)>]
 
+LaTeX Warning: Reference `subfig:tilt-comp-error' on page 38 undefined on input line 67.
+
+
+LaTeX Warning: Reference `fig:Digital compass accuracy test-1' on page 38 undefined on input line 68.
+
+
+LaTeX Warning: Reference `fig:Digital compass accuracy test-1' on page 38 undefined on input line 69.
+
+<results/fig/tilt-comp-test.png, id=390, 863.47594pt x 347.04657pt>
+File: results/fig/tilt-comp-test.png Graphic file (type png)
+<use results/fig/tilt-comp-test.png>
+Package pdftex.def Info: results/fig/tilt-comp-test.png  used on input line 75.
+(pdftex.def)             Requested size: 409.71692pt x 164.66878pt.
+<results/fig/tilt-comp-test-error.png, id=391, 868.74562pt x 381.67593pt>
+File: results/fig/tilt-comp-test-error.png Graphic file (type png)
+<use results/fig/tilt-comp-test-error.png>
+Package pdftex.def Info: results/fig/tilt-comp-test-error.png  used on input line 82.
+(pdftex.def)             Requested size: 409.71692pt x 180.00504pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: Reference `subfig:tilt-comp-error' on page 38 undefined on input line 90.
+
+
+LaTeX Warning: Reference `sec: ...' on page 38 undefined on input line 92.
+
+
+LaTeX Warning: Reference `fig:tilt-comp' on page 38 undefined on input line 92.
+
+
+LaTeX Warning: Reference `fig:rudder-control-dry' on page 38 undefined on input line 97.
+
+[38 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/digital-compass-test-2.png (PNG copy)> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/digital-compass-test-2-error.png (PNG copy)>]
+<results/fig/dry-rudder-test.png, id=397, 1387.584pt x 706.0779pt>
+File: results/fig/dry-rudder-test.png Graphic file (type png)
+<use results/fig/dry-rudder-test.png>
+Package pdftex.def Info: results/fig/dry-rudder-test.png  used on input line 103.
+(pdftex.def)             Requested size: 455.24411pt x 231.64891pt.
+
+
+LaTeX Warning: Reference `fig:rudder-control-test-1-path' on page 39 undefined on input line 110.
+
+<results/fig/dam-test-1/dam-test-1.png, id=398, 722.7pt x 722.7pt>
+File: results/fig/dam-test-1/dam-test-1.png Graphic file (type png)
+<use results/fig/dam-test-1/dam-test-1.png>
+Package pdftex.def Info: results/fig/dam-test-1/dam-test-1.png  used on input line 115.
+(pdftex.def)             Requested size: 364.19667pt x 364.1942pt.
+
+LaTeX Warning: Reference `subfig:first-rudder-control-heading' on page 39 undefined on input line 121.
+
+[39 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/tilt-comp-test.png (PNG copy)> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/tilt-comp-test-error.png (PNG copy)>] [40 </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/dry-rudder-test.png> </home/phoenix/Documents/stellies/year4/2021/semester-2/skripsie/E-Project-448-git/my-report/results/fig/dam-test-1/dam-test-1.png>]
+<results/fig/dam-test-1/heading.png, id=413, 1387.584pt x 706.0779pt>
+File: results/fig/dam-test-1/heading.png Graphic file (type png)
+<use results/fig/dam-test-1/heading.png>
+Package pdftex.def Info: results/fig/dam-test-1/heading.png  used on input line 129.
+(pdftex.def)             Requested size: 409.71692pt x 208.48509pt.
+<results/fig/dam-test-1/error-signal.png, id=414, 1387.584pt x 706.0779pt>
+File: results/fig/dam-test-1/error-signal.png Graphic file (type png)
+<use results/fig/dam-test-1/error-signal.png>
+Package pdftex.def Info: results/fig/dam-test-1/error-signal.png  used on input line 136.
+(pdftex.def)             Requested size: 409.71692pt x 208.48509pt.
+<results/fig/dam-test-1/apparent-wind.png, id=415, 1387.584pt x 706.0

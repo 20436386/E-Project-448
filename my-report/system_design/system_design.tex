@@ -22,7 +22,7 @@ and the jib simultaneously. The receiver and two servo motors are powered with a
 removed as they are not needed in the development of a autonomous sailboat.
 
 \section{Micro-controller}
-Two options were considered for the micro-controller: the Adafruit BlackPill STM32F411 development board \cite{black_pill} and a Adafruit STM32F405 Feather \cite{feather}.
+Two options were considered for the micro-controller: the Adafruit BlackPill STM32F411 development board \cite{black_pill} and a Adafruit STM32F405 Feather \cite{STM32F405-specs}.
  The Adafruit BlackPill
 has an Arm 32-bit Cortex-M4 CPU, which has a clock speed of 100MHz, 512KB flash memory, 128kB SRAM, and has a power efficiency
 of $100\mu A$/$MHz$. The Adafruit feather has an Arm 32-bit Cortex-M4 CPU, with a clock speed of 168 MHz, 1MB flash memory, 
@@ -58,13 +58,21 @@ has a first positioning time of 32 seconds, maximum update rate of 10Hz, and als
 
 \section{Digital compass}
 The digital compass is used to determine the bearing of the sailing vessel, which is compared to the reference bearing to determine if the vessel is off course. It is 
-required that the compass be able to perform tilt compensation, as the vessel will not always be on a level surface out at sea. If the digital compass is tilted and used
-to determine bearing without tilt compensation, the bearing will not be accurate. To perform tilt compensation a magnetometer is needed to determine magnetic field vector, and a 
+required that the compass be able to perform tilt compensation, as the vessel will not always be on a level surface out at sea. The error in heading that occurs when tilt
+compensation has not been implemented is illustrated in Fig.\ref{fig:tilt_error}, where it can be seen that as the pitch angle of the vessel increases, a greater error in 
+heading occurs\cite{tilt_error}. To perform tilt compensation a magnetometer is needed to determine magnetic field vector, and a 
 accelerometer is needed to determine the acceleration due to gravity vector. An IMU is a device that contains both a 3-axis magnetometer, 3-axis accelerometer and 3-axis gyroscope.
 The two options that were considered were a AltIMU-10-V4\cite{altimu-10} made by Pololu Electronics and a MPU-9250/6500 9-axis IMU\cite{mpu-9250}. Both options feature 
 16-bit ADC with signal conditioning. The 
 Alt-IMU-10-V4 also features a digital barometer which is not needed for the purposes of this project. The MPU-9250/6500 was chosen for its low cost when compared 
 to the AltIMU-10-V4. The MPU-9250/6500 has a supply voltage of 3.3V, an operating current of 3.5mA and an $I^{2}C$ interface.
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.5\linewidth]{tilt_error.png}
+  \caption[Tilt error]{Heading error due to tilt without tilt compensation\cite{tilt_error}}
+  \label{fig:tilt_error}
+\end{figure}
 
 
 \section{Micro-SD card}
@@ -93,15 +101,20 @@ batteries would only power the system for 2.13 hours, which was considered insuf
 % \item Design and develop rudder control system.
 % \item Design and implement tacking manuever into system.
 
+\subsubsection{Data logging}
+To verify the system is capable of logging data as well as test the successful operation of the GPS receiver, a simple test is conducted. The experimental 
+setup is as follows: The system is carried along a path, the GPS receiver will take samples at a rate of 1Hz, the GPS coordinates will then be logged to 
+the micro-SD card on each sample, results are then analyzed to determine if path that was logged corresponds to the actual path travelled. 
+
 \subsubsection{Digital compass}
 Successful operation and accuracy of the digital compass is determined with two separate tests. 
 
 The first test is done to test the accuracy of the digital 
-compass. The setup is as follows: the digital compass undergoes extensive calibration, the digital compass as well as a handheld magnetic compass shown 
-in Fig. \ref{}, are placed on a flat piece of wood and 
-spaced such that they do not interfere with each other, the wood is rotated in steps of $10^{\circ}$ anti-clockwise, each step readings from the handheld 
-compass and the digital compass are taken and compared, because of the sample deviation present in the digital compass 10 samples are taken each step and 
-an average is taken for comparison. 
+compass. The setup is as follows: the digital compass undergoes extensive calibration; the digital compass as well as a handheld magnetic compass shown 
+in Fig. \ref{}, are placed on a level piece of wood and 
+spaced such that they do not interfere with each other; the wood is rotated in steps of $10^{\circ}$ anti-clockwise; each step readings from the handheld 
+compass and the digital compass are taken and compared; because of the slight sample deviation present in the digital compass, an average of 10 samples
+are taken for each step. 
 
 The second test is done to determine the successful operation of the tilt compensation algorithm that is used. The 
 setup is the same as the first test, but this time a pitch angle of $10^{\circ}$ is applied to the digital compass, the handheld compass is still placed 
@@ -110,11 +123,11 @@ of these samples is used for comparison. The results of this test are compared w
 and roll angle of zero. 
 
 Accuracy of the digital compass needs to be compared with that of the GPS receiver. If the GPS receiver is capable of determining the bearing with better/or 
-even the same degree of accuracy as that of the digital compass, and doing so with the same sampling period, then the use of a digital compass in the 
+even the same degree of accuracy as that of the digital compass, then the use of a digital compass in the 
 system does not make sense. It should be noted that the GPS receiver is only capable of determining bearing when the velocity of the system is greater than
 zero. The test done to compare the accuracy of these two components is as follows: The GPS receiver is carried along a path of constant bearing and with a 
-velocity similar to that of the maximum velocity the sailboat is capable of, bearing samples are then taken at a frequency of 10Hz (maximum sampling frequency
-of the receiver), the same is then done for the digital compass, digital compass is held such that it points to the end point of the path throughout 
+velocity similar to that of the maximum velocity the sailboat is capable of, bearing samples are then taken at a frequency of 1Hz, the same is then done 
+for the digital compass, digital compass is held such that it points to the end point of the path throughout 
 the test. The digital compass must be calibrated before the test. The results of the two tests are then compared.  
 
 \subsubsection{Navigational calculations}
@@ -124,11 +137,6 @@ calculated, distances that samples are taken are physically measured out before 
 change in distance. 
 
 % Should include test to verify bearing here?
-
-\subsubsection{Data logging}
-To verify the system is capable of logging data as well as test the successful operation of the GPS receiver, a simple test is conducted. The experimental 
-setup is as follows: The system is carried along a path, the GPS receiver will take samples at a rate of 10Hz, the GPS coordinates will then be logged to 
-the micro-SD card on each sample, results are then analyzed to determine if path that was logged corresponds to the actual path travelled. 
 
 \subsubsection{Sail control}
 A test will be conducted to verify accuracy as well as successful operation of the sail control system. The experimental setup is as follows: wind direction 
@@ -140,17 +148,20 @@ The first test will test the operation of the rudder control out of the water. A
 will then be carried along a path of constant bearing ending in the target coordinate, the current position, desired bearing, actual bearing and error signal
 will be logged throughout the test. 
 
-The second test will be done on the dam by the Maties canoe club. The experimental setup is as follows: a target coordinate is programmed into the system and 
-the digital compass is calibrated, the sailboat is placed at a starting point such that the point of sail is $180^{\circ}$ i.e. wind directly from behind, the
-sail position is set at $80^{\circ}$, data is logged throughout the test. The data that is logged is: current GPS coordinate, distance to target, desired bearing, 
-actual bearing, bearing error signal and rudder PWM value.
+The second test will be done on the dam by the Maties canoe club. The experimental setup is as follows: a target coordinate is programmed into the system,
+the digital compass is calibrated and the sailboat is placed at a suitable starting location. Apparent wind is determined beforehand and the sail position is 
+set accordingly (sail position control will be disabled for this test). The data that will be logged throughout the test is: current GPS coordinate, distance 
+to target, desired heading, actual heading, heading error signal, rudder PWM value and apparent wind direction. The purpose of this test is to evaluate the performance
+of the rudder controller and determine optimal gains through experimentation, this test will therefore be repeated more than once.
 
 \subsubsection{Sytem}
 A similar test will be done on water at the Maties canoe club to verify the successful operation of the entire system - navigational and control systems. The test
-is similar to the second test done for the rudder control except the sail control will be excluded, and the setup is as follows: a target coordinate is 
+is similar to the second test done for the rudder control except the sail control will be included, and the setup is as follows: a target coordinate is 
 programmed into the system and the digital compass is calibrated, the sailboat is placed at a suitable starting point, data will be logged throughout the test. 
 The data that is logged is: current GPS coordinate, distance to target, desired bearing, actual bearing, bearing error signal, rudder servo PWM value, apparent 
 wind direction, sail position value, sail servo PWM value.
+
+%Put in a test with two target waypoints here.
 
 
 
