@@ -221,14 +221,14 @@ ensured that the samples taken are approximately spherical in shape.
 
 \begin{figure}
     \centering
-    \begin{subfigure}[!h]{=0.4\linewidth}
-        \includegraphics[width=1\linewidth]{unclibrated-mag.png}
+    \begin{subfigure}[!h]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{unclibrated-mag.png}
         \caption{Uncalibrated magnetometer samples}
         \label{fig:uncalibrated}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[!h]{0.4\linewidth}
-        \includegraphics[width=1\linewidth]{calibrated-mag.png}
+    \begin{subfigure}[!h]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{calibrated-mag.png}
         \caption{Calibrated magnetometer samples}
         \label{fig:calibrated}
     \end{subfigure}
@@ -424,7 +424,7 @@ and sail position must be at $80^{\circ}$ when apparent wind is at $\pm 180^{\ci
 The rudder controller can be designed through simulation, using the methods described in subsection \ref{sec:robotics-paper}, or by adjustment through experimentation. To design a rudder 
 controller using simulation methods, the dynamics of the sail vessel need to be determined, which is not a trivial task. Eq.\ref{eq:sail_dynamics} is used to calculate and model the dynamics 
 of a sail vessel, and involves calculating hydrodynamics, moment of inertia, viscous damping, lift, effort sail and centre of mass. From results in subsection \ref{sec:robotics-paper}, 
-it is clear that the controller parameters determined through simulation were not optimal and therefore design rudder controller for this project is done by adjustment.
+it is clear that the controller parameters determined through simulation were not optimal and therefore of design rudder controller for this project is done by adjustment.
 
 The rudder controller used is a proportional controller. The control law for this controller is shown in Eq.\ref{eq:control-law}, where $k_{p}$ is the proportional gain and $E_{r}$ is the 
 error signal. The error signal is determined using Eq.\ref{eq:error-sig}, where $\psi_{r}$ is the reference bearing and $\psi_{a}$ is the actual bearing of the vessel. 

@@ -348,6 +348,11 @@ while True:
     #Delay between acquiring RMC data is on avg 1 second
     if nmea_sentence[0 : 6] == gps_ident:#(0x24, 0x47, 0x4E, 0x52, 0x4D, 0x43):
         rmc_data = str(nmea_sentence).split(',')
+	
+	#This ensures all fields of rmc_data are valid
+        if len(rmc_data) < 14:
+            continue
+
         rmc_status = rmc_data[2]
         if rmc_data[2] == 'A':
 

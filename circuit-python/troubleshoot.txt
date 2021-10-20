@@ -1,0 +1,4 @@
+#Run this in repl sirsuitpy terminal if there is a major fuckup
+
+>>> import storage
+>>> storage.erase_filesystem()
