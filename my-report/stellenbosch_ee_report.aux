@@ -198,7 +198,7 @@
 \newlabel{eq:sail-control-algorithm}{{4.22}{33}{Sail controller}{equation.4.9.22}{}}
 \newlabel{eq:duty_cycle}{{4.23}{33}{Sail controller}{equation.4.9.23}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Rudder Controller}{33}{subsubsection*.44}\protected@file@percent }
-\newlabel{eq:control-law}{{4.24}{33}{Rudder Controller}{equation.4.9.24}{}}
+\newlabel{eq:control-law}{{4.24}{34}{Rudder Controller}{equation.4.9.24}{}}
 \newlabel{eq:error-sig}{{4.25}{34}{Rudder Controller}{equation.4.9.25}{}}
 \newlabel{eq:pwm-sig-rudder}{{4.26}{34}{Rudder Controller}{equation.4.9.26}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.9.2}Navigational calculations}{34}{subsection.4.9.2}\protected@file@percent }
@@ -207,90 +207,122 @@
 \newlabel{eq:haversine2}{{4.28}{34}{Distance}{equation.4.9.28}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Heading}{35}{subsubsection*.46}\protected@file@percent }
 \newlabel{eq:ref-heading}{{4.29}{35}{Heading}{equation.4.9.29}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.3}Program flow}{35}{subsection.4.9.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{36}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.3}Software flow}{35}{subsection.4.9.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces State machine}}{35}{figure.caption.47}\protected@file@percent }
+\newlabel{fig:state-machine}{{4.6}{35}{State machine}{figure.caption.47}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Normal Navigation}{35}{subsubsection*.48}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tacking}{36}{subsubsection*.49}\protected@file@percent }
+\newlabel{eq:starboard-limit}{{4.30}{36}{Tacking}{equation.4.9.30}{}}
+\newlabel{eq:port-limit}{{4.31}{36}{Tacking}{equation.4.9.31}{}}
+\newlabel{eq:tacking-angle}{{4.32}{37}{Tacking}{equation.4.9.32}{}}
+\newlabel{eq:distance-array}{{4.33}{37}{Tacking}{equation.4.9.33}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Results}{38}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Data logging}{36}{section.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Data logging test}}{36}{figure.caption.47}\protected@file@percent }
-\newlabel{fig:rooi-plane-loop}{{5.1}{36}{Data logging test}{figure.caption.47}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Digital Compass}{37}{section.5.2}\protected@file@percent }
-\newlabel{subfig:digital-compass-test-1}{{5.2a}{37}{Digital compass heading compared to handheld compass heading\relax }{figure.caption.48}{}}
-\newlabel{sub@subfig:digital-compass-test-1}{{a}{37}{Digital compass heading compared to handheld compass heading\relax }{figure.caption.48}{}}
-\newlabel{subfig:digital-compass-test-1-error}{{5.2b}{37}{Error between Digital compass heading and handheld compass heading\relax }{figure.caption.48}{}}
-\newlabel{sub@subfig:digital-compass-test-1-error}{{b}{37}{Error between Digital compass heading and handheld compass heading\relax }{figure.caption.48}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Digital compass accuracy test-1}}{37}{figure.caption.48}\protected@file@percent }
-\newlabel{fig:Digital compass accuracy test-1}{{5.2}{37}{Digital compass accuracy test-1}{figure.caption.48}{}}
-\newlabel{subfig:digital-compass-test-2}{{5.3a}{38}{Digital compass heading compared to handheld compass heading\relax }{figure.caption.49}{}}
-\newlabel{sub@subfig:digital-compass-test-2}{{a}{38}{Digital compass heading compared to handheld compass heading\relax }{figure.caption.49}{}}
-\newlabel{subfig:digital-compass-test-2-error}{{5.3b}{38}{Error between Digital compass heading and handheld compass heading\relax }{figure.caption.49}{}}
-\newlabel{sub@subfig:digital-compass-test-2-error}{{b}{38}{Error between Digital compass heading and handheld compass heading\relax }{figure.caption.49}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Digital compass accuracy test-2}}{38}{figure.caption.49}\protected@file@percent }
-\newlabel{fig:Digital compass accuracy test-2}{{5.3}{38}{Digital compass accuracy test-2}{figure.caption.49}{}}
-\newlabel{subfig:tilt-comp-test}{{5.4a}{39}{Tilt compensated digital compass heading compared to handheld compass heading\relax }{figure.caption.50}{}}
-\newlabel{sub@subfig:tilt-comp-test}{{a}{39}{Tilt compensated digital compass heading compared to handheld compass heading\relax }{figure.caption.50}{}}
-\newlabel{subfig:tilt-comp-error}{{5.4b}{39}{Error between tilt compensated digital compass heading and handheld compass heading\relax }{figure.caption.50}{}}
-\newlabel{sub@subfig:tilt-comp-error}{{b}{39}{Error between tilt compensated digital compass heading and handheld compass heading\relax }{figure.caption.50}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Tilt compensation test}}{39}{figure.caption.50}\protected@file@percent }
-\newlabel{fig:tilt-comp}{{5.4}{39}{Tilt compensation test}{figure.caption.50}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Sail Control}{39}{section.5.3}\protected@file@percent }
-\newlabel{sail-control}{{5.3}{39}{Sail Control}{section.5.3}{}}
-\newlabel{fig:wind-test}{{5.5a}{40}{Actual and measured wind direction\relax }{figure.caption.51}{}}
-\newlabel{sub@fig:wind-test}{{a}{40}{Actual and measured wind direction\relax }{figure.caption.51}{}}
-\newlabel{fig:sail-pos-test}{{5.5b}{40}{Measured and expected sail position\relax }{figure.caption.51}{}}
-\newlabel{sub@fig:sail-pos-test}{{b}{40}{Measured and expected sail position\relax }{figure.caption.51}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Sail controller test results}}{40}{figure.caption.51}\protected@file@percent }
-\newlabel{fig:sail-control}{{5.5}{40}{Sail controller test results}{figure.caption.51}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.4}Rudder control}{40}{section.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}Test-1}{40}{subsection.5.4.1}\protected@file@percent }
-\newlabel{test-1}{{5.4.1}{40}{Test-1}{subsection.5.4.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Test-2}{40}{subsection.5.4.2}\protected@file@percent }
-\newlabel{test-2}{{5.4.2}{40}{Test-2}{subsection.5.4.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Rudder control test out of water}}{41}{figure.caption.52}\protected@file@percent }
-\newlabel{fig:rudder-control-dry}{{5.6}{41}{Rudder control test out of water}{figure.caption.52}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Path travelled in first rudder control test}}{41}{figure.caption.53}\protected@file@percent }
-\newlabel{fig:rudder-control-test-1-path}{{5.7}{41}{Path travelled in first rudder control test}{figure.caption.53}{}}
-\newlabel{subfig:first-rudder-control-heading}{{5.8a}{42}{sampled and reference heading\relax }{figure.caption.54}{}}
-\newlabel{sub@subfig:first-rudder-control-heading}{{a}{42}{sampled and reference heading\relax }{figure.caption.54}{}}
-\newlabel{subfig:first-rudder-control-error}{{5.8b}{42}{Error signal\relax }{figure.caption.54}{}}
-\newlabel{sub@subfig:first-rudder-control-error}{{b}{42}{Error signal\relax }{figure.caption.54}{}}
-\newlabel{subfig:first-rudder-control-wind}{{5.8c}{42}{Apparent wind\relax }{figure.caption.54}{}}
-\newlabel{sub@subfig:first-rudder-control-wind}{{c}{42}{Apparent wind\relax }{figure.caption.54}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces First rudder control test on water}}{42}{figure.caption.54}\protected@file@percent }
-\newlabel{fig:first-rudder-control-water}{{5.8}{42}{First rudder control test on water}{figure.caption.54}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Test-3}{43}{subsection.5.4.3}\protected@file@percent }
-\newlabel{test-3}{{5.4.3}{43}{Test-3}{subsection.5.4.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces Path travelled in first rudder control test}}{43}{figure.caption.55}\protected@file@percent }
-\newlabel{fig:rudder-control-test-2-path}{{5.9}{43}{Path travelled in first rudder control test}{figure.caption.55}{}}
-\newlabel{subfig:rudder-control-2-heading}{{5.10a}{44}{sampled and reference heading\relax }{figure.caption.56}{}}
-\newlabel{sub@subfig:rudder-control-2-heading}{{a}{44}{sampled and reference heading\relax }{figure.caption.56}{}}
-\newlabel{subfig:rudder-control-2-error}{{5.10b}{44}{Error signal\relax }{figure.caption.56}{}}
-\newlabel{sub@subfig:rudder-control-2-error}{{b}{44}{Error signal\relax }{figure.caption.56}{}}
-\newlabel{subfig:rudder-control-2-wind}{{5.10c}{44}{Apparent wind\relax }{figure.caption.56}{}}
-\newlabel{sub@subfig:rudder-control-2-wind}{{c}{44}{Apparent wind\relax }{figure.caption.56}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces Second rudder control test on water}}{44}{figure.caption.56}\protected@file@percent }
-\newlabel{fig:rudder-control-2-water}{{5.10}{44}{Second rudder control test on water}{figure.caption.56}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Data logging}{38}{section.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Data logging test}}{38}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:rooi-plane-loop}{{5.1}{38}{Data logging test}{figure.caption.50}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Digital Compass}{39}{section.5.2}\protected@file@percent }
+\newlabel{subfig:digital-compass-test-1}{{5.2a}{39}{Digital compass heading compared to handheld compass heading\relax }{figure.caption.51}{}}
+\newlabel{sub@subfig:digital-compass-test-1}{{a}{39}{Digital compass heading compared to handheld compass heading\relax }{figure.caption.51}{}}
+\newlabel{subfig:digital-compass-test-1-error}{{5.2b}{39}{Error between Digital compass heading and handheld compass heading\relax }{figure.caption.51}{}}
+\newlabel{sub@subfig:digital-compass-test-1-error}{{b}{39}{Error between Digital compass heading and handheld compass heading\relax }{figure.caption.51}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Digital compass accuracy test-1}}{39}{figure.caption.51}\protected@file@percent }
+\newlabel{fig:Digital compass accuracy test-1}{{5.2}{39}{Digital compass accuracy test-1}{figure.caption.51}{}}
+\newlabel{subfig:digital-compass-test-2}{{5.3a}{40}{Digital compass heading compared to handheld compass heading\relax }{figure.caption.52}{}}
+\newlabel{sub@subfig:digital-compass-test-2}{{a}{40}{Digital compass heading compared to handheld compass heading\relax }{figure.caption.52}{}}
+\newlabel{subfig:digital-compass-test-2-error}{{5.3b}{40}{Error between Digital compass heading and handheld compass heading\relax }{figure.caption.52}{}}
+\newlabel{sub@subfig:digital-compass-test-2-error}{{b}{40}{Error between Digital compass heading and handheld compass heading\relax }{figure.caption.52}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Digital compass accuracy test-2}}{40}{figure.caption.52}\protected@file@percent }
+\newlabel{fig:Digital compass accuracy test-2}{{5.3}{40}{Digital compass accuracy test-2}{figure.caption.52}{}}
+\newlabel{subfig:tilt-comp-test}{{5.4a}{41}{Tilt compensated digital compass heading compared to handheld compass heading\relax }{figure.caption.53}{}}
+\newlabel{sub@subfig:tilt-comp-test}{{a}{41}{Tilt compensated digital compass heading compared to handheld compass heading\relax }{figure.caption.53}{}}
+\newlabel{subfig:tilt-comp-error}{{5.4b}{41}{Error between tilt compensated digital compass heading and handheld compass heading\relax }{figure.caption.53}{}}
+\newlabel{sub@subfig:tilt-comp-error}{{b}{41}{Error between tilt compensated digital compass heading and handheld compass heading\relax }{figure.caption.53}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Tilt compensation test}}{41}{figure.caption.53}\protected@file@percent }
+\newlabel{fig:tilt-comp}{{5.4}{41}{Tilt compensation test}{figure.caption.53}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Sail Control}{41}{section.5.3}\protected@file@percent }
+\newlabel{sail-control}{{5.3}{41}{Sail Control}{section.5.3}{}}
+\newlabel{fig:wind-test}{{5.5a}{42}{Actual and measured wind direction\relax }{figure.caption.54}{}}
+\newlabel{sub@fig:wind-test}{{a}{42}{Actual and measured wind direction\relax }{figure.caption.54}{}}
+\newlabel{fig:sail-pos-test}{{5.5b}{42}{Measured and expected sail position\relax }{figure.caption.54}{}}
+\newlabel{sub@fig:sail-pos-test}{{b}{42}{Measured and expected sail position\relax }{figure.caption.54}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Sail controller test results}}{42}{figure.caption.54}\protected@file@percent }
+\newlabel{fig:sail-control}{{5.5}{42}{Sail controller test results}{figure.caption.54}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Rudder control}{42}{section.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.1}Test-1}{42}{subsection.5.4.1}\protected@file@percent }
+\newlabel{rudder-test-1}{{5.4.1}{42}{Test-1}{subsection.5.4.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Rudder control test-1}}{42}{figure.caption.55}\protected@file@percent }
+\newlabel{fig:rudder-control-dry}{{5.6}{42}{Rudder control test-1}{figure.caption.55}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.2}Test-2}{43}{subsection.5.4.2}\protected@file@percent }
+\newlabel{rudder-test-2}{{5.4.2}{43}{Test-2}{subsection.5.4.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces Path travelled in first rudder control test}}{43}{figure.caption.56}\protected@file@percent }
+\newlabel{fig:rudder-control-test-1-path}{{5.7}{43}{Path travelled in first rudder control test}{figure.caption.56}{}}
+\newlabel{subfig:first-rudder-control-heading}{{5.8a}{44}{actual heading, reference heading and error signal\relax }{figure.caption.57}{}}
+\newlabel{sub@subfig:first-rudder-control-heading}{{a}{44}{actual heading, reference heading and error signal\relax }{figure.caption.57}{}}
+\newlabel{subfig:first-rudder-control-wind}{{5.8b}{44}{Apparent wind\relax }{figure.caption.57}{}}
+\newlabel{sub@subfig:first-rudder-control-wind}{{b}{44}{Apparent wind\relax }{figure.caption.57}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces Rudder control test-2}}{44}{figure.caption.57}\protected@file@percent }
+\newlabel{fig:first-rudder-control-water}{{5.8}{44}{Rudder control test-2}{figure.caption.57}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4.3}Test-3}{44}{subsection.5.4.3}\protected@file@percent }
+\newlabel{rudder-test-3}{{5.4.3}{44}{Test-3}{subsection.5.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces Path travelled in first rudder control test}}{45}{figure.caption.58}\protected@file@percent }
+\newlabel{fig:rudder-control-test-2-path}{{5.9}{45}{Path travelled in first rudder control test}{figure.caption.58}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5.5}System}{45}{section.5.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}Test-1}{45}{subsection.5.5.1}\protected@file@percent }
-\newlabel{test-1}{{5.5.1}{45}{Test-1}{subsection.5.5.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}Test-2}{45}{subsection.5.5.2}\protected@file@percent }
-\newlabel{test-2}{{5.5.2}{45}{Test-2}{subsection.5.5.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.11}{\ignorespaces Path travelled in first rudder control test}}{45}{figure.caption.57}\protected@file@percent }
-\newlabel{fig:system-test-2-path}{{5.11}{45}{Path travelled in first rudder control test}{figure.caption.57}{}}
-\newlabel{subfig:system-2-heading}{{5.12a}{47}{Actual and reference heading\relax }{figure.caption.58}{}}
-\newlabel{sub@subfig:system-2-heading}{{a}{47}{Actual and reference heading\relax }{figure.caption.58}{}}
-\newlabel{subfig:system-2-error}{{5.12b}{47}{Error signal\relax }{figure.caption.58}{}}
-\newlabel{sub@subfig:system-2-error}{{b}{47}{Error signal\relax }{figure.caption.58}{}}
-\newlabel{subfig:system-2-wind}{{5.12c}{47}{Apparent wind\relax }{figure.caption.58}{}}
-\newlabel{sub@subfig:system-2-wind}{{c}{47}{Apparent wind\relax }{figure.caption.58}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.12}{\ignorespaces Second system test on water}}{47}{figure.caption.58}\protected@file@percent }
-\newlabel{fig:system-2-water}{{5.12}{47}{Second system test on water}{figure.caption.58}{}}
+\newlabel{system-test-1}{{5.5.1}{45}{Test-1}{subsection.5.5.1}{}}
+\newlabel{subfig:rudder-control-2-heading}{{5.10a}{46}{Actual heading, reference heading and error signal\relax }{figure.caption.59}{}}
+\newlabel{sub@subfig:rudder-control-2-heading}{{a}{46}{Actual heading, reference heading and error signal\relax }{figure.caption.59}{}}
+\newlabel{subfig:rudder-control-2-wind}{{5.10b}{46}{Apparent wind\relax }{figure.caption.59}{}}
+\newlabel{sub@subfig:rudder-control-2-wind}{{b}{46}{Apparent wind\relax }{figure.caption.59}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces Rudder control test-3}}{46}{figure.caption.59}\protected@file@percent }
+\newlabel{fig:rudder-control-2-water}{{5.10}{46}{Rudder control test-3}{figure.caption.59}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}Test-2}{46}{subsection.5.5.2}\protected@file@percent }
+\newlabel{system-test-2}{{5.5.2}{46}{Test-2}{subsection.5.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.11}{\ignorespaces Path travelled in first system test}}{47}{figure.caption.60}\protected@file@percent }
+\newlabel{fig:system-test-1-path}{{5.11}{47}{Path travelled in first system test}{figure.caption.60}{}}
+\newlabel{subfig:system-1-heading}{{5.12a}{48}{Actual heading, reference heading and error signal\relax }{figure.caption.61}{}}
+\newlabel{sub@subfig:system-1-heading}{{a}{48}{Actual heading, reference heading and error signal\relax }{figure.caption.61}{}}
+\newlabel{subfig:system-1-wind}{{5.12b}{48}{Apparent wind\relax }{figure.caption.61}{}}
+\newlabel{sub@subfig:system-1-wind}{{b}{48}{Apparent wind\relax }{figure.caption.61}{}}
+\newlabel{subfig:system-1-sail}{{5.12c}{48}{Sail position\relax }{figure.caption.61}{}}
+\newlabel{sub@subfig:system-1-sail}{{c}{48}{Sail position\relax }{figure.caption.61}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.12}{\ignorespaces System test-1}}{48}{figure.caption.61}\protected@file@percent }
+\newlabel{fig:system-1-water}{{5.12}{48}{System test-1}{figure.caption.61}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.13}{\ignorespaces Path travelled in second system test}}{49}{figure.caption.62}\protected@file@percent }
+\newlabel{fig:system-test-2-path}{{5.13}{49}{Path travelled in second system test}{figure.caption.62}{}}
+\newlabel{subfig:system-2-heading}{{5.14a}{50}{Actual and reference heading\relax }{figure.caption.63}{}}
+\newlabel{sub@subfig:system-2-heading}{{a}{50}{Actual and reference heading\relax }{figure.caption.63}{}}
+\newlabel{subfig:system-2-error}{{5.14b}{50}{Error signal\relax }{figure.caption.63}{}}
+\newlabel{sub@subfig:system-2-error}{{b}{50}{Error signal\relax }{figure.caption.63}{}}
+\newlabel{subfig:system-2-wind}{{5.14c}{50}{Apparent wind\relax }{figure.caption.63}{}}
+\newlabel{sub@subfig:system-2-wind}{{c}{50}{Apparent wind\relax }{figure.caption.63}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.14}{\ignorespaces System test-2}}{50}{figure.caption.63}\protected@file@percent }
+\newlabel{fig:system-2-water}{{5.14}{50}{System test-2}{figure.caption.63}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Conclusion}{51}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chap:conclusion}{{6}{51}{Conclusion}{chapter.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Summary}{51}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Objective review}{51}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Objective - 1}{51}{subsubsection*.64}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Objective - 2}{51}{subsubsection*.65}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Objective - 3}{52}{subsubsection*.66}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Objective - 4}{52}{subsubsection*.67}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Objective - 5}{52}{subsubsection*.68}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Objective - 6}{52}{subsubsection*.69}\protected@file@percent }
 \bibdata{mybib}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Summary and Conclusion}{48}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Conclusion}{53}{subsection.6.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Future work}{53}{section.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}System schematic}{54}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:conclusion}{{6}{48}{Summary and Conclusion}{chapter.6}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}System schematic}{49}{appendix.A}\protected@file@percent }
+\newlabel{appen:system}{{A}{54}{System schematic}{appendix.A}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Software Flow Diagram}{55}{appendix.B}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{appen:system}{{A}{49}{System schematic}{appendix.A}{}}
+\newlabel{appen:flow}{{B}{55}{Software Flow Diagram}{appendix.B}{}}
+\newlabel{fig:normal-flow}{{\caption@xref {fig:normal-flow}{ on input line 19}}{55}{Software Flow Diagram}{figure.caption.71}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.1}{\ignorespaces Flow diagram of normal navigation state}}{55}{figure.caption.71}\protected@file@percent }
+\newlabel{fig:tacking-flow}{{\caption@xref {fig:tacking-flow}{ on input line 26}}{56}{Software Flow Diagram}{figure.caption.72}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.2}{\ignorespaces Flow diagram of tacking state}}{56}{figure.caption.72}\protected@file@percent }

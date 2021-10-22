@@ -1,4 +1,81 @@
 \graphicspath{{conclusion/fig/}}
 
-\chapter{Summary and Conclusion}
+\chapter{Conclusion}
 \label{chap:conclusion}
+
+\section{Summary}
+The control and navigational systems for a autonomous sailing vessel was developed. A RC sailboat was retrofit with a system designed to enable the autonomous sailing. The system developed consisted
+of the following components: a Adafruit development board, a IMU, a GPS receiver, a micro-SD card and socket, a wind direction sensor and the sail vessel itself. A digital compass with tilt-compensation
+capabilities was developed. The vessel made use of the digital compass and navigational algorithms in order to control the rudder and ultimately navigate along designated way-points. The wind direction
+sensor was used to control the sail position. Tests were then conducted to verify the successful operation of the system.
+
+\section{Objective review}
+%List each objective
+    %metric that was used
+    %the results
+    %wether the objective was met or not
+% objectives
+% Design and develop a digital compass that compensates for tilt.
+% Determine and compare the accuracy of heading obtained from a GPS reciever and that from a digital compass.
+% System must be capable of logging operational data to a micro-SD card.
+% Design and develop sail control system.
+% Design and develop rudder control system.
+% Design and implement necessary navigational algorithms: Determine distance and bearing between two GPS coordinate.
+% Design and develop software that ensures system in capable of navigating to predetermined waypoints.
+% Design and implement tacking manuovre into system.
+
+\subsubsection{Objective - 1}
+The objective was to design and develop a digital compass that compensates for tilt. The metrics used to test the operation of the digital compass are found in sec .\ref{},
+and the results can be found in .\ref{}. The results of the tests conducted show that the accuracy of the digital compass is comparable to that of a handheld
+magnetic compass. The digital compass is also capable of compensating for tilt. This objective has therefore been met.
+
+\subsubsection{Objective - 2}
+The objective was to incorporate the ability to log operational data into the system. The metrics used to test the data logging capabilities can be found in sec .\ref{},
+and the results can be found in .\ref{}. The results show that the system is capable of logging operational data and also verified the accuracy and successful operation of the 
+GPS receiver.
+
+This objective has therefore been met
+
+\subsubsection{Objective - 3}
+The objective was to design and develop the sail control system. The metrics used to test the operation of the sail control is found in sec .\ref{},
+and the results can be found in .\ref{}. The results illustrated in Fig.\ref{fig:wind-test} show that samples taken from the wind sensor deviate slightly from the expected value.
+The purpose of the wind sensor is to determine the optimal sail position, sail position does not however affect the navigation
+of the vessel, only the speed of the vessel. Therefore absolute accuracy in measuring wind direction is not of the utmost importance, and deviation in measured results is acceptable.
+
+
+The sail controller was capable of adjusting the sail position according to apparent wind direction and therefore this objective has been met.
+
+\subsubsection{Objective - 4}
+The objective was to design and implement necessary navigational algorithms. The metrics used to test the distance algorithm is found in sec .\ref{},
+and the results can be found in .\ref{}. The results of this test show that the system is capable of determining distance from a target waypoint with an acceptable level of accuracy. 
+
+The objective has therefore been met.
+
+\subsubsection{Objective - 5}
+The objective was to design and develop a rudder control system. The metrics used to test the operation of the rudder control is found in sec .\ref{},
+and the results can be found in .\ref{}. The results of the tests done in and out of the water indicate that the rudder controller is capable of controlling the rudder servo to track the 
+reference bearing with an acceptable rise-time, and percentage overshoot.
+%put in step response time of the rudder here 
+This objective has therefore been met.
+
+\subsubsection{Objective - 6}
+The objective was to design and develop software that ensures the system in capable of navigating to predetermined waypoints. The metrics used to test if this objective has been met is
+found in sec .\ref{}, and the results can be found in .\ref{}. The results of this test show that the system is capable of sailing to multiple target locations, on after the other, with 
+a sufficient level of accuracy. This objective has therefore been met. 
+
+It should be noted that the results of these tests indicated that the placement of the wind direction sensor on the bow of the vessel, was not optimal, as 
+the sails caused disturbance on the wind direction readings.
+
+\subsection{Conclusion}
+All the objective were met, and the resulting system is therefore capable of autonomous sailing. Although many other autonomous sailing vessels have been developed before this, examples of 
+which can be found in chapter.\ref{}, the results of this project verifies further the validity of low cost autonomous sail vessel development. The cost of ocean research can thusly be reduced
+drastically by introducing the use of autonomous sailing vessels.  
+
+\section{Future work}
+Completion of the following tasks will improve the overall performance of the sail vessel:
+\begin{itemize}
+    \item A lager sail vessel should be developed, such that the wind direction sensor can be placed in a location were the sails wont cause disturbance.
+    \item The development of a single power system to supply power to all subsystems.
+    \item The addition of photovoltaic cells to provide charging capabilities.
+    \item Navigation via data received by the GPS receiver alone should be developed for long distance missions where the magnetic field is not constant   
+\end{itemize}

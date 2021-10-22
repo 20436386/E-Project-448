@@ -18,18 +18,24 @@
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Digital compass discrete LPF step response}}{30}{figure.caption.39}% 
 \contentsline {figure}{\numberline {4.4}{\ignorespaces PCB schematic}}{32}{figure.caption.40}% 
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Control system}}{32}{figure.caption.41}% 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces State machine}}{35}{figure.caption.47}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Data logging test}}{36}{figure.caption.47}% 
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Digital compass accuracy test-1}}{37}{figure.caption.48}% 
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Digital compass accuracy test-2}}{38}{figure.caption.49}% 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Tilt compensation test}}{39}{figure.caption.50}% 
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Sail controller test results}}{40}{figure.caption.51}% 
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Rudder control test out of water}}{41}{figure.caption.52}% 
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Path travelled in first rudder control test}}{41}{figure.caption.53}% 
-\contentsline {figure}{\numberline {5.8}{\ignorespaces First rudder control test on water}}{42}{figure.caption.54}% 
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Path travelled in first rudder control test}}{43}{figure.caption.55}% 
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Second rudder control test on water}}{44}{figure.caption.56}% 
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Path travelled in first rudder control test}}{45}{figure.caption.57}% 
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Second system test on water}}{47}{figure.caption.58}% 
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Data logging test}}{38}{figure.caption.50}% 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Digital compass accuracy test-1}}{39}{figure.caption.51}% 
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Digital compass accuracy test-2}}{40}{figure.caption.52}% 
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Tilt compensation test}}{41}{figure.caption.53}% 
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Sail controller test results}}{42}{figure.caption.54}% 
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Rudder control test-1}}{42}{figure.caption.55}% 
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Path travelled in first rudder control test}}{43}{figure.caption.56}% 
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Rudder control test-2}}{44}{figure.caption.57}% 
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Path travelled in first rudder control test}}{45}{figure.caption.58}% 
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Rudder control test-3}}{46}{figure.caption.59}% 
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Path travelled in first system test}}{47}{figure.caption.60}% 
+\contentsline {figure}{\numberline {5.12}{\ignorespaces System test-1}}{48}{figure.caption.61}% 
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Path travelled in second system test}}{49}{figure.caption.62}% 
+\contentsline {figure}{\numberline {5.14}{\ignorespaces System test-2}}{50}{figure.caption.63}% 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Flow diagram of normal navigation state}}{55}{figure.caption.71}% 
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Flow diagram of tacking state}}{56}{figure.caption.72}% 

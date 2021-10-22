@@ -43,7 +43,7 @@
 \BOOKMARK [1][-]{section.4.9}{Software}{chapter.4}% 43
 \BOOKMARK [2][-]{subsection.4.9.1}{Control systems}{section.4.9}% 44
 \BOOKMARK [2][-]{subsection.4.9.2}{Navigational calculations}{section.4.9}% 45
-\BOOKMARK [2][-]{subsection.4.9.3}{Program flow}{section.4.9}% 46
+\BOOKMARK [2][-]{subsection.4.9.3}{Software flow}{section.4.9}% 46
 \BOOKMARK [0][-]{chapter.5}{Results}{}% 47
 \BOOKMARK [1][-]{section.5.1}{Data logging}{chapter.5}% 48
 \BOOKMARK [1][-]{section.5.2}{Digital Compass}{chapter.5}% 49
@@ -55,5 +55,10 @@
 \BOOKMARK [1][-]{section.5.5}{System}{chapter.5}% 55
 \BOOKMARK [2][-]{subsection.5.5.1}{Test-1}{section.5.5}% 56
 \BOOKMARK [2][-]{subsection.5.5.2}{Test-2}{section.5.5}% 57
-\BOOKMARK [0][-]{chapter.6}{Summary and Conclusion}{}% 58
-\BOOKMARK [0][-]{appendix.A}{System schematic}{}% 59
+\BOOKMARK [0][-]{chapter.6}{Conclusion}{}% 58
+\BOOKMARK [1][-]{section.6.1}{Summary}{chapter.6}% 59
+\BOOKMARK [1][-]{section.6.2}{Objective review}{chapter.6}% 60
+\BOOKMARK [2][-]{subsection.6.2.1}{Conclusion}{section.6.2}% 61
+\BOOKMARK [1][-]{section.6.3}{Future work}{chapter.6}% 62
+\BOOKMARK [0][-]{appendix.A}{System schematic}{}% 63
+\BOOKMARK [0][-]{appendix.B}{Software Flow Diagram}{}% 64

@@ -124,7 +124,7 @@ of $10^{\circ}$. As expected the sail position stays at $10^{\circ}$ for apparen
 
 \section{Rudder control}
 \subsection{Test-1}
-\label{test-1}
+\label{rudder-test-1}
 
 The results of the rudder control test which was conducted out of the water are shown in Fig.\ref{fig:rudder-control-dry}. The average value of reference heading is $44.603^{\circ}$ and the average value of actual 
 heading is $44.728^{\circ}$. These values are approximately equal and therefore the error signal that is generated for the rudder controller should keep the vessel on course when on water. The variance of the 
@@ -132,8 +132,8 @@ actual heading during the test was calculated as $13.178^{\circ}$, which can be 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\linewidth]{dry-rudder-test.png}
-    \caption[Rudder control test out of water]{Results of rudder control test out of water}
+    \includegraphics[width=0.75\linewidth]{dry-rudder-test.png}
+    \caption[Rudder control test-1]{Results of rudder control test-1}
     \label{fig:rudder-control-dry}
 \end{figure}
 
@@ -142,24 +142,25 @@ actual heading during the test was calculated as $13.178^{\circ}$, which can be 
 % coordinates logged during the test were plotted with Python and are shown in Fig.\ref{fig:rudder-control-test-1-path}. 
 
 \subsection{Test-2}
-\label{test-2}
+\label{rudder-test-2}
+%This is test-1 13-10-21
 
-For the first rudder control test conducted on the water, the apparent wind was determined before hand to be roughly $100^{\circ}$, the sail position was therefore set to $40^{\circ}$.%NB must work this out using updates sail position formulae i.e. one with new pwm_min value 
-For this test instead of calculating the reference heading - using the current GPS coordinates and target GPS coordinates - on every iteration a fixed reference bearing was set as $113^{\circ}$ 
+For the first rudder control test conducted on the water, the apparent wind was determined before hand to be roughly $100^{\circ}$, the sail position was therefore set to $38.5^{\circ}$.%NB must work this out using updates sail position formulae i.e. one with new pwm_min value 
+For this test instead of calculating the reference heading - using the current GPS coordinates and target GPS coordinates - on every iteration, a fixed reference bearing was set as $130^{\circ}$ 
 beforehand. The proportional gain factor was set to 1.8. The GPS coordinates logged during the test were plotted with Python and are shown in Fig.\ref{fig:rudder-control-test-1-path}. 
 
 %Actual value during this test was 1.5
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\linewidth]{dam-test-1/dam-test-1.png}
+    \includegraphics[width=0.7\linewidth]{dam-test-1/dam-test-1.png}
     \caption[Path travelled in first rudder control test]{GPS coordinates of path travelled}
     \label{fig:rudder-control-test-1-path}
 \end{figure}
 
  
-During the test the vessel was visibly oscillating from starboard to port side, this can be seen when analyzing Fig.\ref{subfig:first-rudder-control-heading}, which is a plot of the measured 
-heading and reference heading data, logged throughout the test. The average actual heading value is $115,404^{\circ}$ and the variance is $216,495^{\circ}$. The oscillation indicates that 
+During the test the vessel was visibly oscillating from starboard to port side, this can be seen when analyzing Fig.\ref{subfig:first-rudder-control-heading}, which is a plot of the actual 
+heading, reference heading and error signal, logged throughout the test. The average actual heading value is $131.68^{\circ}$ and the variance is $228.83^{\circ}$. The oscillation indicates that 
 the proportional gain factor is too high and overshoot is occurring. 
 
 \begin{figure}[h!]
@@ -167,15 +168,8 @@ the proportional gain factor is too high and overshoot is occurring.
     \begin{subfigure}{=0.75\linewidth}
         \centering
         \includegraphics[width=1\linewidth]{dam-test-1/heading.png}
-        \caption{sampled and reference heading}
+        \caption{actual heading, reference heading and error signal}
         \label{subfig:first-rudder-control-heading}
-    \end{subfigure}
-
-    \begin{subfigure}{=0.75\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{dam-test-1/error.png}
-        \caption{Error signal}
-        \label{subfig:first-rudder-control-error}
     \end{subfigure}
 
     \begin{subfigure}{=0.75\linewidth}
@@ -185,60 +179,52 @@ the proportional gain factor is too high and overshoot is occurring.
         \label{subfig:first-rudder-control-wind}
     \end{subfigure}
 
-    \caption[First rudder control test on water]{First rudder control test on water}
+    \caption[Rudder control test-2]{Rudder control test-2}
     \label{fig:first-rudder-control-water}
 \end{figure}
 
 
-The error signal, which is input to the rudder 
-controller is shown in Fig.\ref{subfig:first-rudder-control-error}. The maximum speed reached during the test was 1.161 knots. Although the sail controller was not implemented during this test, 
+The maximum speed reached during the test was 1.161 knots. Although the sail controller was not implemented during this test, 
 wind direction readings were still taken and the data is illustrated in Fig.\ref{subfig:first-rudder-control-wind}. The average apparent wind value is $98.8^{\circ}$, which corresponds to the initial 
 wind direction reading that was taken. The variation in apparent wind direction throughout the test can be attributed to the oscillating of the vessel.
 
 \subsection{Test-3}
-\label{test-3}
-%Put successful straight line test here
+\label{rudder-test-3}
+%This is test-3 13-10-21
 Another test was conducted on the water, this time the reference heading was calculated using current and target GPS coordinates after every sampling period. A GPS coordinate corresponding to a 
 point on the side of the dam was set as the target location. The proportional gain factor was set to 1.4. The sail position controller was again not used during this test, instead the apparent wind
-was measured beforehand. The apparent wind direction was determined to be $-85^{\circ}$ and the sail position was set to $40^{\circ}$. The GPS coordinates that were logged throughout the test 
+was measured beforehand. The apparent wind direction was determined to be $-85^{\circ}$ and the sail position was set to $30^{\circ}$. The GPS coordinates that were logged throughout the test 
 are shown in Fig.\ref{fig:rudder-control-test-2-path}.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.8\linewidth]{dam-test-2/dam-test-3.png}
+    \includegraphics[width=0.7\linewidth]{dam-test-2/dam-test-3.png}
     \caption[Path travelled in first rudder control test]{GPS coordinates of path travelled}
     \label{fig:rudder-control-test-2-path}
 \end{figure}
 
-The reference and actual bearing values that were logged throughout the test are shown in Fig.\ref{subfig:rudder-contorl-2-heading}. The error signal that was generated for the rudder controller 
-can be seen in Fig.\ref{subfig:rudder-control-2-error}. The average of the actual bearing is $112.32^{\circ}$ and the variance is $4.77^{\circ}$. The average of the reference heading is
-$111.26^{\circ}$. The variance of the actual bearing is similar to that of Test-1, the proportional gain value of 1.4 is therefore close to optimal. The difference between the actual and reference 
+The reference heading, actual heading and error signal values that were logged throughout the test are shown in Fig.\ref{subfig:rudder-contorl-2-heading}. 
+The average of the actual bearing is $131.57^{\circ}$ and the variance is $4.77^{\circ}$. The average of the reference heading is
+$129.27^{\circ}$. The variance of the actual bearing is smaller than that of Test-1, the proportional gain value of 1.4 is therefore close to optimal. The difference between the actual and reference 
 heading averages is very slight and the rudder controller therefore tracked the reference signal sufficiently.
 
 \begin{figure}[h!]
     \centering
     \begin{subfigure}{=0.75\linewidth}
         \centering
-        \includegraphics[width=1\linewidth]{dam-test-2/heading-graph.png}
-        \caption{sampled and reference heading}
+        \includegraphics[width=1\linewidth]{dam-test-2/results.png}
+        \caption{Actual heading, reference heading and error signal}
         \label{subfig:rudder-control-2-heading}
     \end{subfigure}
 
     \begin{subfigure}{=0.75\linewidth}
         \centering
-        \includegraphics[width=1\linewidth]{dam-test-2/error-graph.png}
-        \caption{Error signal}
-        \label{subfig:rudder-control-2-error}
-    \end{subfigure}
-
-    \begin{subfigure}{=0.75\linewidth}
-        \centering
-        \includegraphics[width=1\linewidth]{dam-test-2/apparent-wind.png}
+        \includegraphics[width=1\linewidth]{dam-test-2/app_wind.png}
         \caption{Apparent wind}
         \label{subfig:rudder-control-2-wind}
     \end{subfigure}
 
-    \caption[Second rudder control test on water]{Second rudder control test on water}
+    \caption[Rudder control test-3]{Rudder control test-3}
     \label{fig:rudder-control-2-water}
 \end{figure}
 
@@ -247,21 +233,71 @@ controller was not active, the results are shown in Fig.\ref{subfig:rudder-contr
 calculated initially. The apparent wind direction throughout the test appears to be more stable than the results obtained in Test-2, this is due to the vessel maintaining a near constant heading
 as opposed to the oscillation that ocurred in Test-2.
 
+
 \section{System}
 
 \subsection{Test-1}
-\label{test-1}
-%Insert straight-line test with sail controller active here
+\label{system-test-1}
+%These results are from dam test 13-10-21 test-2
+
+A test was conducted with a similar experimental setup as that of test \ref{rudder-test-3}. A target GPS coordinate corresponding to a point on the side of the dam was input beforehand. The reference
+heading was updated on every sample period using current and target GPS coordinates. The proportional gain factor was set to 1.4. The sail position controller was active for the duration of this 
+test. The GPS coordinates logged throughout the test are plotted and shown in Fig.\ref{fig:system-test-1-path}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{dam-test-3/dam-test-2.png}
+    \caption[Path travelled in first system test]{GPS coordinates of path travelled}
+    \label{fig:system-test-1-path}
+\end{figure}
+
+The test results are illustrated in Fig.\ref{fig:system-1-water}. The average reference and actual heading was calculated to be $118.3^{\circ}$ and $119.05^{\circ}$ respectively. The rudder controller 
+therefore tracked the reference signal sufficiently. The variance of the actual bearing was determined to be $6.365^{\circ}$. 
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}{=0.75\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{dam-test-3/results.png}
+        \caption{Actual heading, reference heading and error signal}
+        \label{subfig:system-1-heading}
+    \end{subfigure}
+
+    \begin{subfigure}{=0.75\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{dam-test-3/app_wind.png}
+        \caption{Apparent wind}
+        \label{subfig:system-1-wind}
+    \end{subfigure}
+
+    \begin{subfigure}{=0.75\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{dam-test-3/sail-pos.png}
+        \caption{Sail position}
+        \label{subfig:system-1-sail}
+    \end{subfigure}
+
+    \caption[System test-1]{System test-1}
+    \label{fig:system-1-water}
+\end{figure}
+
+The measured apparent wind is illustrated in 
+Fig.\ref{subfig:system-1-wind} and corresponding sail position is illustrated in Fig.\ref{subfig:system-1-sail}. The average wind direction was calculated as $-98.12^{\circ}$. 
+Throughout the duration of the test the apparent wind direction appeared to be 
+smaller than the average value of $-98.12^{\circ}$, the wind direction also appeared to be quite constant. The variation in the measured apparent wind values can therefore be attributed to 
+disturbance caused by the sails being placed directly behind the wind sensor.  
+
+
 
 \subsection{Test-2}
-\label{test-2}
+\label{system-test-2}
 A test was conducted with two separate waypoints being set beforehand. The first waypoint was the GPS coordinates of a point roughly located in the centre of the dam, the second was that
 of a point next to the first waypoint, on the shore of the dam. The GPS coordinates logged throughout the test were plotted and are shown in Fig.\ref{fig:system-test-2-path}.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.8\linewidth]{dam-test-4/dam-test-4.png}
-    \caption[Path travelled in first rudder control test]{GPS coordinates of path travelled}
+    \caption[Path travelled in second system test]{GPS coordinates of path travelled}
     \label{fig:system-test-2-path}
 \end{figure}
 
@@ -296,7 +332,7 @@ occurred. The vessel is therefore capable of navigating between multiple waypoin
         \label{subfig:system-2-wind}
     \end{subfigure}
 
-    \caption[Second system test on water]{Second system test on water}
+    \caption[System test-2]{System test-2}
     \label{fig:system-2-water}
 \end{figure}
 

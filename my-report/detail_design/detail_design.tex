@@ -160,7 +160,7 @@ Eq.\ref{eq:mag_1} is then expanded, giving Eq.\ref{eq:mag_2} and Eq.\ref{eq:mag_
     \label{eq:mag_2}
     \begin{bmatrix} B_{r,x} \\ B_{r,y} \\ B_{r,z} \end{bmatrix} = \begin{bmatrix} cos\theta & 0 & sin\theta \\ 0 & 1 & 0 \\ -sin\theta & 0 & cos\theta \end{bmatrix} \begin{bmatrix} 1 & 0 & 0 \\ 0 & cos\phi & -sin\phi \\ 0 & sin\phi & cos\phi \end{bmatrix} \begin{bmatrix} B_{s,x} \\ B_{s,y} \\ B_{s,z} \end{bmatrix}
 \end{equation}
-
+\\
 \begin{equation}
     \label{eq:mag_3}
     \begin{bmatrix} B_{r,x} \\ B_{r,y} \\ B_{r,z} \end{bmatrix} = \begin{bmatrix} B_{s,x} cos\theta + B_{s,y} sin\theta sin\phi + B_{s,z} sin\theta cos\phi \\ 0 + B_{s,y} cos\phi - B_{s,z} sin\phi \\ -B_{s,x} sin\theta +  B_{s,y} cos\theta sin\phi + B_{s,z} cos\theta cos\phi \end{bmatrix} 
@@ -373,7 +373,7 @@ is then input to the sail controller, which adjusts the sail position with a con
 
 \subsubsection{Sail controller}
 
-The ADC that samples the wind direction sensors output returns a value in the range of 0 to $2^{16}$. Table \ref{table: ...} shows the minimum and maximum voltage values measured at the output of 
+The ADC that samples the wind direction sensors output returns a value in the range of 0 to $2^{16}$. Table \ref{table:adc-limits} shows the minimum and maximum voltage values measured at the output of 
 the sensor and the corresponding sampled ADC values expressed as a percentage. 
 
 \begin{table}[!h]
@@ -392,8 +392,9 @@ the sensor and the corresponding sampled ADC values expressed as a percentage.
     \end{tabularx}
 \end{table}
 
-Eq.\ref{eq:sail-control-alpha} is implemented to remove the 642mV offset and convert the sampled ADC value to a value in the range $0^{\circ}$ to $360^{\circ}$. This value therefore represents the
-direction of apparent wind. The cross-over point is the point where the voltage output of the sensor changes from a maximum to a minimum i.e. the voltage drops from 3.07V to 642mV. This drop does 
+Eq.\ref{eq:sail-control-alpha} is implemented to remove the 642mV offset and convert the sampled ADC value to a value in the range $0^{\circ}$ to $360^{\circ}$. $\alpha$ therefore represents the
+direction of the apparent wind. A check is then done in software to limit the range of the apparent wind to $\pm180^{\circ}$. The cross-over point is the point where the voltage output of the sensor 
+changes from a maximum to a minimum i.e. the voltage drops from 3.07V to 642mV. This drop does 
 not occur instantaneously and because of this erronous readings can occur if samples are taken at the cross-over point. The controller was therefore designed with the wind sensor orientated such that 
 the cross-over point lies in the no-sail zone, as readings taken in this area are not used anyway.
 
@@ -482,6 +483,97 @@ To calculate reference heading Eq.\ref{eq:ref-heading} is used.
 \end{equation}
 
 
-\subsection{Program flow}
+\subsection{Software flow}
+
+A state machine was designed and implemented in software, the state machine consists of two states: Normal navigation state and a Tacking state. The state machine diagram is shown in 
+Fig.\ref{fig:state-machine}.
+
+%The software initially starts in the normal navigation state, a change to the tacking state occurs if the measured absolute apparent wind is smaller than 
+% $45^{\circ}$. The state machine will then remain in the tacking 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{state_machine.png}
+    \caption[State machine]{State machine}
+    \label{fig:state-machine}
+\end{figure}
+
+\subsubsection{Normal Navigation}
+
+Program execution initially starts in the normal navigation state.  A diagram of the software flow of the normal navigation state is illustrated in Fig.\ref{fig:normal-flow} in appendix
+ \ref{appen:flow}. The current GPS location is then updated from the the GPS receiver, and 
+distance from the current location to the target way-point is calculated using the haversine equation (\ref{eq:haversine1}, \ref{eq:haversine2}). The target way-points are input by the user as 
+an array of GPS coordinates before program execution. The software then checks if distance to the target way-point is less than five meters, if so, then the target way-point is updated to 
+the next waypoint in the array, if the distance is greater than five meters then the program goes on to update the current apparent wind direction by sampling the wind direction sensor. After 
+updating the target-waypoint, software flow jumps back the the main branch were the apparent wind is sampled. If the software attempts to update the target way-point but the current target 
+way-point is the last way-point, then program execution ends.
+
+After updating the current apparent wind direction, a check is done to determine if the absolute apparent wind direction is smaller than $45^{\circ}$. If the absolute apparent wind is smaller 
+than $45^{\circ}$, this means the vessel is attempting to sail in the no-sail zone and the state is then changed from normal navigation to the tacking state. If however, the apparent wind is 
+greater than $45^{\circ}$, the software flow then goes on to calculate and update the reference heading using Eq.\ref{eq:ref-heading}. The current heading is then updated, this process involves
+sampling the IMU's magnetometer and accelerometer, applying the low-pass Butterworth filter to these samples,applying the tilt-compensation algorithm to determine pitch and roll angles and 
+consequently the heading of the vessel. 
+
+The error signal for the rudder controller is then updated using the current and reference heading values. The rudder controller then determines the rudder control signal, which is used to 
+determine and update the rudder servo's PWM duty cycle - using Eq.\ref{eq:pwm-sig-rudder}. The rudder servo PWM duty cycle is then updated accordingly. The current apparent wind direction
+is then given to the sail controller to determine the appropriate sail position. The sail control signal is then used to determine and update the sail servos PWM duty cycle.
+
+Operational data is then logged to the micro-SD. The operational data includes: current GPS coordinate, distance to target, desired bearing, actual bearing, bearing error signal, 
+rudder servo PWM value, apparent wind direction, sail position value, sail servo PWM value. software flow then jumps back to the start where the current GPS location is again updated.
+
+\subsubsection{Tacking}
+The tacking state is entered if the absolute apparent wind direction is smaller than $45^{\circ}$.A diagram of the software flow of the tacking state is illustrated in 
+Fig.\ref{fig:tacking-flow} in appendix \ref{appen:flow}.
+ In order to perform the tacking manoeuvre, the limits of the no-sil zone must be determined, 
+as these are the two headings that the vessel will alternating sail along. Software flow therefore begins by calculating the no-sail zone limits. Eq.\ref{eq:starboard-limit} determines the 
+heading limit on the starboard side of the vessel and Eq.\ref{eq:port-limit} determines the heading limit on the port side, $50^{\circ}$ is used instead of $45^{\circ}$ to provide leeway.
+
+\begin{equation}
+    \label{eq:starboard-limit}
+    \psi_{s} = apparent\_wind + 50^{\circ}
+\end{equation}
+
+\begin{equation}
+    \label{eq:port-limit}
+    \psi_{p} = apparent\_wind - 50^{\circ}
+\end{equation}
+
+The distance ($D_x$) and heading ($\psi_x$) between the current GPS location and the target GPS location is then determined using the equations \ref{eq:haversine1}, \ref{eq:haversine2} and \ref{eq:ref-heading}.
+A check is then done to determine which heading limit the vessel should start sailing along. If the apparent wind is greater than or equal to zero, this means the vessel's current heading is 
+closer to $\psi_{p}$ and the reference heading ($\psi_r$) is updated to $\psi_{p}$. If however the apparent wind is less than zero, this means the vessel's current heading is closer to $\psi_{s}$
+and the reference heading ($\psi_r$) is updated to $\psi_{s}$. 
+
+The software flow then proceeds to determine the distance array. The distance array holds the values of the distances that the vessel should sail along each heading limit in order to reach 
+the target waypoint. To determine the distance array the angle between the initial reference heading ($\psi_r$) and ($\psi_x$) is determined using Eq.\ref{eq:tacking-angle}, this angle shall be known as the tacking 
+angle and denoted $\psi_{t}$. As can be seen the tacking angle differs depending on which heading limit is set as the initial reference heading. Once the tacking angle is known the distance array 
+can be calculated using Eq.\ref{eq:distance-array}
+
+\begin{equation}
+    \label{eq:tacking-angle}
+    \psi_{t} = |\psi_{r} - \psi_{x}|
+\end{equation}
+
+\begin{equation}
+    \label{eq:distance-array}
+    distance\_array = \left( \frac{1}{2} \cdot D_xcos\psi_t ,  D_xsin\psi_t,  \frac{1}{2} \cdot D_xcos\psi_t  \right)
+\end{equation}
+\\
+The sail position is then set to $10^{\circ}$, which is closed hauled.
+
+
+The desired\_distance variable is then set to the first element in the distance array. The current GPS location used above is then stored in the variable temp\_GPS. The current GPS location is then 
+updated once more from the GPS receiver, and the distance between the current GPS location and temp\_GPS is calculated. If the distance calculated is smaller than the desired\_distance then software 
+flow continues on main branch. If however the distance calculated is greater than or equal to desired\_distance then desired\_distance is updated to the next element in the distance array, 
+reference heading ($\psi_r$) is updated to the other heading limit, current GPS location is sampled and temp\_GPS is updated to that value, software flow then continues at main branch. If 
+software attempts to update desired\_distance and desired\_distance is already equal to the last element in the distance array, that means the target way-point has been reached and state is 
+changed back to normal navigation.
+
+
+On main branch software flow continues where the current heading is updated, this is done by sampling the IMU, applying the LPF, and applying the tilt-compensation algorithms. The rudder error signal is
+then calculated and the rudder servo's duty cycle is updated accordingly. Sail position is not updated in the tacking state. The operational data is then logged to the micro-SD card and software 
+flow then jumps back to updating the current GPS location and determining distance to temp\_GPS.
+
+
+
 
 
